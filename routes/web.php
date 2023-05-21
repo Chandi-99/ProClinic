@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/welcome', function(){
+    return view('welcome');
+});
+Route::post('welcome', [App\Http\Controllers\contactController::class, 'store'])->name('welcome');
+Route::post('home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');

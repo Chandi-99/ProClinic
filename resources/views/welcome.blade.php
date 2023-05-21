@@ -80,7 +80,7 @@
                 <div class="row ">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0 ">
-                        <img src="/images/group.jpg " class="custom-text-box-image img-fluid " alt=" ">
+                        <img src="/images/doctornew.jpg" class="custom-text-box-image img-fluid " alt=" ">
                     </div>
 
                     <div class="col-lg-6 col-12 " id="section_2">
@@ -382,7 +382,7 @@
                     </div>
 
                     <div class="col-lg-5 col-12 mx-auto ">
-                        <form class="custom-form contact-form " action="# " method="post " role="form ">
+                        <form class="custom-form contact-form "  method="POST" action="{{route('welcome')}}" role="form ">
                             <h2 style="font-size:50px; font-weight:bold;">Contact form</h2>
 
                             <p class="mb-4 ">Or, you can just send an email:
@@ -390,17 +390,17 @@
                             </p>
                             <div class="row ">
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="first-name " id="first-name " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
+                                    <input type="text " name="fname" id="first-name " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="last-name " id="last-name " style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
+                                    <input type="text " name="lname" id="last-name " style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
                                 </div>
                             </div>
 
-                            <input type="email " name="email " id="email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
+                            <input type="email " name="contact_email" id="email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
 
-                            <textarea name="message " rows="5 " style="font-size:15px;" class="form-control form-control-lg" id="message " placeholder="What can we help you? "></textarea>
+                            <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg" id="message " placeholder="What can we help you? "></textarea>
 
                             <button type="submit " class=" form-control-lg custom-btn mt-3">Send Message</button>
                         </form>
