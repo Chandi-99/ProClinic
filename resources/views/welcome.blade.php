@@ -284,20 +284,20 @@
 
                             <div class="row ">
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text " name="volunteer-name " id="volunteer-name " class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
+                                    <input type="text" name="volunteer-name " id="volunteer-name " class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="email " name="volunteer-email " id="volunteer-email " pattern="[^ @]*@[^ @]* " class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
+                                    <input type="email" name="volunteer-email " id="volunteer-email " pattern="[^ @]*@[^ @]* " class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text " name="volunteer-subject " id="volunteer-subject " class="form-control form-control-lg  " style="font-size:15px;" placeholder="Position" required>
+                                    <input type="text" name="volunteer-subject " id="volunteer-subject " class="form-control form-control-lg  " style="font-size:15px;" placeholder="Position" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 " style="font-size:15px;">
                                     <div >
-                                        <input type="file " id="cv" placeholder="Upload CV" style="font-size:15px;"  class="form-control form-control-lg" name="cv">
+                                        <input type="file" id="cv" placeholder="Upload CV" style="font-size:15px;"  class="form-control form-control-lg" name="cv">
                                         <!--<label class="input-group-text " for="inputGroupFile02 ">Upload your CV</label>-->
                                     </div>
                                 </div>
@@ -390,19 +390,19 @@
                             </p>
                             <div class="row ">
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="fname" id="first-name " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
+                                    <input type="text" name="fname" id="first-name " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="lname" id="last-name " style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
+                                    <input type="text" name="lname" id="last-name " style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
                                 </div>
                             </div>
 
-                            <input type="email " name="contact_email" id="email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
+                            <input type="email" name="contact_email" id="email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
 
                             <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg" id="message " placeholder="What can we help you? "></textarea>
 
-                            <button type="submit " class=" form-control-lg custom-btn mt-3">Send Message</button>
+                            <button type="submit" class=" form-control-lg custom-btn mt-3">Send Message</button>
                         </form>
                     </div>
 

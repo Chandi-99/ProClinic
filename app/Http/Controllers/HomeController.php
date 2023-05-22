@@ -28,23 +28,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function store(array $data){
-        
-        $temp = Validator::make($data, [
-            'fname' => ['required', 'string', 'max:20'],
-            'lname' => ['required', 'string', 'max:20'],
-            'contact_email' => ['required', 'string', 'email', 'max:255'],
-            'message' => ['required', 'string', 'max:250'],
+    public function store(Request $request){
+        $temp =  Contact::create([
+            'fname' => $request['fname'],
+            'lname' => $request['lname'],
+            'contact_email' => $request['contact_email'],
+            'message' => $request['message'],
         ]);
-
-        $contact = new Contact();
-        $contact->fname = $temp['fname'];
-        $contact->lname = $temp['lname'];
-        $contact->message = $temp['message'];
-        $contact->contact_email = $temp['contact_email'];
-        $contact->save();
-
-        redirect('contactus');
+        $temp->save();
+        return view('contactus');
     }
 
 
