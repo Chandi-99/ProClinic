@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('medi_name')->unique();
             $table->string('company');
             $table->string('availability');
-            $table->boolean('after_eat');
+            $table->string('after_eat');
             $table->double('unit_price');
             $table->string('uses');
             $table->string('side_effects');
