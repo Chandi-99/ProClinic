@@ -14,10 +14,11 @@
                     <p class="mb-0 " style="text-align:justify;">Thank you for submitting your application to our company. We have received it and will be reviewing it carefully.
                      We will be in touch with you soon to schedule an interview. In the meantime, please feel free to contact us if you have any questions.</p>
                        <br>
-                       <p style="color:darkgray;">Click on home button to resume your journey at our website</p>
+                       
                     </div>
             
             </div>
+            
 
             </div>
 

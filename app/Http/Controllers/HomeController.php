@@ -33,15 +33,13 @@ class HomeController extends Controller
     public function store(Request $request){
 
         if($request->has('form1')){
-
             $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
             if($medicine == null){
-                return redirect('welcome')->with('alert_1', 'Medicine not found!');
+                return redirect('home')->with('alert_1', 'Medicine not found!');
             }
             else{
                 return view('searchmedicine',['medi'=>$medicine]);
             }
-
         }
         if ($request->has('form2')){
             
@@ -62,6 +60,9 @@ class HomeController extends Controller
                 if($request['cvfile']) {
 
                     $path = $request->file('cvfile')->store('cvfiles');
+                    $name = $request->cv_name;
+                    $temp = "cvfiles/".$request->file('cvfile')->getClientOriginalName();
+                    $sql = DB::update('update candidates set `candidates`.`cv_file_path` ='.'"'.$temp.'"'.' where `candidates`.`cv_email`='.'"'.$name.'";');
 
                     // Insert record
                     $insertData_arr = array(
@@ -75,9 +76,6 @@ class HomeController extends Controller
                     Candidate::create($insertData_arr);
                     return view('CV-Confirmation');
 
-                }
-                else{
-                    return redirect()->back()->with('alert', 'Something went wrong!');
                 }
 
             }

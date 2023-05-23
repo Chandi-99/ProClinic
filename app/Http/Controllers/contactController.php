@@ -14,15 +14,6 @@ class contactController extends Controller
     public function index()
     {
         return view('welcome');
-
-        // Fetch all records
-        /*
-        $Candidate = Candidate::select('*')->get();
-
-        $data['Candidate'] = $Candidate;
-        
-        return view('index',$data);
-        */
     }
 
     public function store(Request $request){
@@ -55,6 +46,9 @@ class contactController extends Controller
                 if($request['cvfile']) {
 
                     $path = $request->file('cvfile')->store('cvfiles');
+                    $name = $request->cv_name;
+                    $temp = "cvfiles/".$request->file('cvfile')->getClientOriginalName();
+                    $sql = DB::update('update candidates set `candidates`.`cv_file_path` ='.'"'.$temp.'"'.' where `candidates`.`cv_email`='.'"'.$name.'";');
 
                     // Insert record
                     $insertData_arr = array(
@@ -66,19 +60,8 @@ class contactController extends Controller
                     );
 
                     Candidate::create($insertData_arr);
-
-                    // Session
-                    //Session::flash('alert-class', 'alert-success');
-                    //Session::flash('message','Record inserted successfully.');
-
                     return view('CV-Confirmation');
 
-                }
-                else{
-
-                    // Session
-                    //Session::flash('alert-class', 'alert-danger');
-                    //Session::flash('message','Record not inserted');
                 }
 
             }

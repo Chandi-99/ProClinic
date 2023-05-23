@@ -392,7 +392,7 @@
 
                     <div class="col-lg-5 col-12 mx-auto ">
                         <form class="custom-form contact-form " method="POST " action="{{route('home')}}"   >
-                        @csrf
+                        
                             <h2 style="font-size:50px; font-weight:bold;">Contact form</h2>
 
                             <p class="mb-4 ">Or, you can just send an email:

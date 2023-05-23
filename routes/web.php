@@ -24,7 +24,7 @@ Route::get('/welcome', function(){
     return view('welcome');
 });
 Route::post('welcome', [App\Http\Controllers\contactController::class, 'store'])->name('welcome');
-Route::post('home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
+Route::post('/result', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
 
 //Route::get('searchMedicine', [App\Http\Controllers\searchMediController::class, 'index'])->name('searchmedicine');
 

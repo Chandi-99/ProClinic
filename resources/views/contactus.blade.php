@@ -17,10 +17,11 @@
                        We will respond to your message as soon as we can.</p>
                        <br>
                        <p>Thank you!</p>
-                       <p style="color:darkgray;">Click on home button to resume your journey at our website</p>
+                       <a class="custom-btn" href="{{route('welcome')}}" >Go Back</a>
                     </div>
             
             </div>
+            
 
             </div>
 
