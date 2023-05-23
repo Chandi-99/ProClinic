@@ -207,7 +207,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <a href="donate.html " class="custom-btn btn ">Donate now</a>
+                                <a href="{{route('donation')}}" class="custom-btn btn ">Donate now</a>
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                                     </div>
                                 </div>
 
-                                <a href="donate.html " class="custom-btn btn form-control-lg">Donate now</a>
+                                <a href="{{route('donation')}}" class="custom-btn btn form-control-lg">Donate now</a>
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                                     </div>
                                 </div>
 
-                                <a href="donate.html " class="custom-btn btn ">Donate now</a>
+                                <a href="{{route('donation')}}" class="custom-btn btn ">Donate now</a>
                             </div>
                         </div>
                     </div>

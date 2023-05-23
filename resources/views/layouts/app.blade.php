@@ -97,13 +97,7 @@
                     </li>
 
                     <li class="nav-item dropdown ">
-                        <a class="nav-link click-scroll dropdown-toggle " href="#section_5 " id="navbarLightDropdownMenuLink " role="button " data-bs-toggle="dropdown " aria-expanded="false ">News</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light " aria-labelledby="navbarLightDropdownMenuLink ">
-                            <li><a class="dropdown-item " href="news.html ">News Listing</a></li>
-
-                            <li><a class="dropdown-item " href="news-detail.html ">News Detail</a></li>
-                        </ul>
+                    <a class="nav-link click-scroll " href="{{ route('blog') }}" >Blog</a>
                     </li>
 
                     <li class="nav-item ">
@@ -111,7 +105,7 @@
                     </li>
 
                     <li class="nav-item ms-3 ">
-                        <a class="nav-link custom-btn custom-border-btn btn " href="donate.html ">Donate</a>
+                        <a class="nav-link custom-btn custom-border-btn btn " href="{{route('donation')}}">Donate</a>
                     </li>
 
                     <!-- Authentication Links -->
