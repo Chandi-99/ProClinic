@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
+            $table->string('medi_name')->unique();
+            $table->string('company');
+            $table->string('availability');
+            $table->boolean('after_eat');
+            $table->double('unit_price');
+            $table->string('uses');
+            $table->string('side_effects');
+            $table->double('mg');
             $table->timestamps();
         });
     }

@@ -34,8 +34,13 @@ class HomeController extends Controller
 
         if($request->has('form1')){
 
-            $medicine = DB::select('select * from medicines');
-            return view('stud_view',['users'=>$medicine]);
+            $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
+            if($medicine == null){
+                return redirect('welcome')->with('alert_1', 'Medicine not found!');
+            }
+            else{
+                return view('searchmedicine',['medi'=>$medicine]);
+            }
 
         }
         if ($request->has('form2')){

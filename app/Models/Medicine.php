@@ -11,10 +11,12 @@ class Medicine extends Model
 
     protected $fillable = [
         'medi_name',
-        'medi_Name',
         'company',
         'availability',
         'after_Eat',
         'unit_Price',
+        'uses',
+        'side_effects',
+        'mg',
     ];
 }

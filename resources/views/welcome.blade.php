@@ -161,6 +161,11 @@
         </section>
         <section class="cta-section section-padding section-bg " id="search_med">
             <div class="container ">
+                 @if (session('alert_1'))
+                    <div class="alert alert-success">
+                        {{ session('alert_1') }}
+                                </div>
+                @endif
                 <div class="row justify-content-center align-items-center ">
                     <div class="col-lg-5 col-12 ms-auto ">
                         <h2 class="mb-0 ">All your Medicines from One Place! <br> We got thousands of Medicines </br>that you need.</h2>

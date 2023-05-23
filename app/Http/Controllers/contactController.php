@@ -7,6 +7,7 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Candidate;
+use Illuminate\Support\Facades\DB;
 
 class contactController extends Controller
 {
@@ -27,7 +28,13 @@ class contactController extends Controller
     public function store(Request $request){
 
         if($request->has('form1')){
-
+            $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
+            if($medicine == null){
+                return redirect('welcome')->with('alert_1', 'Medicine not found!');
+            }
+            else{
+                return view('searchmedicine',['medi'=>$medicine]);
+            }
         }
         if ($request->has('form2')){
             
