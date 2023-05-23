@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\DB;
 
-class contactController extends Controller
+class welcomeController extends Controller
 {
     public function index()
     {
