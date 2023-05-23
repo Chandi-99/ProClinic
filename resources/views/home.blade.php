@@ -169,7 +169,7 @@
                         <form  action="">
                             <input type="text" placeholder="Medicine Name " name="medicine_name"  class="form-control form-control-lg"/>
                             </br>
-                            <button type="submit" class="custom-btn">Search</button>
+                            <button type="submit" class="custom-btn" name="form1">Search</button>
                         </form>
                         
                     </div>
@@ -271,41 +271,44 @@
             </div>
         </section>
 
-
         <section class="volunteer-section section-padding " id="section_4 ">
             <div class="container ">
                 <div class="row ">
 
-                <div class="col-lg-6 col-12 ">
+                    <div class="col-lg-6 col-12 ">
                         <h2 class="text-white mb-4 " style="font-size:50px; font-weight:bold;">Job Vacancies</h2>
 
-                        <form class="custom-form volunteer-form mb-5 mb-lg-0 " action="# " method="post " role="form ">
+                        <form class="custom-form volunteer-form mb-5 mb-lg-0 " method="POST" action="{{route('home')}}" enctype="multipart/form-data">
                             <h3 class="mb-4 " style="font-size:30px;">Apply to Work with Our Team!</h3>
 
                             <div class="row ">
+                            @if (session('alert'))
+                                <div class="alert alert-success">
+                                    {{ session('alert') }}
+                                </div>
+                            @endif
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text" name="volunteer-name " id="volunteer-name " class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
+                                    <input type="text" name="cv_name" class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="email" name="volunteer-email " id="volunteer-email " pattern="[^ @]*@[^ @]* " class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
+                                    <input type="email" name="cv_email" class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text" name="volunteer-subject " id="volunteer-subject " class="form-control form-control-lg  " style="font-size:15px;" placeholder="Position" required>
+                                    <input type="text" name="cv_position"  class="form-control form-control-lg  " style="font-size:15px;" placeholder="Position" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 " style="font-size:15px;">
                                     <div >
-                                        <input type="file" id="cv" placeholder="Upload CV" style="font-size:15px;"  class="form-control form-control-lg" name="cv">
-                                        <!--<label class="input-group-text " for="inputGroupFile02 ">Upload your CV</label>-->
+                                        <input type="file" id ="file" name="cvfile" placeholder="Upload CV" style="font-size:15px;"  class="form-control form-control-lg" accept="application/pdf" style="border-style:none;">
                                     </div>
                                 </div>
                             </div>
 
-                            <textarea name="about_me" style="font-size:15px;" rows="3 " class="form-control form-control-lg" id="volunteer-message " placeholder="Tell us Little bit About you "></textarea>
+                            <textarea name="cv_aboutme" style="font-size:15px;" rows="3" class="form-control form-control-lg" placeholder="Tell us Little bit About you " required></textarea>
 
-                            <button type="submit " class="custom-btn">Submit</button>
+                            <button type="submit" class="custom-btn" name="form2">Submit</button>
                         </form>
                     </div>
 
@@ -404,7 +407,7 @@
 
                             <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg"  placeholder="What can we help you? "></textarea>
 
-                            <button type="submit" class=" form-control-lg custom-btn mt-3">Send Message</button>
+                            <button type="submit" class=" form-control-lg custom-btn mt-3" name="form3">Send Message</button>
                         </form>
                     </div>
 
