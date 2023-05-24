@@ -243,6 +243,7 @@
     <script src="/js/click-scroll.js "></script>
     <script src="/js/counter.js "></script>
     <script src="/js/custom.js "></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
 </body>
 </html>
