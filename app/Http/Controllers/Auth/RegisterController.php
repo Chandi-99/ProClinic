@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Patient;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\data;
 
 class RegisterController extends Controller
 {
@@ -42,18 +44,35 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Get a validator for an incoming registration data.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+        $validator = Validator::make($data, [
+            'fname' => ['required', 'string', 'max:20'],
+            'lname' => ['required', 'string', 'max:20'],
+            'address' => ['required', 'string', 'max:50'],
+            'dob' => ['required', 'date', 'max:20'],
+            'gender' => ['required', 'string', 'max:10'],
+            'nic' => ['required', 'string', 'max:12'],
+            'contact' => ['required', 'integer', 'max:10'],
         ]);
+
+        if($validator->fails()){
+            return  Validator::make($data, [
+                'name' => ['required', 'string', 'max:20'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }
+        else{
+            return $validator->fails();
+        }
+
     }
 
     /**
@@ -64,11 +83,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'usertype' => "patient",
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->save();
+        $patient = Patient::create([
+            'fname' => $data['fname'],
+            'lname'=> $data['lname'],
+            'contact'=> $data['contact'],
+            'nic'=> $data['nic'],
+            'address'=> $data['address'],
+            'gender'=> $data['gender'],
+            'dob'=> $data['dob'],
+        ]);
+
+        $patient->save();
+        return $user;
+
     }
 }
