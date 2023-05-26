@@ -27,7 +27,7 @@ Route::post('welcome', [App\Http\Controllers\welcomeController::class, 'store'])
 Route::post('/result', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
 
 Route::get('donation', [App\Http\Controllers\donationController::class, 'index'])->name('donation');
-
+Route::post('donation', [App\Http\Controllers\stripeController::class, 'chargeCustomer'])->name('donation');
 Route::get('blog', [App\Http\Controllers\blogController::class, 'index'])->name('blog');
 //Route::get('searchMedicine', [App\Http\Controllers\searchMediController::class, 'index'])->name('searchmedicine');
 

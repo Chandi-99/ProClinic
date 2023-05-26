@@ -80,7 +80,7 @@
                 <div class="row ">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0 ">
-                        <img src="/images/doctornew.jpg" class="custom-text-box-image img-fluid " alt=" ">
+                        <img src="/images/ourstory.jpeg" class="custom-text-box-image img-fluid " alt=" ">
                     </div>
 
                     <div class="col-lg-6 col-12 " id="section_2">
@@ -200,10 +200,10 @@
                                     </div>
                                     <div class="d-flex align-items-center my-2 ">
                                         <p class="mb-0 ">
-                                            <strong>Raised:</strong> $18,500
+                                            <strong>Raised:</strong> Rs.18,500
                                         </p>
                                         <p class="ms-auto mb-0 ">
-                                            <strong>Goal:</strong> $32,000
+                                            <strong>Goal:</strong> Rs.32,000
                                         </p>
                                     </div>
                                 </div>
@@ -228,11 +228,11 @@
 
                                     <div class="d-flex align-items-center my-2 ">
                                         <p class="mb-0 ">
-                                            <strong>Raised:</strong> $27,600
+                                            <strong>Raised:</strong> Rs.27,600
                                         </p>
 
                                         <p class="ms-auto mb-0 ">
-                                            <strong>Goal:</strong> $60,000
+                                            <strong>Goal:</strong> Rs.60,000
                                         </p>
                                     </div>
                                 </div>
@@ -258,11 +258,11 @@
 
                                     <div class="d-flex align-items-center my-2 ">
                                         <p class="mb-0 ">
-                                            <strong>Raised:</strong> $84,600
+                                            <strong>Raised:</strong> Rs.84,600
                                         </p>
 
                                         <p class="ms-auto mb-0 ">
-                                            <strong>Goal:</strong> $100,000
+                                            <strong>Goal:</strong> Rs.100,000
                                         </p>
                                     </div>
                                 </div>
