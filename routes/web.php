@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,10 @@ Route::get('/welcome', function(){
     return view('welcome');
 });
 Route::post('welcome', [App\Http\Controllers\welcomeController::class, 'store'])->name('welcome');
-Route::post('/result', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
+Route::post('home', [App\Http\Controllers\HomeController::class, 'store']);
 
-Route::get('donation', [App\Http\Controllers\donationController::class, 'index'])->name('donation');
+Route::get('donation', [App\Http\Controllers\donationController::class, 'index'])->name('donation');;
 Route::post('donation', [App\Http\Controllers\stripeController::class, 'chargeCustomer'])->name('donation');
 Route::get('blog', [App\Http\Controllers\blogController::class, 'index'])->name('blog');
-//Route::get('searchMedicine', [App\Http\Controllers\searchMediController::class, 'index'])->name('searchmedicine');
+
 
