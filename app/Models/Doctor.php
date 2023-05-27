@@ -16,5 +16,10 @@ class Doctor extends Model
         'specialization',
         'echanneling_rate',
         'normal_rate',
+        'user_id',
     ];
+
+    public function User() {
+        return $this->belongsTo(User::class);
+    }
 }

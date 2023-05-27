@@ -19,7 +19,6 @@
     <section class="news-section section-padding">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-lg-7 col-12">
                             <div class="news-block">
                                 <div class="news-block-top">
@@ -61,7 +60,25 @@
                                 </div>
 
                                     <div class="news-block-body">
-                                        <p> Content of the Blog <p>
+                                        <p style="text-align:justify;">Our medical center recently held a clothing drive for local residents in need. The drive was a huge success, and we were able to collect over 1,000 items of clothing.
+                                             All of the donated clothing was distributed to local shelters and organizations that help people in need.
+                                            We are so grateful to everyone who donated to our clothing drive. Your generosity will help make a real difference in the lives of people in our community.
+                                            We would also like to thank our volunteers who helped to collect and sort the donated clothing. Your hard work made this event possible.
+                                            If you are interested in donating clothing in the future, please contact our medical center. We are always looking for ways to help those in need.
+                                            </br>
+                                            <strong>Call to action:</strong></br>
+                                            If you have any gently used clothing that you no longer need, please consider donating it to our medical center. Your donation will help make a real difference in the lives of people in our community.
+                                            To donate clothing, please drop it off at our medical center's main entrance. We are open Monday through Friday from 8:00 AM to 5:00 PM.
+                                            Thank you for your generosity!
+                                            </br>
+                                            <strong>Benefits of donating clothing:</strong>
+                                            </br>
+                                            There are many benefits to donating clothing. When you donate clothing, you are helping to:
+                                            Provide clothing to people in need
+                                            Reduce waste
+                                            Save energy
+                                            Protect the environment
+                                            Clothing donation is a great way to give back to your community and make a difference in the world. If you have any gently used clothing that you no longer need, please consider donating it to a local charity or organization.<p>
                                     </div>    
 
 
@@ -179,7 +196,15 @@
                             <form class="custom-form subscribe-form" action="#" method="post" role="form">
                                 <h5 class="mb-4">Newsletter Form</h5>
 
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email Address" required>
+                                @if (Route::has('login'))
+                                    <input type="email" name="subscribe-email" id="subscribe-email"  class="form-control" placeholder="{{ Auth::user()->email }}" required />
+                                
+                                @else
+
+                                    <input type="email" name="subscribe-email" id="subscribe-email"  class="form-control" placeholder="Email Address" required />
+                                
+                                @endif
+                                
 
                                 <div class="col-lg-12 col-12">
                                     <button type="submit" class="form-control">Subscribe</button>

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('specialization');
             $table->double('echanneling_rate');
             $table->string('normal_rate');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

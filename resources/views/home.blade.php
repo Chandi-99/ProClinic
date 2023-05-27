@@ -293,11 +293,11 @@
                                 </div>
                             @endif
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text" name="cv_name" class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
+                                    <input type="text" name="cv_name" class="form-control form-control-lg " placeholder="{{ Auth::user()->Patient->fname }}" style="font-size:15px;" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="email" name="cv_email" class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
+                                    <input type="email" name="cv_email" class="form-control form-control-lg " style="font-size:15px;" placeholder="{{ Auth::user()->email }}" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
@@ -400,11 +400,11 @@
                             </p>
                             <div class="row ">
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="fname " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
+                                    <input type="text " name="fname " style="font-size:15px;" class="form-control form-control-lg" placeholder="{{ Auth::user()->Patient->fname }}" required>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text" name="lname "  style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
+                                    <input type="text" name="lname "  style="font-size:15px;" class="form-control form-control-lg " placeholder="{{ Auth::user()->Patient->lname }}" required>
                                 </div>
                             </div>
 

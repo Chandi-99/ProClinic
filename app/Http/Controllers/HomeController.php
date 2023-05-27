@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\User;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -27,6 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*
+        $user = User::findorfail($user);
+        return view('home',[
+            'user'=> $user,
+        ]);
+        */
         return view('home');
     }
 

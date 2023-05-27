@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\data;
 
 class RegisterController extends Controller
@@ -93,6 +94,8 @@ class RegisterController extends Controller
         ]);
 
         $user->save();
+        $userid = DB::connection()->getPdo()->lastInsertId();
+        
         $patient = Patient::create([
             'fname' => $data['fname'],
             'lname'=> $data['lname'],
@@ -101,6 +104,7 @@ class RegisterController extends Controller
             'address'=> $data['address'],
             'gender'=> $data['gender'],
             'dob'=> $data['dob'],
+            'user_id' => $userid,
         ]);
 
         $patient->save();

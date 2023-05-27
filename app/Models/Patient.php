@@ -16,5 +16,18 @@ class Patient extends Model
         'address',
         'gender',
         'dob',
+        'user_id',
     ];
+
+    public function User() {
+        return $this->belongsTo(User::class);
+    }
+
+    /*
+    $patients = Patient::all();
+
+    foreach ($patients as $patient) {
+    $users = $patient->users; // Get all users associated with the patient
+    */
 }
+
