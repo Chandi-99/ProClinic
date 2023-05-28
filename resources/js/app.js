@@ -39,3 +39,4 @@ app.component('example-component', ExampleComponent);
 app.mount('#app');
 
 var myFile = "";
+Vue.component('video - chat', require('. / components / VideoChat.vue').default);
