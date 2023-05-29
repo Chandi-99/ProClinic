@@ -175,8 +175,7 @@
                             <input type="text" placeholder="Medicine Name " name="medicine_name"  class="form-control form-control-lg"/>
                             </br>
                             <button type="submit" class="custom-btn" name="form1">Search</button>
-                        </form>
-                        
+                        </form>                     
                     </div>
                 </div>
             </div>

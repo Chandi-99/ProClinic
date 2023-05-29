@@ -10,7 +10,7 @@ button {
 }
 
 .sidebar-nav {
-    width: var(--offcanvas-width);
+    width: 270px;
 }
 
 .sidebar-link {
@@ -31,7 +31,7 @@ button {
         overflow: auto !important;
     }
     main {
-        margin-left: var(--offcanvas-width);
+        margin-left: 270px;
     }
     /* this is to remove the backdrop */
     .offcanvas-backdrop::before {

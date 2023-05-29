@@ -34,8 +34,9 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 ">
                         <div class="featured-block d-flex justify-content-center align-items-center ">
-                            <a href="" class="d-block "  style="text-decoration:none;">
+                            <a href="#" class="d-block "  style="text-decoration:none;">
                                 <img src="/images/doctor.jpg " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
+
                                 <p class="featured-block-text " style="text-decoration:none;">Make an <strong>Appointment</strong></p>
                             </a>
                         </div>
@@ -43,7 +44,7 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center ">
-                            <a href="donate.html " class="d-block " style="text-decoration:none;">
+                            <a href="{{route('videochat')}}" class="d-block " style="text-decoration:none;">
                                 <img src="images/certificate.png " class="featured-block-image img-fluid " alt=" " height="130px" width="130px">
 
                                 <p class="featured-block-text " >Request <strong>Medical Certificate</strong></p>
@@ -134,7 +135,7 @@
                     <div class="col-lg-5 col-md-7 col-12 ">
                             <h2 class="mb-0 " style="font-weight:bold;">Dr. Yasitha Bandaragodage</h2>
 
-                            <p class="text-muted mb-lg-4 mb-md-4 " style="color:black;"><strong>Physician</strong></p>
+                            <p class="text-muted mb-lg-4 mb-md-4 " style="color:black;">Physician</p>
 
                             <p style="text-align:justify;">Hi, I'm Dr. Yasitha Bandaragodage, and I'm the owner of ProClinic Medical Center. I'm a board-certified Physician who has been practicing medicine for over 10 years. I'm passionate about providing my patients with the highest quality of care, and I'm committed to helping them achieve their best health.
                                 ProClinic is a state-of-the-art facility that offers a wide range of medical services.We have a team of highly skilled and experienced doctors and nurses.
@@ -160,22 +161,22 @@
         </section>
         <section class="cta-section section-padding section-bg " id="search_med">
             <div class="container ">
-            @if (session('alert_1'))
+                 @if (session('alert_1'))
                     <div class="alert alert-success">
                         {{ session('alert_1') }}
-                    </div>
+                                </div>
                 @endif
                 <div class="row justify-content-center align-items-center ">
                     <div class="col-lg-5 col-12 ms-auto ">
                         <h2 class="mb-0 ">All your Medicines from One Place! <br> We got thousands of Medicines </br>that you need.</h2>
                     </div>
                     <div class="col-lg-5 col-12 ">
-                        <form  action="">
+                        <form method="POST" action="{{route('home')}}" role="form ">
+                            @csrf
                             <input type="text" placeholder="Medicine Name " name="medicine_name"  class="form-control form-control-lg"/>
                             </br>
                             <button type="submit" class="custom-btn" name="form1">Search</button>
-                        </form>
-                        
+                        </form>                     
                     </div>
                 </div>
             </div>
@@ -275,6 +276,7 @@
             </div>
         </section>
 
+
         <section class="volunteer-section section-padding " id="section_4 ">
             <div class="container ">
                 <div class="row ">
@@ -283,6 +285,7 @@
                         <h2 class="text-white mb-4 " style="font-size:50px; font-weight:bold;">Job Vacancies</h2>
 
                         <form class="custom-form volunteer-form mb-5 mb-lg-0 " method="POST" action="{{route('home')}}" enctype="multipart/form-data">
+                            @csrf
                             <h3 class="mb-4 " style="font-size:30px;">Apply to Work with Our Team!</h3>
 
                             <div class="row ">
@@ -292,11 +295,11 @@
                                 </div>
                             @endif
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="text" name="cv_name" class="form-control form-control-lg " placeholder="{{ Auth::user()->Patient->fname }}" style="font-size:15px;" required>
+                                    <input type="text" name="cv_name" class="form-control form-control-lg " placeholder="Your Name" style="font-size:15px;" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
-                                    <input type="email" name="cv_email" class="form-control form-control-lg " style="font-size:15px;" placeholder="{{ Auth::user()->email }}" required>
+                                    <input type="email" name="cv_email" class="form-control form-control-lg " style="font-size:15px;" placeholder="Email Address " required>
                                 </div>
 
                                 <div class="col-lg-6 col-12 ">
@@ -383,15 +386,15 @@
                                         </a>
                                 </p>
 
-</br>
+                                </br>
                                 <a href="# " class="custom-btn mt-5" style="text-decoration:none;">Get Direction</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-5 col-12 mx-auto ">
-                        <form class="custom-form contact-form " method="POST " action="{{route('home')}}"   >
-                        
+                        <form class="custom-form contact-form "  method="POST" action="{{route('home')}}" role="form ">
+                            @csrf
                             <h2 style="font-size:50px; font-weight:bold;">Contact form</h2>
 
                             <p class="mb-4 ">Or, you can just send an email:
@@ -399,19 +402,19 @@
                             </p>
                             <div class="row ">
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text " name="fname " style="font-size:15px;" class="form-control form-control-lg" placeholder="{{ Auth::user()->Patient->fname }}" required>
+                                    <input type="text" name="fname" id="first-name " style="font-size:15px;" class="form-control form-control-lg" placeholder="Amal " required>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-12 ">
-                                    <input type="text" name="lname "  style="font-size:15px;" class="form-control form-control-lg " placeholder="{{ Auth::user()->Patient->lname }}" required>
+                                    <input type="text" name="lname" id="last-name " style="font-size:15px;" class="form-control form-control-lg " placeholder="Perera " required>
                                 </div>
                             </div>
 
-                            <input type="email" name="contact_email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
+                            <input type="email" name="contact_email" id="email " style="font-size:15px;" class="form-control form-control-lg" placeholder="amalperera@gmail.com " required>
 
-                            <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg"  placeholder="What can we help you? "></textarea>
+                            <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg" id="message " placeholder="What can we help you? "></textarea>
 
-                            <button type="submit" class=" form-control-lg custom-btn mt-3" name="form3">Send Message</button>
+                            <button type="submit" class="form-control-lg custom-btn mt-3" name="form3">Send Message</button>
                         </form>
                     </div>
 
@@ -419,6 +422,9 @@
             </div>
         </section>
 
+
     </main>
 
+
 @endsection
+

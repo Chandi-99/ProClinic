@@ -13,20 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/welcome', function(){
     return view('welcome');
 });
 
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admindashboard');
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'index'])->name('staffdashboard');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::post('welcome', [App\Http\Controllers\welcomeController::class, 'store'])->name('welcome');
-Route::post('home', [App\Http\Controllers\HomeController::class, 'store']);
+Route::post('home', [App\Http\Controllers\HomeController::class, 'store'])->name('home');
 
 Route::get('donation', [App\Http\Controllers\donationController::class, 'index'])->name('donation');;
 Route::post('donation', [App\Http\Controllers\stripeController::class, 'chargeCustomer']);

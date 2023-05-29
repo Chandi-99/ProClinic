@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\data;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -32,7 +31,30 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
+
+    public function redirectTo()
+    {
+        switch(Auth::user()->usertype){
+            case 'admin':
+            $this->redirectTo = 'admin';
+            return $this->redirectTo;
+                break;
+            case 'staff':
+                    $this->redirectTo = 'staff';
+                return $this->redirectTo;
+                break;
+            case 'patient':
+                $this->redirectTo = 'home';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = 'login';
+                return $this->redirectTo;
+        }
+         
+        // return $next($request);
+    } 
 
     /**
      * Create a new controller instance.
@@ -52,7 +74,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
         $validator = Validator::make($data, [
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],

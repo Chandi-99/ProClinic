@@ -1,89 +1,96 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+  <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>{{ 'ProClinic' }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-     <!-- CSS FILES -->
-     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS FILES -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-icons.css" rel="stylesheet">
     <link href="/css/proclinic_layout.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+<!-- Datatable script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+
     <!--Bootstrap File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
-<body>
+  </head>
+  <header class="site-header">
 
-<body id="section_1">
-<header class="site-header">
+ <div class="container">
+    <div class="row">
 
-        <div class="container">
-            <div class="row">
+        <div class="col-lg-8 col-12 d-flex flex-wrap">
+            <p class="d-flex me-4 mb-0">
+                <i class="bi-geo-alt me-2"></i> No 20, Galle Road, Colombo 06, Sri Lanka.
+            </p>
 
-                <div class="col-lg-8 col-12 d-flex flex-wrap">
-                    <p class="d-flex me-4 mb-0">
-                        <i class="bi-geo-alt me-2"></i> No 20, Galle Road, Colombo 06, Sri Lanka.
-                    </p>
+            <p class="d-flex mb-0">
+                <i class="bi-envelope me-2"></i>
 
-                    <p class="d-flex mb-0">
-                        <i class="bi-envelope me-2"></i>
-
-                        <a href="mailto:info@company.com">
-                                info@proclinic.com
-                            </a>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
-                    <ul class="social-icon" >
-                        <li class="social-icon-item ">
-                            <a href=" https://twitter.com " class="social-icon-link bi-twitter"></a>
-                        </li>
-
-                        <li class=" social-icon-item ">
-                            <a href="https://facebook.com " class="social-icon-link bi-facebook "></a>
-                        </li>
-
-                        <li class=" social-icon-item ">
-                            <a href="https://instagram.com " class="social-icon-link bi-instagram "></a>
-                        </li>
-
-                        <li class="social-icon-item " >
-                            <a href="https://youtube.com " class="social-icon-link bi-youtube "></a>
-                        </li>
-
-                        <li class="social-icon-item ">
-                            <a href="https://whatsapp.com " class="social-icon-link bi-whatsapp "></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <a href="mailto:info@company.com">
+                        info@proclinic.com
+                    </a>
+            </p>
         </div>
+
+        <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+            <ul class="social-icon" >
+                <li class="social-icon-item ">
+                    <a href=" https://twitter.com " class="social-icon-link bi-twitter"></a>
+                </li>
+
+                <li class=" social-icon-item ">
+                    <a href="https://facebook.com " class="social-icon-link bi-facebook "></a>
+                </li>
+
+                <li class=" social-icon-item ">
+                    <a href="https://instagram.com " class="social-icon-link bi-instagram "></a>
+                </li>
+
+                <li class="social-icon-item " >
+                    <a href="https://youtube.com " class="social-icon-link bi-youtube "></a>
+                </li>
+
+                <li class="social-icon-item ">
+                    <a href="https://whatsapp.com " class="social-icon-link bi-whatsapp "></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </header>
-    <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
-        <div class="container">
+<body>
+      <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
+          <div class="container">
             @if (Route::has('login'))
-            <a class="navbar-brand " href="{{ ('/') }}">
+            <a class="navbar-brand " href="{{ route('admindashboard') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
                 <span style="font-size:30px; color:#5bc1ac;" > ProClinic
                         <small style="font-size:17px;" id="title">Medical Center</small>
                     </span>
             </a>
             @else
-            <a class="navbar-brand " href="{{ route('home') }}">
+            <a class="navbar-brand " href="{{ route('admindashboard') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
                 <span style="font-size:30px; color:#5bc1ac;" > ProClinic
                         <small style="font-size:17px;" id="title">Medical Center</small>
@@ -92,28 +99,24 @@
             @endif
             <button class="navbar-toggler " type="button " data-bs-toggle="collapse " data-bs-target="#navbarNav " aria-controls="navbarNav " aria-expanded="false " aria-label="Toggle navigation ">
                     <span class="navbar-toggler-icon "></span>
-                </button>
+            </button>
 
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('welcome')}}">Home</a>
+                        <a class="nav-link click-scroll " href="{{route('welcome')}}">Patients</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/') }}" >About</a>
+                        <a class="nav-link click-scroll " href="{{ ('/') }}" >Doctors</a>
                     </li>
 
                     <li class="nav-item dropdown ">
-                    <a class="nav-link click-scroll " href="{{ route('blog') }}" >Blog</a>
+                    <a class="nav-link click-scroll " href="{{ route('blog') }}" >Staff & Rooms</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="#footer ">Contact</a>
-                    </li>
-
-                    <li class="nav-item ms-3 ">
-                        <a class="nav-link custom-btn custom-border-btn btn " href="{{route('donation')}}">Donate</a>
+                        <a class="nav-link click-scroll " href="{{ route('blog') }}">Appointments</a>
                     </li>
 
                     <!-- Authentication Links -->
@@ -151,12 +154,17 @@
                     @endguest
                 </ul>
             </div>
-        </div>
+          </div>
     </nav>
-                
-    <main class="py-4">
+    <main class="mt-5 pt-3" style="margin-left:10px; margin-right:10px;">
         @yield('content')
     </main>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="./js/jquery-3.5.1.js"></script>
+    <script src="./js/jquery.dataTables.min.js"></script>
+    <script src="./js/dataTables.bootstrap5.min.js"></script>
+    <script src="./js/script.js"></script>
 
     <footer class="site-footer " id="footer">
         <div class="container">
@@ -241,17 +249,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- JAVASCRIPT FILES -->
-    <script src="/js/jquery.min.js "></script>
-    <script src="/js/bootstrap.min.js "></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.sticky.js "></script>
-    <script src="/js/click-scroll.js "></script>
-    <script src="/js/counter.js "></script>
-    <script src="/js/custom.js "></script>
-    <script src="https://js.stripe.com/v3/"></script>
-
-</body>
+  
+  </body>
 </html>

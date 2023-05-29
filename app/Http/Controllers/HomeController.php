@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,13 +29,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*
-        $user = User::findorfail($user);
-        return view('home',[
-            'user'=> $user,
-        ]);
-        */
-        return view('home');
+        $usertype = Auth::user()->usertype;
+        
+        if($usertype == 'patient'){
+            return view('home');
+        }
+        else if($usertype == 'admin'){
+            return view('admindashboard');
+        }
+        else{
+            return view('staffdashboard');
+        }
     }
 
     public function store(Request $request){
