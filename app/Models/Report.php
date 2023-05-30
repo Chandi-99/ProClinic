@@ -14,6 +14,7 @@ class Report extends Model
         'date',
         'visibility',
         'image_path',
+        'patient_id',
     ];
 
     public function Patient() {

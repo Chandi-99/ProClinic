@@ -81,27 +81,10 @@ class RegisterController extends Controller
             'dob' => ['required', 'date'],
             'gender' => ['required', 'string', 'max:10'],
             'nic' => ['required', 'string', 'min:10','max:12'],
-            'contact' => ['required', 'integer', 'max:10'],
-            'name' => ['required', 'string', 'max:20'],
+            'contact' => ['required', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-
-        /*
-        if($validator->fails()){
-            
-            return  Validator::make($data, [
-                'name' => ['required', 'string', 'max:20'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            return $validator->fails();
-        }
-        else{
-            return $validator;
-        }
-        */
-
     }
 
     /**

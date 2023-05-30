@@ -7,16 +7,33 @@ use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use App\Models\Report;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Auth;
 
 class reportController extends Controller
 {
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //$user = auth()->user()->Patient();
-       // $reports = Auth::user()->Patient()->Reports()->orderBy('created_at', 'desc')->get();
-        $images = auth()->user()->Patient->Reports;
-        return view('Reports', compact('images'));
+        $user = User::find(Auth::user()->id);
+        $patient = $user->Patient;
+        //$reports = Report::where('patient_id',$patientid);
+        echo $patient;
+
+        $reports = Report::where('patient_id',$patient->patient_id);
+        //echo $reports;
+        //$reports = $patient->Reports;
+        return view('Reports', compact('reports'));
     }
 
     public function updateReports(Request $request)
@@ -24,27 +41,38 @@ class reportController extends Controller
         // Validate the form input
         $request->validate([
             'report' => 'required|max:2048', // Assuming you want to restrict file types to images (JPEG, PNG, etc.) and a maximum file size of 2MB
-            'report_name' => 'required|unique',
+            'report_name' => 'required',
             'visibility' => 'required',
         ]);
 
-        // Process the uploaded image
-        $image = $request->file('report');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $image->move(public_path('images'), $imageName);
+       // Storage::disk('public')->putFileAs('uploads', $file, $file->getClientOriginalName());
+        $temp = "reports/".$request->file('report')->getClientOriginalName();
 
-        // Save the image file name to the user's profile (you'll need to adjust this based on your user model and database structure)
-        $report = Report::create([
-            'report_name' => $request['report_name'],
-            'date' => $request['date'],
-            'visibility' => $request['visibility'],
-            'image_path' => $image,
-        ]);
+        $user = User::find(Auth::user()->id);    
+        $patientid = $user->Patient->patient_id;
 
-        $report->save();
+        if($request['report']) {
 
-        return redirect()->back()->with('success', 'Profile image updated successfully!');
+            $path = $request->file('report')->storeAs('reports', $request->file('report')->getClientOriginalName());
+            $name = $request->report_name;
+            $temp = "reports/".$request->file('report')->getClientOriginalName();
+            $sql = DB::update('update reports set `reports`.`image_path` ='.'"'.$temp.'"'.' where `reports`.`patient_id`='.'"'.$patientid.'";');
 
-        //$section->touch();
+            // Insert record
+            $insertData_arr = array(
+                'report_name' => $request['report_name'],
+                'date' => date("Y-m-d"),
+                'visibility' => $request['visibility'],
+                'patient_id'=> $patientid,
+                'image_path' => "reports/".$request->file('report')->getClientOriginalName()              
+            );
+
+            Report::create($insertData_arr);
+            return view('Reports');
+
+        }
+
+
+        return redirect()->back()->with('success', 'Report inserted successfully!');
     }
 }

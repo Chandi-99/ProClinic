@@ -15,17 +15,18 @@ class welcomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $usertype = Auth::user()->usertype;
-        
-        if($usertype == 'patient'){
-            //Session::put('patient_id', $patientid);
-            return view('home');
-        }
-        else if($usertype == 'admin'){
-            return view('admindashboard');
-        }
-        else if($usertype == 'staff'){
-            return view('staffdashboard');
+        if($user){
+
+            $usertype = $user->usertype;
+            if($usertype == 'admin'){
+                return view('admindashboard');
+            }
+            else if($usertype == 'staff'){
+                return view('staffdashboard');
+            }
+            else if($usertype == 'patient'){
+                return view('home');
+            }
         }
         else{
             return view('welcome');
@@ -62,11 +63,8 @@ class welcomeController extends Controller
 
                 if($request['cvfile']) {
 
-                    $path = $request->file('cvfile')->store('cvfiles');
                     $name = $request->cv_name;
-                    $temp = "cvfiles/".$request->file('cvfile')->getClientOriginalName();
-                    $sql = DB::update('update candidates set `candidates`.`cv_file_path` ='.'"'.$temp.'"'.' where `candidates`.`cv_email`='.'"'.$name.'";');
-
+                    $path = $request->file('cvfile')->storeAs('cvfiles', $request->file('cvfile')->getClientOriginalName());
                     // Insert record
                     $insertData_arr = array(
                         'cv_name' => $request->cv_name,

@@ -110,7 +110,7 @@
                                 <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
                                 @error('contact')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>Contact should contain only 10 Numbers</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
