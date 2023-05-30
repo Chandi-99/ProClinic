@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\Patient;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -29,9 +31,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $usertype = Auth::user()->usertype;
         
         if($usertype == 'patient'){
+            //Session::put('patient_id', $patientid);
             return view('home');
         }
         else if($usertype == 'admin'){

@@ -74,26 +74,33 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $validator = Validator::make($data, [
+        return  Validator::make($data, [
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string', 'max:50'],
-            'dob' => ['required', 'date', 'max:20'],
+            'dob' => ['required', 'date'],
             'gender' => ['required', 'string', 'max:10'],
-            'nic' => ['required', 'string', 'max:12'],
+            'nic' => ['required', 'string', 'min:10','max:12'],
             'contact' => ['required', 'integer', 'max:10'],
+            'name' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        /*
         if($validator->fails()){
+            
             return  Validator::make($data, [
                 'name' => ['required', 'string', 'max:20'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
-        }
-        else{
             return $validator->fails();
         }
+        else{
+            return $validator;
+        }
+        */
 
     }
 

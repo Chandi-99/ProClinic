@@ -23,6 +23,10 @@ class Patient extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function Reports() {
+        return $this->hasMany(Report::class);
+    }
+
     /*
     $patients = Patient::all();
 

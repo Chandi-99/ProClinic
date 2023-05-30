@@ -54,7 +54,7 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 ">
                         <div class="featured-block d-flex justify-content-center align-items-center ">
-                            <a href="donate.html " class="d-block " style="text-decoration:none;">
+                            <a href="{{route('user.reports')}}" class="d-block " style="text-decoration:none;">
                                 <img src="images/report.avif " class="featured-block-image img-fluid " alt=" " height="130px" width="130px">
 
                                 <p class="featured-block-text " >Manage<strong> Medical Reports</strong></p>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Candidate;
@@ -13,7 +14,23 @@ class welcomeController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $user = Auth::user();
+        $usertype = Auth::user()->usertype;
+        
+        if($usertype == 'patient'){
+            //Session::put('patient_id', $patientid);
+            return view('home');
+        }
+        else if($usertype == 'admin'){
+            return view('admindashboard');
+        }
+        else if($usertype == 'staff'){
+            return view('staffdashboard');
+        }
+        else{
+            return view('welcome');
+        }
+        
     }
 
     public function store(Request $request){

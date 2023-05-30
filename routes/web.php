@@ -13,15 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  [App\Http\Controllers\welcomeController::class, 'index']);
 
 Auth::routes();
-Route::get('/welcome', function(){
-    return view('welcome');
-});
-
+Route::get('welcome', [App\Http\Controllers\welcomeController::class, 'index']);
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admindashboard');
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'index'])->name('staffdashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
@@ -36,4 +31,6 @@ Route::get('blog', [App\Http\Controllers\blogController::class, 'index'])->name(
 Route::get('videochat', [App\Http\Controllers\VideoChatController::class, 'index'])->name('videochat');
 Route::post('auth', [App\Http\Controllers\VideoChatController::class, 'auth']);
 
+Route::get('/user/reports', [App\Http\Controllers\reportController::class, 'index'])->name('user.reports');
+Route::post('/user/reports', [App\Http\Controllers\reportController::class, 'updateReports'])->name('user.reports.update');
 

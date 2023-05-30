@@ -27,14 +27,24 @@
                         <div class="row mb-3">
                             <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
                             <div class="col-md-6">
-                                <input id="fname" type="text" class="form-control" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
+                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
+                                @error('fname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Invalid First Name</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="lname" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
                             <div class="col-md-6">
-                                <input id="lname" type="text" class="form-control" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
+                                <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
+                                @error('lname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Invalid Last Name</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -42,10 +52,15 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <select id="gender" type="text" class="form-control" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
                                     <option >Male</option>
                                     <option>Female</option>
                                 </select>
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Gender was Unidentified</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -53,7 +68,12 @@
                             <label for="dob" class="col-md-4 col-form-label text-md-end">{{ __('Date of Birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dob" type="date" class="form-control" name="dob" value="{{ old('dob') }}" required>
+                                <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required>
+                                @error('dob')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Invalid Date of Birth Inserted</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -61,7 +81,12 @@
                             <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autocomplete="address">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Invalid Address Entered</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -69,7 +94,12 @@
                             <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('NIC') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nic" type="text" class="form-control" name="nic" value="{{ old('nic') }}" required autocomplete="nic">
+                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic">
+                                @error('nic')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Invalid NIC Number</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -77,7 +107,12 @@
                             <label for="contact" class="col-md-4 col-form-label text-md-end">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="contact" type="number" class="form-control" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
+                                <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
+                                @error('contact')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Contact should contain only 10 Numbers</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

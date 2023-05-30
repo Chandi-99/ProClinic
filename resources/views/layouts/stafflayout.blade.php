@@ -83,14 +83,14 @@
       <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
           <div class="container">
             @if (Route::has('login'))
-            <a class="navbar-brand " href="{{ route('admindashboard') }}">
+            <a class="navbar-brand " href="{{ route('staffdashboard') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
                 <span style="font-size:30px; color:#5bc1ac;" > ProClinic
                         <small style="font-size:17px;" id="title">Medical Center</small>
                     </span>
             </a>
             @else
-            <a class="navbar-brand " href="{{ route('admindashboard') }}">
+            <a class="navbar-brand " href="{{ route('login') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
                 <span style="font-size:30px; color:#5bc1ac;" > ProClinic
                         <small style="font-size:17px;" id="title">Medical Center</small>
