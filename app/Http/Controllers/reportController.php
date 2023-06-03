@@ -27,23 +27,22 @@ class reportController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $patient = $user->Patient;
-        echo $patient;
+        
 
-        $reports = Report::where('patient_id',$patient->patient_id);
-        return view('Reports', compact('reports'));
+        $reports = Report::where('patient_id',$patient->patient_id)->get();
+        echo $reports;
+        return view('Reports', compact('reports', 'patient'));
     }
 
     public function updateReports(Request $request)
     {
+
         // Validate the form input
         $request->validate([
-            'report' => 'required|max:2048', // Assuming you want to restrict file types to images (JPEG, PNG, etc.) and a maximum file size of 2MB
+            'report' => 'required|max:2048',
             'report_name' => 'required',
             'visibility' => 'required',
         ]);
-
-       // Storage::disk('public')->putFileAs('uploads', $file, $file->getClientOriginalName());
-        $temp = "reports/".$request->file('report')->getClientOriginalName();
 
         $user = User::find(Auth::user()->id);    
         $patientid = $user->Patient->patient_id;
@@ -51,8 +50,7 @@ class reportController extends Controller
         if($request['report']) {
 
             $path = $request->file('report')->storeAs('reports', $request->file('report')->getClientOriginalName());
-            $name = $request->report_name;
-            $temp = "reports/".$request->file('report')->getClientOriginalName();
+            $temp = $request->file('report')->getClientOriginalName();
             $sql = DB::update('update reports set `reports`.`image_path` ='.'"'.$temp.'"'.' where `reports`.`patient_id`='.'"'.$patientid.'";');
 
             // Insert record
@@ -61,11 +59,18 @@ class reportController extends Controller
                 'date' => date("Y-m-d"),
                 'visibility' => $request['visibility'],
                 'patient_id'=> $patientid,
-                'image_path' => "reports/".$request->file('report')->getClientOriginalName()              
+                'image_path' => $request->file('report')->getClientOriginalName()              
             );
 
             Report::create($insertData_arr);
-            return view('Reports');
+
+            $user = User::find(Auth::user()->id);
+            $patient = $user->Patient;
+            echo $patient;
+    
+            $reports = Report::where('patient_id',$patient->patient_id)->get();
+            echo $reports;
+            return view('Reports', compact('reports'));
 
         }
 

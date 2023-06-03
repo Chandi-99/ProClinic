@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@php
+use Illuminate\Support\Facades\Storage;
+@endphp
 
 <main>
 
@@ -14,10 +17,10 @@
         <h7>Saved Reports:</h7>
         <div>
             @foreach ($reports as $report)
-                <input type="text" name="test" value="test"/>
-                <img src="/storage/{{$report->image_path}}" alt="User Report" style="width: 200px; height: auto;">
+                <img src="\storage\app\reports\{{$report->image_path}}" alt="User Report" style="width: 200px; height: auto;" />               
             @endforeach
         </div>
+        <img src="\storage\app/reports/01.jpg" alt="User Report" style="width: 200px; height: auto;" />
     @else
         <p>No any Report saved yet.</p>
     @endif

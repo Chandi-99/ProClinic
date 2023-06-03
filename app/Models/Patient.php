@@ -26,12 +26,5 @@ class Patient extends Model
     public function Reports() {
         return $this->hasMany(Report::class);
     }
-
-    /*
-    $patients = Patient::all();
-
-    foreach ($patients as $patient) {
-    $users = $patient->users; // Get all users associated with the patient
-    */
 }
 
