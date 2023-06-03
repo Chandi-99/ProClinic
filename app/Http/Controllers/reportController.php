@@ -27,12 +27,9 @@ class reportController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $patient = $user->Patient;
-        //$reports = Report::where('patient_id',$patientid);
         echo $patient;
 
         $reports = Report::where('patient_id',$patient->patient_id);
-        //echo $reports;
-        //$reports = $patient->Reports;
         return view('Reports', compact('reports'));
     }
 

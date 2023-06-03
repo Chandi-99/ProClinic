@@ -13,7 +13,6 @@
     
         <h7>Saved Reports:</h7>
         <div>
-        
             @foreach ($reports as $report)
                 <input type="text" name="test" value="test"/>
                 <img src="/storage/{{$report->image_path}}" alt="User Report" style="width: 200px; height: auto;">
