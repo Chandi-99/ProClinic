@@ -25,6 +25,7 @@ class patientController extends Controller
     public function create(Request $request){
 
         $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:20'],
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string', 'max:50'],

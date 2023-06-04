@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
+            $table->date('dob');
             $table->string('gender');
             $table->string('regNum');
             $table->string('specialization');
+            $table->integer('contact');
             $table->double('echanneling_rate');
             $table->string('normal_rate');
             $table->unsignedBigInteger('user_id');
