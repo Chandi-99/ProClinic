@@ -34,3 +34,12 @@ Route::post('auth', [App\Http\Controllers\VideoChatController::class, 'auth']);
 Route::get('/user/reports', [App\Http\Controllers\reportController::class, 'index'])->name('user.reports');
 Route::post('/user/reports', [App\Http\Controllers\reportController::class, 'updateReports'])->name('user.reports.update');
 
+Route::get('/rooms', [App\Http\Controllers\roomController::class, 'index'])->name('room');
+Route::post('/rooms', [App\Http\Controllers\roomController::class, 'create'])->name('room.create');
+
+Route::get('/newPatient', [App\Http\Controllers\patientController::class, 'index'])->name('patient');
+Route::post('/newPatient', [App\Http\Controllers\patientController::class, 'create'])->name('patient.create');
+
+Route::get('/newDoctor', [App\Http\Controllers\doctorController::class, 'index'])->name('doctor');
+Route::post('/newDoctor', [App\Http\Controllers\doctorController::class, 'create'])->name('doctor.create');
+

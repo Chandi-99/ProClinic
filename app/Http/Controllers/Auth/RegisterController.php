@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -78,10 +79,10 @@ class RegisterController extends Controller
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string', 'max:50'],
-            'dob' => ['required', 'date'],
+            'dob' => ['required', 'date', 'before:today'],
             'gender' => ['required', 'string', 'max:10'],
-            'nic' => ['required', 'string', 'min:10','max:12'],
-            'contact' => ['required', 'max:20'],
+            'nic' => ['required', 'string', 'min:10','max:12', 'unique:users'],
+            'contact' => ['required', 'max:20', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -117,6 +118,7 @@ class RegisterController extends Controller
         ]);
 
         $patient->save();
+        Session::alert('New Patient Account Created Successfully!.', 'success');
         return $user;
 
     }

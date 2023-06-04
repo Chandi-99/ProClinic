@@ -22,6 +22,13 @@
     <link href="/css/bootstrap-icons.css" rel="stylesheet">
     <link href="/css/proclinic_layout.css" rel="stylesheet">
 
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    </style>
     <!-- DataTables CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"/>
 
@@ -166,10 +173,10 @@
     <script src="./js/dataTables.bootstrap5.min.js"></script>
     <script src="./js/script.js"></script>
 
-    <footer class="site-footer " id="footer">
-        <div class="container">
+    <footer class="site-footer mt-0 pt-3" id="footer">
+        <div class="container pb-0">
             <div class="row " style="margin:0px; padding:0px">
-                <div class="col-lg-3 col-12 mb-2 ">
+                <div class="col-lg-3 col-12 ">
                     <img src="/images/logo.png " class="logo img-fluid " alt=" ">
                 </div>
 
@@ -214,7 +221,7 @@
             </div>
         </div>
 
-        <div class="site-footer-bottom ">
+        <div class="site-footer-bottom mt-4 pt-3  pb-1">
             <div class="container ">
                 <div class="row ">
 

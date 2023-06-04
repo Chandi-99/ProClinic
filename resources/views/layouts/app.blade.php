@@ -9,6 +9,14 @@
 
     <title>{{ 'ProClinic' }}</title>
 
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    </style>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -150,10 +158,10 @@
         @yield('content')
     </main>
 
-    <footer class="site-footer " id="footer">
-        <div class="container">
+    <footer class="site-footer mt-0 pt-3" id="footer">
+        <div class="container pb-0">
             <div class="row " style="margin:0px; padding:0px">
-                <div class="col-lg-3 col-12 mb-2 ">
+                <div class="col-lg-3 col-12 ">
                     <img src="/images/logo.png " class="logo img-fluid " alt=" ">
                 </div>
 
@@ -198,7 +206,7 @@
             </div>
         </div>
 
-        <div class="site-footer-bottom ">
+        <div class="site-footer-bottom mt-4 pt-3  pb-1">
             <div class="container ">
                 <div class="row ">
 

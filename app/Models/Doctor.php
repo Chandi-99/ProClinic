@@ -12,10 +12,12 @@ class Doctor extends Model
         'fname',
         'lname',
         'gender',
+        'dob',
         'regNum',
         'specialization',
         'echanneling_rate',
         'normal_rate',
+        'contact',
         'user_id',
     ];
 
