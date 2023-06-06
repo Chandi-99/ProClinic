@@ -123,7 +123,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('blog') }}">Blog</a>
+                        <a class="nav-link click-scroll " href="{{ route('fetch_all') }}">Blog</a>
                     </li>
 
                     <!-- Authentication Links -->

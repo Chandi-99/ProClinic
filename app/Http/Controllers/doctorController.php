@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use App\Models\Patient;
-use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class doctorController extends Controller
@@ -78,7 +75,8 @@ class doctorController extends Controller
              ]);
 
             $doctor->save();
-            return view('newdoctor')->with('alert_2', 'Doctor Account Creation Successful!'); 
+            
+            return view('newdoctor');
 
         }
     }

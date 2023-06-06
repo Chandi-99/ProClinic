@@ -44,5 +44,10 @@ Route::post('/newPatient', [App\Http\Controllers\patientController::class, 'crea
 Route::get('/newDoctor', [App\Http\Controllers\doctorController::class, 'index'])->name('doctor');
 Route::post('/newDoctor', [App\Http\Controllers\doctorController::class, 'create'])->name('doctor.create');
 
+Route::group(['middleware' => 'auth', 'prefix' => 'post'], function () {
+    Route::get('get_all', [App\Http\Controllers\blogPostController::class, 'getAllPosts'])->name('fetch_all');
+    Route::post('create_post', [App\Http\Controllers\blogPostController::class, 'createPost'])->name('create_post');
+});
+
 
 

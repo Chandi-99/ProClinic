@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Yoeunes\Toastr\ToastrServiceProvider;
 
 return [
 
@@ -170,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
 
     ])->toArray(),
 
