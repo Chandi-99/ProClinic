@@ -7,7 +7,7 @@
             <div class="card-header" style="text-align:center;"><b>{{ __('Registration for Doctors') }}</b></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('doctor.create') }}">
+                    <form method="POST" action="{{route('doctor.create')}}">
                         @csrf
                         <div class="text-center">
                         @if(session('alert_2'))
@@ -228,7 +228,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class=" custom-btn">
+                                <button type="submit" class="custom-btn">
                                     {{ __('Register') }}
                                 </button>
                             </div>

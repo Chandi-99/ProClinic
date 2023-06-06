@@ -81,8 +81,8 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:50'],
             'dob' => ['required', 'date', 'before:today'],
             'gender' => ['required', 'string', 'max:10'],
-            'nic' => ['required', 'string', 'min:10','max:12', 'unique:users'],
-            'contact' => ['required', 'max:20', 'unique:users'],
+            'nic' => ['required', 'string', 'min:10','max:12', 'unique:patients'],
+            'contact' => ['required', 'max:20', 'unique:patients'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -118,7 +118,7 @@ class RegisterController extends Controller
         ]);
 
         $patient->save();
-        Session::alert('New Patient Account Created Successfully!.', 'success');
+       // Session::alert('New Patient Account Created Successfully!.', 'success');
         return $user;
 
     }

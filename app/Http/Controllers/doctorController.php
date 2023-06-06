@@ -29,13 +29,13 @@ class doctorController extends Controller
             'name' => ['required', 'string', 'max:20'],
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],
-            'dob' => ['required', 'date', 'before:1995-01-01', 'after:1923-01-01'],
-            'regNum' => ['required', 'string', 'max:15', 'unique:users'],
+            'dob' => ['required', 'date', 'before:1995-01-01', 'after:1943-01-01'],
+            'regNum' => ['required', 'string', 'max:15', 'unique:doctors'],
             'gender' => ['required', 'string', 'max:10'],
             'specialization' => ['required', 'string', 'max:15'],
             'echanneling_rate' => ['string','max:4'],
             'normal_rate' => ['required', 'string','max:4'],
-            'contact' => ['required', 'max:20', 'unique:users'],
+            'contact' => ['required', 'max:20', 'unique:doctors'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,7 +64,7 @@ class doctorController extends Controller
                 $erate = $request['echanneling_rate'];
             }
         
-            $patient = Doctor::create([
+            $doctor = Doctor::create([
                 'fname' => $request['fname'],
                 'lname'=> $request['lname'],
                 'contact'=> $request['contact'],
@@ -77,7 +77,7 @@ class doctorController extends Controller
                 'user_id' => $userid,
              ]);
 
-            $patient->save();
+            $doctor->save();
             return view('newdoctor')->with('alert_2', 'Doctor Account Creation Successful!'); 
 
         }
