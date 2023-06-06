@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('welcome', [App\Http\Controllers\welcomeController::class, 'index']);
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admindashboard');
 Route::get('/staff', [App\Http\Controllers\StaffController::class, 'index'])->name('staffdashboard');
+Route::get('/doctor', [App\Http\Controllers\doctorDashboardController::class, 'index'])->name('doctordashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::post('welcome', [App\Http\Controllers\welcomeController::class, 'store'])->name('welcome');
@@ -42,4 +43,6 @@ Route::post('/newPatient', [App\Http\Controllers\patientController::class, 'crea
 
 Route::get('/newDoctor', [App\Http\Controllers\doctorController::class, 'index'])->name('doctor');
 Route::post('/newDoctor', [App\Http\Controllers\doctorController::class, 'create'])->name('doctor.create');
+
+
 

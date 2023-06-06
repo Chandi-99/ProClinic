@@ -53,6 +53,10 @@ class LoginController extends Controller
                 $this->redirectTo = 'home';
                 return $this->redirectTo;
                 break;
+            case 'doctor':
+                $this->redirectTo = 'doctor';
+                return $this->redirectTo;
+                break;
             default:
                 $this->redirectTo = 'login';
                 return $this->redirectTo;
