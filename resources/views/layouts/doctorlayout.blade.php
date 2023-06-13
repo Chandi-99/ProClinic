@@ -115,15 +115,15 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/') }}" >Visitings</a>
+                        <a class="nav-link click-scroll " href="{{ route('welcome') }}" >Visitings</a>
                     </li>
 
                     <li class="nav-item dropdown ">
-                    <a class="nav-link click-scroll " href="{{ route('blog') }}" >Payments</a>
+                    <a class="nav-link click-scroll " href="{{ route('welcome') }}" >Payments</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('fetch_all') }}">Blog</a>
+                        <a class="nav-link click-scroll " href="{{ route('doctorBlog') }}">Blog</a>
                     </li>
 
                     <!-- Authentication Links -->
@@ -163,7 +163,7 @@
             </div>
           </div>
     </nav>
-    <main class="mt-5 pt-3" style="margin-left:10px; margin-right:10px;">
+    <main class="mt-2 pt-3" style="margin-left:10px; margin-right:10px;">
         @yield('content')
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>

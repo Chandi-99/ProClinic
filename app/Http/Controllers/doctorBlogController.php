@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
-class blogController extends Controller
+class doctorBlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
-        Session('alert_1', '');
-        return view('blog'); 
+
+        if(Auth::user()->usertype == 'doctor'){
+            Session('alert_1', '');
+            return view('doctorBlog'); 
+        }
+       
     }
 
     public function update(Request $request){
@@ -29,12 +38,16 @@ class blogController extends Controller
         }
         else if($request->has('form3')){
 
+        }
+        else if($request->has('form4')){
+
             $validator = Validator::make($request->all(), [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:subscribers'],
             ]);
+
             if($validator->fails()){
                 Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
-                return view('blog');
+                return view('doctorBlog');
             }
             else{
                 $email = $request->all()['email'];
@@ -45,11 +58,10 @@ class blogController extends Controller
                  if ($subscriber) {
                      Mail::to($email)->send(new Subscribe($email));
                      Session::flash('alert_1', 'Subscription Success! Check Inbox');
-                     return view('blog');
+                     return view('doctorBlog');
                  }
             }
 
         }
-
     }
 }

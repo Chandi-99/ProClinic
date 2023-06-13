@@ -49,6 +49,15 @@ Route::post('/newDoctor', [App\Http\Controllers\doctorController::class, 'create
 Route::get('/newpost', [App\Http\Controllers\postController::class, 'index'])->name('post');
 Route::post('/newpost', [App\Http\Controllers\postController::class, 'create'])->name('post.create');
 
+Route::get('/newNurse', [App\Http\Controllers\nurseController::class,'index'])->name('newNurse');
+Route::post('/newNurse', [App\Http\Controllers\nurseController::class,'store'])->name('newNurse.store');
+
+Route::get('/assignNurse', [App\Http\Controllers\assignNurseController::class,'index'])->name('assignNurse');
+Route::post('/assignNurse', [App\Http\Controllers\assignNurseController::class,'store'])->name('assignNurse.store');
+
+Route::get('/doctorblog', [App\Http\Controllers\doctorBlogController::class, 'index'])->name('doctorBlog');
+Route::post('/doctorblog', [App\Http\Controllers\doctorBlogController::class, 'update'])->name('doctorBlog.update');
+
 
 
 

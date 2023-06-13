@@ -34,4 +34,11 @@ class roomController extends Controller
         ]);
     }
 
+    public function showNurse(){
+        return view('newNurse');
+    }
+
+    public function assignNurse(){
+        return view('assignNurse');
+    }
 }

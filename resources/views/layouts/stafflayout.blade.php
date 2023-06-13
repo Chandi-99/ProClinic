@@ -123,7 +123,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="#footer ">Blog</a>
+                        <a class="nav-link click-scroll " href="#footer ">Appointments</a>
                     </li>
 
                     <!-- Authentication Links -->
@@ -163,7 +163,7 @@
             </div>
           </div>
     </nav>
-    <main class="mt-5 pt-3" style="margin-left:10px; margin-right:10px;">
+    <main class="mt-0 pt-3" style="margin-left:10px; margin-right:10px;">
         @yield('content')
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>

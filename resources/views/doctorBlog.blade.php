@@ -1,8 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.doctorlayout')
 @section('content')
-
-<main>
-    <section class="news-detail-header-section text-center">
+    <section class="news-detail-header-section text-center mt-0">
         <div class="section-overlay"></div>
 
             <div class="container">
@@ -14,9 +12,17 @@
 
                 </div>
             </div>
-</section>
+    </section>
+
+    <form method="POST" action="{{route('blog.update')}}" enctype="multipart/form-data">
+    @csrf
+    <div class="text-center mt-2 mb-1" style="width:50%;margin:0 auto;">
+            <button type="submit" name="form1" class="form-control custom-btn" >Add New Blog Post</button>
+    </div>
+    </form>
         
-<section class="news-section section-padding mt-0 pt-2">
+
+    <section class="news-section section-padding mt-0 pt-2">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-12">
@@ -127,14 +133,14 @@
                                         </div>
                                     </div>
 
-                                    <form class="custom-form comment-form mt-4" action="{{route('blog.update')}}" method="post" role="form">
+                                    <form class="custom-form comment-form mt-4" action="{{route('doctorBlog.update')}}" method="post" role="form">
                                         @csrf
                                         <h6 class="mb-3">Write a comment</h6>
 
                                         <textarea name="comment-message" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"></textarea>
 
                                         <div class="col-lg-3 col-md-4 col-6 ms-auto">
-                                            <button type="submit" class="form-control">Comment</button>
+                                            <button type="submit" name="form2" class="form-control">Comment</button>
                                         </div>
                                     </form>
                                 </div>
@@ -142,11 +148,11 @@
                         </div>
 
                         <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
-                            <form class="custom-form search-form" action="{{route('blog.update')}}" method="post" role="form">
-                                @csrf
+                            @csrf
+                            <form class="custom-form search-form" action="{{route('doctorBlog.update')}}" method="post" role="form">
                                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
 
-                                <button type="submit" class="form-control">
+                                <button type="submit" name="form3" class="form-control">
                                     <i class="bi-search"></i>
                                 </button>
                             </form>
@@ -195,7 +201,7 @@
                                 </div>
                             </div>
 
-                            <form class="custom-form subscribe-form" action="{{route('blog.update')}}" method="post" role="form">
+                            <form class="custom-form subscribe-form" action="{{route('doctorBlog.update')}}" method="post" role="form">
                                 @csrf
                                 @if (session('alert_1'))
                                 <div class="alert alert-success">
@@ -205,7 +211,7 @@
                                 <h5 class="mb-4">Notified when new posts published</h5>
                                     <input type="email" name="email" id="subscribe-email"  class="form-control" placeholder="Email Address" required />
                                 <div class="col-lg-12 col-12">
-                                    <button type="submit" name="form3" class="form-control">Subscribe</button>
+                                    <button type="submit" name="form4" class="form-control">Subscribe</button>
                                 </div>
                             </form>
                         </div>
@@ -213,8 +219,4 @@
                     </div>
                 </div>
             </section>
-
-
-
-</main>
 @endsection
