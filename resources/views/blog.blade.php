@@ -16,7 +16,15 @@
             </div>
     </section>
 
-    <section class="news-section section-padding">
+    <form method="POST" action="{{route('blog.update')}}" enctype="multipart/form-data">
+    @csrf
+    <div class="text-center mt-2 mb-1" style="width:50%;margin:0 auto;">
+            <button type="submit" name="form1" class="form-control custom-btn" >Add New Blog Post</button>
+    </div>
+    </form>
+        
+
+    <section class="news-section section-padding mt-0 pt-2">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-12">
@@ -194,20 +202,21 @@
                             </div>
 
                             <form class="custom-form subscribe-form" action="#" method="post" role="form">
-                                <h5 class="mb-4">Newsletter Form</h5>
-
-                                @if (Route::has('login'))
-                                    <input type="email" name="subscribe-email" id="subscribe-email"  class="form-control" placeholder="{{ Auth::user()->email }}" required />
-                                
-                                @else
-
-                                    <input type="email" name="subscribe-email" id="subscribe-email"  class="form-control" placeholder="Email Address" required />
-                                
+                                @csrf
+                                @if (session('alert_1'))
+                                <div class="alert alert-success">
+                                    {{ session('alert_1') }}
+                                </div>
                                 @endif
+                                <h5 class="mb-4">Notified when new posts published</h5>
+
+
+                                    <input type="email" name="email" id="subscribe-email"  class="form-control" placeholder="Email Address" required />
+                                
                                 
 
                                 <div class="col-lg-12 col-12">
-                                    <button type="submit" class="form-control">Subscribe</button>
+                                    <button type="submit" name="form3" class="form-control">Subscribe</button>
                                 </div>
                             </form>
                         </div>

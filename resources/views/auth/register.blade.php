@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header" style="text-align:center;"><b>{{ __('Registration for Patients') }}</b></div>
+            <div class="card-header" style="text-align:center;"><h6><b>{{ __('Registration for Patients') }}</b></h6></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

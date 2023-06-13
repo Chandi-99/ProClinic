@@ -13,14 +13,12 @@ use Illuminate\Support\Facades\Storage;
     <p  style="display:inline;font-weight:bold;font-size:20px;">Gender: </p><p style="display:inline;">{{Auth::user()->patient->gender}} </p>
     </br>
     @if ($reports)
-    
         <h7>Saved Reports:</h7>
         <div>
             @foreach ($reports as $report)
                 <img src="\storage\app\reports\{{$report->image_path}}" alt="User Report" style="width: 200px; height: auto;" />               
             @endforeach
         </div>
-        <img src="\storage\app/reports/01.jpg" alt="User Report" style="width: 200px; height: auto;" />
     @else
         <p>No any Report saved yet.</p>
     @endif

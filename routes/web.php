@@ -27,7 +27,9 @@ Route::post('home', [App\Http\Controllers\HomeController::class, 'store'])->name
 
 Route::get('donation', [App\Http\Controllers\donationController::class, 'index'])->name('donation');;
 Route::post('donation', [App\Http\Controllers\stripeController::class, 'chargeCustomer']);
+
 Route::get('blog', [App\Http\Controllers\blogController::class, 'index'])->name('blog');
+Route::post('blog', [App\Http\Controllers\blogController::class, 'update'])->name('blog.update');
 
 Route::get('videochat', [App\Http\Controllers\VideoChatController::class, 'index'])->name('videochat');
 Route::post('auth', [App\Http\Controllers\VideoChatController::class, 'auth']);
@@ -44,10 +46,10 @@ Route::post('/newPatient', [App\Http\Controllers\patientController::class, 'crea
 Route::get('/newDoctor', [App\Http\Controllers\doctorController::class, 'index'])->name('doctor');
 Route::post('/newDoctor', [App\Http\Controllers\doctorController::class, 'create'])->name('doctor.create');
 
-Route::group(['middleware' => 'auth', 'prefix' => 'post'], function () {
-    Route::get('get_all', [App\Http\Controllers\blogPostController::class, 'getAllPosts'])->name('fetch_all');
-    Route::post('create_post', [App\Http\Controllers\blogPostController::class, 'createPost'])->name('create_post');
-});
+Route::get('/newpost', [App\Http\Controllers\postController::class, 'index'])->name('post');
+Route::post('/newpost', [App\Http\Controllers\postController::class, 'create'])->name('post.create');
+
+
 
 
 
