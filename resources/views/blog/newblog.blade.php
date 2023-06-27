@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.doctorlayout')
 @section('content')
 
 <main>
@@ -10,7 +10,7 @@
         @endif
         <form method="POST" action="{{ route('post.create') }}" enctype="multipart/form-data">
             @csrf
-            <h6 for="image" class="text-center">Create New Blog Post:</h6>
+            <h6 for="image" >Create New Blog Post:</h6>
             <div class="col-lg-6 col-12 ">
             <label>Title : </label><input type="text" name="title" class="form-control form-control-lg @error('title') is-invalid @enderror" value="First Blog Post" required>
             
@@ -42,7 +42,8 @@
             </div>
             </br>
 
-            <button type="submit"  class="custom-btn">Create Post</button>
+            <button type="submit"  class="custom-btn mb-4">Create Post</button>
+            </br>       
         </form>
 
     </div>

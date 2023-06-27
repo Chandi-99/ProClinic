@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\Subscribe;
 use App\Models\Subscriber;
+use App\Models\post;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +24,17 @@ class doctorBlogController extends Controller
 
         if(Auth::user()->usertype == 'doctor'){
             Session('alert_1', '');
-            return view('doctorBlog'); 
+            $posts = Post::latest()->take(3)->get();
+            $latest = Post::latest()->take(1)->get();
+            $id = $latest[0]->user_id;
+            $author = User::where('id', 1)->first()->get();
+
+            return view('doctorBlog', [
+                'posts' => $posts, 'latest' => $latest, 'authors' => $author,
+            ]); 
+        }
+        else{
+            return view('blog');
         }
        
     }

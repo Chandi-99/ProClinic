@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
 use App\Models\post;
-use App\Models\Report;
-use Illuminate\Support\Facades\Mail;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -44,23 +40,19 @@ class postController extends Controller
             $user = User::find(Auth::user()->id);
 
             if($request['image']) {
-    
-                $path = $request->file('image')->storeAs('blogimages', $request->file('image')->getClientOriginalName());
-                $temp = $request->file('image')->getClientOriginalName();
-               $sql = DB::update('update posts set `posts`.`image` ='.'"'.$temp.'"'.' where `posts`.`user_id`='.'"'.$user->id.'";');
-    
-                // Insert record
-                $insertData_arr = array(
-                    'title' => $request['title'],
-                    'body' => $request['body'],
-                    'user_id'=> $user->id,
-                    'image' => $request->file('image')->getClientOriginalName()             
-                );
-    
-                post::create($insertData_arr);
-    
-                Session::flash('alert_1', 'Post Creation Successful!');
-                
+
+                $data= new post();
+
+                if($request->file('image')){
+                    $file= $request->file('image');
+                    $filename= date('YmdHi').$file->getClientOriginalName();
+                    $file-> move(public_path('public/Image'), $filename);
+                    $data['image']= $filename;
+                    $data['title'] = $request['title'];
+                    $data['body'] = $request['body'];
+                    $data['user_id'] = $user->id;
+                }
+                $data->save();
                 return view('newblog');
     
             }

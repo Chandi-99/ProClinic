@@ -58,6 +58,9 @@ Route::post('/assignNurse', [App\Http\Controllers\assignNurseController::class,'
 Route::get('/doctorblog', [App\Http\Controllers\doctorBlogController::class, 'index'])->name('doctorBlog');
 Route::post('/doctorblog', [App\Http\Controllers\doctorBlogController::class, 'update'])->name('doctorBlog.update');
 
+Route::get('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'index']);
+Route::post('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'update']);
+
 
 
 
