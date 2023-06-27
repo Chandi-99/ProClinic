@@ -32,7 +32,7 @@ class VideoChatController extends Controller
             ]
         );
         return response(
-            $pusher->presence_auth($channel_name, $socket_id, $user->id)
+            //$pusher->presence_auth($channel_name, $socket_id, $user->id)
         );
     }
 }

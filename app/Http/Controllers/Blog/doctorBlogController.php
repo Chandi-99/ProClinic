@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Mail\Subscribe;
 use App\Models\Subscriber;
 use App\Models\post;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
