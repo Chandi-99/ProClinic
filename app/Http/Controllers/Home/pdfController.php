@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\PDF;
+use App\Http\Controllers\Controller;
 
 class pdfController extends Controller
 {

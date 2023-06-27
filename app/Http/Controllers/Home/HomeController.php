@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Patient;
@@ -36,13 +37,13 @@ class HomeController extends Controller
         
         if($usertype == 'patient'){
             //Session::put('patient_id', $patientid);
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'admin'){
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         else{
-            return view('staffdashboard');
+            return view('staff.staffdashboard');
         }
     }
 
@@ -51,10 +52,10 @@ class HomeController extends Controller
         if($request->has('form1')){
             $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
             if($medicine == null){
-                return redirect('home')->with('alert_1', 'Medicine not found!');
+                return redirect('patient.home')->with('alert_1', 'Medicine not found!');
             }
             else{
-                return view('searchmedicine',['medi'=>$medicine]);
+                return view('patient.searchmedicine',['medi'=>$medicine]);
             }
         }
         if ($request->has('form2')){
@@ -87,7 +88,7 @@ class HomeController extends Controller
                     );
 
                     Candidate::create($insertData_arr);
-                    return view('CV-Confirmation');
+                    return view('patient.CV-Confirmation');
 
                 }
 
@@ -104,7 +105,7 @@ class HomeController extends Controller
             ]);
 
             $temp->save();
-            return view('contactus');
+            return view('patient.contactus');
         }
 
     }

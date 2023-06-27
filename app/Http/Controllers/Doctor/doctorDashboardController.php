@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Doctor;
 
 use Illuminate\Http\Request;
 use app\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Controllers\Controller;
 
 class doctorDashboardController extends Controller
 {

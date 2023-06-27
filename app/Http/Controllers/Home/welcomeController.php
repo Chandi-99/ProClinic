@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Candidate;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class welcomeController extends Controller
@@ -19,17 +20,17 @@ class welcomeController extends Controller
 
             $usertype = $user->usertype;
             if($usertype == 'admin'){
-                return view('admindashboard');
+                return view('adimn.admindashboard');
             }
             else if($usertype == 'staff'){
-                return view('staffdashboard');
+                return view('staff.staffdashboard');
             }
             else if($usertype == 'patient'){
-                return view('home');
+                return view('patient.home');
             }
         }
         else{
-            return view('welcome');
+            return view('patient.welcome');
         }
         
     }
@@ -39,10 +40,10 @@ class welcomeController extends Controller
         if($request->has('form1')){
             $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
             if($medicine == null){
-                return redirect('welcome')->with('alert_1', 'Medicine not found!');
+                return redirect('patient.welcome')->with('alert_1', 'Medicine not found!');
             }
             else{
-                return view('searchmedicine',['medi'=>$medicine]);
+                return view('patient.searchmedicine',['medi'=>$medicine]);
             }
         }
         if ($request->has('form2')){
@@ -75,7 +76,7 @@ class welcomeController extends Controller
                     );
 
                     Candidate::create($insertData_arr);
-                    return view('CV-Confirmation');
+                    return view('patient.CV-Confirmation');
 
                 }
 
@@ -92,7 +93,7 @@ class welcomeController extends Controller
             ]);
 
             $temp->save();
-            return view('contactus');
+            return view('patient.contactus');
         }
 
     }

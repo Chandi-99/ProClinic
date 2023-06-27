@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Staff;
+use App\Http\Controllers\Controller;
 use App\Models\Nurse;
 use App\Models\Holiday;
 use App\Models\Nurse_Room;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,7 @@ class patientController extends Controller
     }
 
     public function index(){
-        return view('newpatient');
+        return view('staff.newpatient');
     }
 
     public function create(Request $request){
@@ -40,7 +41,7 @@ class patientController extends Controller
 
         if ($validator->fails()) {
             //->withErrors($validator);
-            return view('newpatient')->with('alert_2', 'Patient Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
+            return view('staff.newpatient')->with('alert_2', 'Patient Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
         }
         else{     
             
@@ -66,7 +67,7 @@ class patientController extends Controller
              ]);
 
             $patient->save();
-            return view('newpatient')->with('alert_2', 'Patient Account Creation successful!'); 
+            return view('staff.newpatient')->with('alert_2', 'Patient Account Creation successful!'); 
 
         }
     }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -16,13 +17,13 @@ class AdminController extends Controller
         $usertype = Auth::user()->usertype;
         
         if($usertype == 'patient'){
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'staff'){
-            return view('staffdashboard');
+            return view('staff.staffdashboard');
         }
         else{
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         
     }

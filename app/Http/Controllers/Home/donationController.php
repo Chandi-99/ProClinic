@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use NotifyLk\Api\SmsApi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class donationController extends Controller
 {

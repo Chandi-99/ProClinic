@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +31,7 @@ class reportController extends Controller
 
         $reports = Report::where('patient_id',$patient->patient_id)->get();
         echo $reports;
-        return view('Reports', compact('reports', 'patient'));
+        return view('patient.Reports', compact('reports', 'patient'));
     }
 
     public function updateReports(Request $request)
@@ -70,7 +70,7 @@ class reportController extends Controller
     
             $reports = Report::where('patient_id',$patient->patient_id)->get();
             echo $reports;
-            return view('Reports', compact('reports'));
+            return view('patient.Reports', compact('reports'));
 
         }
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\post;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Nette\Utils\Image;
 
@@ -24,7 +25,7 @@ class blogController extends Controller
         $id = $latest[0]->user_id;
         $author = User::where('id', 1)->first()->get();
 
-        return view('doctorBlog', [
+        return view('blog.doctorBlog', [
             'posts' => $posts, 'latest' => $latest, 'authors' => $author,
         ]); 
     }

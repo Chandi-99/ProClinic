@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Staff;
+use App\Http\Controllers\Controller;
 use App\Models\Nurse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
