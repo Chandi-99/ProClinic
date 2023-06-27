@@ -29,12 +29,12 @@ class doctorBlogController extends Controller
             $id = $latest[0]->user_id;
             $author = User::where('id', 1)->first()->get();
 
-            return view('doctorBlog', [
+            return view('blog.doctorBlog', [
                 'posts' => $posts, 'latest' => $latest, 'authors' => $author,
             ]); 
         }
         else{
-            return view('blog');
+            return view('blog.blog');
         }
        
     }
@@ -43,7 +43,7 @@ class doctorBlogController extends Controller
 
         if ($request->has('form1')){
             
-            return view('newblog');
+            return view('blog.newblog');
         }
         else if($request->has('form2')){
 
@@ -59,7 +59,7 @@ class doctorBlogController extends Controller
 
             if($validator->fails()){
                 Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
-                return view('doctorBlog');
+                return view('blog.doctorBlog');
             }
             else{
                 $email = $request->all()['email'];
@@ -70,7 +70,7 @@ class doctorBlogController extends Controller
                  if ($subscriber) {
                      Mail::to($email)->send(new Subscribe($email));
                      Session::flash('alert_1', 'Subscription Success! Check Inbox');
-                     return view('doctorBlog');
+                     return view('blog.doctorBlog');
                  }
             }
 

@@ -20,7 +20,7 @@ class postController extends Controller
 
     public function index(){
         Session::flash('alert_1', '');
-        return view('newblog');
+        return view('blog.newblog');
     }
 
     public function create(Request $request){
@@ -34,7 +34,7 @@ class postController extends Controller
 
         if($validator->fails()){
             Session::flash('alert_1', 'Post Creation Unsuccessful!');
-            return view('newblog');
+            return view('blog.newblog');
         }
         else{
             $user = User::find(Auth::user()->id);
@@ -53,7 +53,7 @@ class postController extends Controller
                     $data['user_id'] = $user->id;
                 }
                 $data->save();
-                return view('newblog');
+                return view('blog.newblog');
     
             }
 

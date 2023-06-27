@@ -21,19 +21,19 @@ class nurseController extends Controller
         $usertype = Auth::user()->usertype;
             
         if($usertype == 'patient'){
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'admin'){
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         else if($usertype == 'doctor'){
-            return view('doctordashboard');
+            return view('doctor.doctordashboard');
         }
         else{ 
 
             $nurses = Nurse::all();
 
-            return view('newNurse', [
+            return view('staff.newNurse', [
                 'nurses' => $nurses,
             ]);
         }
@@ -55,7 +55,7 @@ class nurseController extends Controller
             $nurses = Nurse::orderByDesc('created_at')->get();
             Session::flash('alert_2', 'Nurse Account Creation Unsuccessful. One or More Inputs are Invalid!');
             
-            return view('newNurse', [
+            return view('staff.newNurse', [
                 'nurses' => $nurses,
             ]);
 
@@ -76,7 +76,7 @@ class nurseController extends Controller
             $nurses = Nurse::orderByDesc('created_at')->get();
 
             Session::flash('alert_2', 'Nurse Account Creation Successful!');
-            return view('newNurse', [
+            return view('staff.newNurse', [
                 'nurses' => $nurses,
             ]);
 

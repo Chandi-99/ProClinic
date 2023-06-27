@@ -19,10 +19,10 @@ class doctorDashboardController extends Controller
         $usertype = Auth::user()->usertype;
         
         if($usertype == 'patient'){
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'admin'){
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         else if($usertype == 'doctor'){
             if ($request->ajax()) {
@@ -38,7 +38,7 @@ class doctorDashboardController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('doctordashboard');
+            return view('doctor.doctordashboard');
         }
         else{ 
             if ($request->ajax()) {
@@ -54,7 +54,7 @@ class doctorDashboardController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('staffdashboard');
+            return view('staff.staffdashboard');
         }
     }
 }

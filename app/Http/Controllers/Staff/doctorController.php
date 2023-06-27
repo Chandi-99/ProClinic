@@ -18,7 +18,7 @@ class doctorController extends Controller
     }
 
     public function index(){
-        return view('newdoctor');
+        return view('staff.newdoctor');
     }
 
     public function create(Request $request){
@@ -41,7 +41,7 @@ class doctorController extends Controller
 
         if ($validator->fails()) {
             //->withErrors($validator);
-            return view('newdoctor')->with('alert_2', 'Doctor Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
+            return view('staff.newdoctor')->with('alert_2', 'Doctor Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
         }
         else{     
             
@@ -77,7 +77,7 @@ class doctorController extends Controller
 
             $doctor->save();
             
-            return view('newdoctor');
+            return view('staff.newdoctor');
 
         }
     }

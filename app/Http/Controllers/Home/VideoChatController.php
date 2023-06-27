@@ -12,7 +12,7 @@ class VideoChatController extends Controller
         $user = $request->user();
         $others = User::where('id', '!=', $user->id)->pluck('name', 'id');
         echo $user;
-        return view('videochat')->with([
+        return view('patient.videochat')->with([
             'user' => collect($request->user()->only(['id', 'name'])),
             'others' => $others
         ]);

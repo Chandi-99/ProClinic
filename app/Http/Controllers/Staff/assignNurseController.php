@@ -26,13 +26,13 @@ class assignNurseController extends Controller
         $usertype = Auth::user()->usertype;
         
         if($usertype == 'patient'){
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'admin'){
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         else if($usertype == 'doctor'){
-            return view('doctordashboard');
+            return view('doctor.doctordashboard');
         }
         else{ 
 
@@ -42,7 +42,7 @@ class assignNurseController extends Controller
             $rooms = Room::orderByDesc('created_at')->get();
             $data = Nurse_Room::where('date', '=', $today)->get();
 
-            return view('assignNurse', [
+            return view('staff.assignNurse', [
                 'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
             ]);
         }
@@ -66,7 +66,7 @@ class assignNurseController extends Controller
                 $rooms = Room::orderByDesc('created_at')->get();
                 $data = Nurse_Room::where('date', '=', $today)->get();
             
-                return view('assignNurse', [
+                return view('staff.assignNurse', [
                     'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
                 ]);
             }
@@ -114,7 +114,7 @@ class assignNurseController extends Controller
                 $rooms = Room::orderByDesc('created_at')->get();
                 $data = Nurse_Room::where('date', '=', $today)->get();
                 
-                return view('assignNurse', [
+                return view('staff.assignNurse', [
                     'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
                 ]);
     
@@ -138,7 +138,7 @@ class assignNurseController extends Controller
                         $rooms = Room::orderByDesc('created_at')->get();
                         $data = Nurse_Room::where('date', '=', $today)->get();
                         
-                        return view('assignNurse', [
+                        return view('staff.assignNurse', [
                             'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
                         ]);
                     }

@@ -16,6 +16,6 @@ class donationController extends Controller
     public function index(){
         //24817
         //daa7GA9cdHQQZ7q7NWDC
-        return view('donation');
+        return view('patient.donation');
     }
 }

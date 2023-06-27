@@ -12,7 +12,7 @@ class BlogPostController extends Controller
         $latest = post::where('id', $id)->get();
         //dd($latest);
          //echo $latest;
-        return view('showpost', [
+        return view('blog.showpost', [
             'latest' => $latest, 
         ]);
     }

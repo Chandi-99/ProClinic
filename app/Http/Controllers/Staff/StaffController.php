@@ -19,10 +19,10 @@ class StaffController extends Controller
         $usertype = Auth::user()->usertype;
         
         if($usertype == 'patient'){
-            return view('home');
+            return view('patient.home');
         }
         else if($usertype == 'admin'){
-            return view('admindashboard');
+            return view('admin.admindashboard');
         }
         else{ 
             if ($request->ajax()) {
@@ -38,7 +38,7 @@ class StaffController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('staffdashboard');
+            return view('staff.staffdashboard');
         }
     }
 }

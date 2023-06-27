@@ -16,7 +16,7 @@ class roomController extends Controller
     public function index(){
         $rooms = Room::all();
 
-        return view('room', [
+        return view('staff.room', [
             'rooms' => $rooms,
         ]);
     }
@@ -30,16 +30,16 @@ class roomController extends Controller
 
         $rooms = Room::all();
 
-        return view('room', [
+        return view('staff.room', [
             'rooms' => $rooms,
         ]);
     }
 
     public function showNurse(){
-        return view('newNurse');
+        return view('staff.newNurse');
     }
 
     public function assignNurse(){
-        return view('assignNurse');
+        return view('staff.assignNurse');
     }
 }
