@@ -97,6 +97,22 @@ class blogController extends Controller
             
         }
         else if($request->has('form2')){
+            $postSearched = post::where('title', $request['search']);
+            if($postSearched != null){
+                $postSearched= post::where('title', $request['search'])->get();
+                $temp =  $postSearched[0]->id;
+                return redirect('./blog/'.$temp);
+            }
+            else{
+                Session::flash('alert_3', 'No Blog Post Found!');
+                $posts = Post::latest()->take(3)->get();
+                $latest = Post::latest()->take(1)->get();
+                $id = $latest[0]->user_id;
+                $author = User::where('id', $id)->first()->get();
+                return view('blog.blog', [
+                    'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                ]);
+            }
 
         }
         else if($request->has('form3')){
@@ -107,6 +123,13 @@ class blogController extends Controller
 
             if($validator->fails()){
                 Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
+                $posts = Post::latest()->take(3)->get();
+                $latest = Post::latest()->take(1)->get();
+                $id = $latest[0]->user_id;
+                $author = User::where('id', $id)->first()->get();
+                return view('blog.blog', [
+                    'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                ]);
                 return view('blog.doctorBlog');
             }
             else{
@@ -131,8 +154,22 @@ class blogController extends Controller
                         ]); 
                     }
                     else{
+                        $posts = Post::latest()->take(3)->get();
+                        $latest = Post::latest()->take(1)->get();
+                        $id = $latest[0]->user_id;
+                        $author = User::where('id', $id)->first()->get();
+                        return view('blog.blog', [
+                            'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                        ]);
                         return view('blog.blog');
                     }
+                    $posts = Post::latest()->take(3)->get();
+                    $latest = Post::latest()->take(1)->get();
+                    $id = $latest[0]->user_id;
+                    $author = User::where('id', $id)->first()->get();
+                    return view('blog.blog', [
+                        'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                    ]);
                      return view('blog.doctorBlog');
                  }
             }

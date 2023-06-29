@@ -20,6 +20,7 @@ class postController extends Controller
 
     public function index(){
         Session::flash('alert_1', '');
+        Session::flash('alert_2', '');
         return view('blog.newblog');
     }
 

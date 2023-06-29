@@ -125,9 +125,14 @@
                         </div>
 
                         <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
+                            @if (session('alert_3'))
+                            <div class="alert alert-success">
+                                {{ session('alert_3') }}
+                            </div>
+                            @endif
                             <form class="custom-form search-form" action="{{route('doctorBlog.update')}}" method="post" role="form">
                                 @csrf
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search" required>
 
                                 <button type="submit" name="form3" class="form-control">
                                     <i class="bi-search"></i>

@@ -89,6 +89,23 @@ class doctorBlogController extends Controller
         }
         else if($request->has('form3')){
 
+            $postSearched = post::where('title', $request['search']);
+            if($postSearched != null){
+                $postSearched= post::where('title', $request['search'])->get();
+                $temp =  $postSearched[0]->id;
+                return redirect('./blog/'.$temp);
+            }
+            else{
+                Session::flash('alert_3', 'No Blog Post Found!');
+                $posts = Post::latest()->take(3)->get();
+                $latest = Post::latest()->take(1)->get();
+                $id = $latest[0]->user_id;
+                $author = User::where('id', $id)->first()->get();
+                return view('blog.doctorBlog', [
+                    'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                ]);
+            }
+
         }
         else if($request->has('form4')){
 

@@ -81,7 +81,7 @@
                     @endforeach
 
                     @if (session('alert_2'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         {{ session('alert_2') }}
                     </div>
                     @endif
