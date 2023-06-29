@@ -16,19 +16,23 @@ use Illuminate\Support\Facades\Storage;
         <h7 style="display:inline;font-weight:bold;font-size:20px;">Saved Reports:</h7>
         <div>
             @foreach ($reports as $report)
-                <img src="\storage\app\reports\{{$report->image_path}}" alt="User Report" style="width: 200px; height: auto;" />               
+                <p>{{$report->report_name}}</p>
+                <img src="{{ url('public/Reports/'.$report->image_path) }}" alt="User Report" style="width: 200px; height: auto;" />               
             @endforeach
         </div>
     @else
         <p>No any Report saved yet.</p>
     @endif
-
+    @if (session('alert_2'))
+        <div class="alert alert-danger">
+            {{ session('alert_2') }}
+        </div>
+    @endif
     <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
         @csrf
-       
-            <h5 for="image" class="text-center">Upload New Report:</h5>
-            <div class="col-lg-6 col-12 ">
-            <label>Report Name: </label><input type="text" name="report_name" class="form-control form-control-lg" value="ECG Report" />
+        <h5 for="image" class="text-center">Upload New Report:</h5>
+        <div class="col-lg-6 col-12 ">
+            <label>Report Name: </label><input type="text" name="report_name" class="form-control form-control-lg" value="ECG Report" required/>
             </div>
             </br>
             <div class="col-lg-6 col-12 ">
@@ -39,7 +43,7 @@ use Illuminate\Support\Facades\Storage;
             </div>
             </br>
             <div class="col-lg-6 col-12 ">
-            <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg">
+            <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" required>
             </div>
             </br>
 

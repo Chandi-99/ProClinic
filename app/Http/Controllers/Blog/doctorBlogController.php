@@ -24,8 +24,8 @@ class doctorBlogController extends Controller
     public function index(){
 
         if(Auth::user()->usertype == 'doctor'){
-            Session('alert_1', '');
-            Session('alert_2', '');
+            Session::flash('alert_1', '');
+            Session::flash('alert_2', '');
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
             $id = $latest[0]->user_id;
