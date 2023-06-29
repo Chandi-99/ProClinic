@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <section class="news-section section-padding mt-0 pt-2">
@@ -5,7 +6,7 @@
         <div class="col-lg-7 col-12">
             <div class="news-block">
             
-                <div class="news-block-top">
+                <div class="news-block-top" style="width:500px; height:350px;">
                     <img src="{{ url('public/Image/'.$latest[0]->image) }}" width="100%" z-index ='0'/>
                     <div class="news-category-block">
                         <p href="#" class="category-block-link">
@@ -33,7 +34,7 @@
                         <div class="news-block-comment">
                             <p>
                                 <i class="bi-chat-left custom-icon me-1"></i>
-                                    48 Comments
+                                {{$latest[0]->comments->count()}} Comments
                             </p>
                         </div>
                     </div>
@@ -45,17 +46,6 @@
                     <div class="news-block-body">
                         <p style="text-align:justify;">{{ ucfirst($latest[0]->body) }}</p>
                     </div>    
-
-
-                    <div class="row mt-5 mb-4">
-                        <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                            <img src="images/news/africa-humanitarian-aid-doctor.jpg" class="news-detail-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-6 col-12">
-                            <img src="images/news/close-up-happy-people-working-together.jpg" class="news-detail-image img-fluid" alt="">
-                        </div>
-                    </div>
 
                     <div class="social-share border-top mt-5 py-4 d-flex flex-wrap align-items-center">
                         <div class="tags-block me-auto">
@@ -83,29 +73,35 @@
                         </div>
                     </div>
 
-                    <div class="author-comment d-flex mt-3 mb-4">
-                        <img src="images/avatar/studio-portrait-emotional-happy-funny.jpg" class="img-fluid avatar-image" alt="">
-
-                        <div class="author-comment-info ms-3">
-                            <h6 class="mb-1">Jack</h6>
-                            <p class="mb-0">Very Nice.</p>
-                        </div>
+                    @foreach($latest[0]->comments as $comment)
+                    <div class="author-comment d-flex mt-3 mb-4">               
+                        <p  class="mb-0 pb-0 mt-0" style="font-weight:bold;">{{$comment->user->name}} : &nbsp;</p>
+                        <p class="mb-0 pb-0 mt-0">{{$comment->comment}}</p>    
                     </div>
+                    @endforeach
 
-                    <form class="custom-form comment-form mt-4"  action ="{{route('blog.update')}}" method="post" role="form">
+                    @if (session('alert_2'))
+                    <div class="alert alert-success">
+                        {{ session('alert_2') }}
+                    </div>
+                    @endif
+
+                    <form class="custom-form comment-form mt-4"  action ="./{{ $latest[0]->id }}" method="post" role="form">
                     @csrf
                         <h6 class="mb-3">Write a comment</h6>
 
-                        <textarea name="comment-message" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"></textarea>
+                        <textarea name="comment" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"></textarea>
+                        <a href="/blog" class="btn btn-outline-primary btn-sm">Go back</a>
 
-                        <div class="col-lg-3 col-md-4 col-6 ms-auto">
+                        <div class="col-lg-3 col-md-4 col-6 ms-auto">                       
                             <button type="submit" class="form-control">Comment</button>
                         </div>
+                        
                     </form>
                 </div>                          
             </div>
         </div>
-        <a href="/blog" class="btn btn-outline-primary btn-sm">Go back</a>
+        
     </div>
     
 </section>
