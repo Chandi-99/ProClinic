@@ -7,7 +7,7 @@
             <div class="news-block">
             
                 <div class="news-block-top" style="width:500px; height:350px;">
-                    <img src="{{ url('public/Image/'.$latest[0]->image) }}" width="100%" z-index ='0'/>
+                    <img src="{{ url('public/BlogImages/'.$latest[0]->image) }}" width="100%" z-index ='0'/>
                     <div class="news-category-block">
                         <p href="#" class="category-block-link">
                             Lifestyle

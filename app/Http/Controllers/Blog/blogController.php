@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
+use function PHPUnit\Framework\isEmpty;
+
 class blogController extends Controller
 {
     public function index(){
@@ -98,7 +100,8 @@ class blogController extends Controller
         }
         else if($request->has('form2')){
             $postSearched = post::where('title', $request['search']);
-            if($postSearched != null){
+            
+            if($postSearched != []){
                 $postSearched= post::where('title', $request['search'])->get();
                 $temp =  $postSearched[0]->id;
                 return redirect('./blog/'.$temp);
@@ -113,6 +116,7 @@ class blogController extends Controller
                     'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
                 ]);
             }
+            
 
         }
         else if($request->has('form3')){

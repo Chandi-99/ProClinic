@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Storage;
 <main>
 
     <div class="container">
-    <h6 class="text-center">Patient Reports</h6>
-    <p  style="display:inline; font-weight:bold;font-size:20px;">Patient Name: </p><p style="display:inline;">{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}</p></br>
-    <p  style="display:inline;font-weight:bold;font-size:20px;">Date of Birth: </p><p style="display:inline;">{{Auth::user()->patient->dob}} </p></br>
-    <p  style="display:inline;font-weight:bold;font-size:20px;">Gender: </p><p style="display:inline;">{{Auth::user()->patient->gender}} </p>
-    </br>
+    <h6 class="text-center">{{Auth::user()->patient->fname}} Reports</h6>
+    <p  style="display:inline; font-weight:bold;font-size:18px;">Patient Name: </p><p style="display:inline;">{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}</p></br>
+    <p  style="display:inline;font-weight:bold;font: size 18px;">Date of Birth: </p><p style="display:inline;">{{Auth::user()->patient->dob}} </p></br>
+    <p  style="display:inline;font-weight:bold;font-size:18px;">Gender: </p><p style="display:inline;">{{Auth::user()->patient->gender}} </p>
+    </br></br>
+    <div class="row">
     @if ($reports)
-        <h7 style="display:inline;font-weight:bold;font-size:20px;">Saved Reports:</h7>
+        <h7 style="display:inline;font-weight:bold;font-size:17px;">Saved Reports Images:</h7>
         <div>
             @foreach ($reports as $report)
                 <p>{{$report->report_name}}</p>
@@ -23,6 +24,22 @@ use Illuminate\Support\Facades\Storage;
     @else
         <p>No any Report saved yet.</p>
     @endif
+    </div>
+
+    </br>
+    <div class="row">
+    @if ($pdfreports)
+        <h7 style="display:inline;font-weight:bold;font-size:17px;">Saved Reports PDFs:</h7>
+        <div>
+            @foreach ($pdfreports as $pdfreport)
+                <a href="http:8000/{{$pdfreport->path}}"> {{$pdfreport->pdfreport_name}}</a>      
+            @endforeach
+        </div>
+    @else
+        <p>No any Report saved yet.</p>
+    @endif
+    </div>
+
     @if (session('alert_2'))
         <div class="alert alert-danger">
             {{ session('alert_2') }}
@@ -30,20 +47,20 @@ use Illuminate\Support\Facades\Storage;
     @endif
     <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
         @csrf
-        <h5 for="image" class="text-center">Upload New Report:</h5>
+        <h6 class="text-center">Upload New Report:</h6>
         <div class="col-lg-6 col-12 ">
-            <label>Report Name: </label><input type="text" name="report_name" class="form-control form-control-lg" value="ECG Report" required/>
+            <label>Report Name: </label><input type="text" name="report_name" class="form-control form-control-lg" value="ECG Report" style="font-size:medium;" required/>
             </div>
             </br>
             <div class="col-lg-6 col-12 ">
-            <label>Visibility: </label><select id="visibility" type="text" class="form-control form-control-lg" name="visibility" required >
+            <label>Visibility: </label><select id="visibility" type="text" class="form-control form-control-lg" name="visibility" style="font-size:medium;" required >
                 <option>Private</option>
                 <option>Allow for Doctors</option>
             </select>
             </div>
             </br>
             <div class="col-lg-6 col-12 ">
-            <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" required>
+            <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" style="font-size:medium;" required>
             </div>
             </br>
 

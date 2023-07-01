@@ -16,6 +16,7 @@
         "notifylk/notify-php": "*@dev",
         "pusher/pusher-php-server": "^7.2",
         "stripe/stripe-php": "^10.13",
+        "unisharp/laravel-filemanager": "^2.6",
         "yajra/laravel-datatables-oracle": "^10.4",
         "yoeunes/toastr": "^2.3"
     },

@@ -29,7 +29,7 @@
                             <div class="news-block" >
                                 @foreach ($latest as $latest)
                                 <div class="news-block-top" style="width:500px; height:350px;margin:0 auto">
-                                   <img src="{{ url('public/Image/'.$latest->image) }}" width="100%" z-index='0'/>
+                                   <img src="{{ url('public/BlogImages/'.$latest->image) }}" width="100%" z-index='0'/>
                                     <div class="news-category-block">
                                         <p href="#" class="category-block-link">
                                             Lifestyle
@@ -145,7 +145,7 @@
                             <div class="news-block news-block-two-col d-flex mt-4">
                                 <div class="news-block-two-col-image-wrap">
                                     <a href="news-detail.html">
-                                        <img src="{{ url('public/Image/'.$post->image) }}" width="100%" z-index='0'/>
+                                        <img src="{{ url('public/BlogImages/'.$post->image) }}" width="100%" z-index='0'/>
                                     </a>
                                 </div>
 

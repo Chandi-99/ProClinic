@@ -26,5 +26,9 @@ class Patient extends Model
     public function Reports() {
         return $this->hasMany(Report::class);
     }
+
+    public function PDFReports() {
+        return $this->hasMany(ReportPDF::class);
+    }
 }
 
