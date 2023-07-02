@@ -111,15 +111,15 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('welcome')}}">Appointments</a>
+                        <a class="nav-link click-scroll " href="{{route('doctordashboard')}}">Appointments</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('welcome') }}" >Visitings</a>
+                        <a class="nav-link click-scroll " href="{{ route('doctordashboard') }}" >Visitings</a>
                     </li>
 
                     <li class="nav-item dropdown ">
-                    <a class="nav-link click-scroll " href="{{ route('welcome') }}" >Payments</a>
+                    <a class="nav-link click-scroll " href="{{ route('doctordashboard') }}" >Payments</a>
                     </li>
 
                     <li class="nav-item ">

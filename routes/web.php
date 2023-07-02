@@ -60,6 +60,8 @@ Route::post('/doctorblog', [App\Http\Controllers\Blog\doctorBlogController::clas
 Route::get('/blog/{post}', [\App\Http\Controllers\Blog\BlogPostController::class, 'index']);
 Route::post('/blog/{post}', [\App\Http\Controllers\Blog\BlogPostController::class, 'update']);
 
+Route::get('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'index']);
+Route::post('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'update']);
 
 
 

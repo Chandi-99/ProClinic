@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('uses');
             $table->string('side_effects');
             $table->double('mg');
+            $table->string('precautions');
+            $table->string('image');
+            $table->string('overdose');
+            $table->string('howtouse');
             $table->timestamps();
         });
     }

@@ -18,5 +18,9 @@ class Medicine extends Model
         'uses',
         'side_effects',
         'mg',
+        'image',
+        'precautions',
+        'overdose',
+        'howtouse',
     ];
 }
