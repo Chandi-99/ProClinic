@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class doctorController extends Controller
@@ -33,15 +34,15 @@ class doctorController extends Controller
             'specialization' => ['required', 'string', 'max:15'],
             'echanneling_rate' => ['string','max:4'],
             'normal_rate' => ['required', 'string','max:4'],
-            'contact' => ['required', 'max:20', 'unique:doctors'],
+            'contact' => ['required', 'max:10', 'min:10', 'unique:doctors'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
 
         if ($validator->fails()) {
-            //->withErrors($validator);
-            return view('staff.newdoctor')->with('alert_2', 'Doctor Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
+            Session::flash('alert_2', 'Doctor Account Creation Unsuccessful. One or More Inputs are Invalid!');
+            return view('staff.newdoctor'); 
         }
         else{     
             

@@ -162,7 +162,7 @@
         <section class="cta-section section-padding section-bg " id="search_med">
             <div class="container ">
                  @if (session('alert_1'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         {{ session('alert_1') }}
                                 </div>
                 @endif

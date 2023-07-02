@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class doctorBlogController extends Controller
 {
@@ -28,10 +29,8 @@ class doctorBlogController extends Controller
             Session::flash('alert_2', '');
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
-            $id = $latest[0]->user_id;
-            $author = User::where('id', $id)->first()->get();
             return view('blog.doctorBlog', [
-                'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                'posts' => $posts, 'latest' => $latest, 
             ]); 
         }
         else{
@@ -66,7 +65,6 @@ class doctorBlogController extends Controller
                 else{
 
                     $latest = Post::latest()->take(1)->get();
-                    $id = $latest[0]->user_id;
                     $user = User::find(Auth::user());
                     $temp = new comment();
                     $temp['comment'] = $request['comment'];
@@ -81,30 +79,27 @@ class doctorBlogController extends Controller
 
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
-            $id = $latest[0]->user_id;
-            $author = User::where('id', $id)->first()->get();
             return view('blog.doctorBlog', [
-                'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                'posts' => $posts, 'latest' => $latest,
             ]);
         }
         else if($request->has('form3')){
 
-            $postSearched = post::where('title', $request['search']);
-            if($postSearched != null){
+            try{
                 $postSearched= post::where('title', $request['search'])->get();
                 $temp =  $postSearched[0]->id;
                 return redirect('./blog/'.$temp);
+
             }
-            else{
-                Session::flash('alert_3', 'No Blog Post Found!');
+            catch(Exception $ex){
+
+                Session::flash('alert_3', 'No Blog Post Found!');                           
                 $posts = Post::latest()->take(3)->get();
                 $latest = Post::latest()->take(1)->get();
-                $id = $latest[0]->user_id;
-                $author = User::where('id', $id)->first()->get();
                 return view('blog.doctorBlog', [
-                    'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                    'posts' => $posts, 'latest' => $latest,
                 ]);
-            }
+            }    
 
         }
         else if($request->has('form4')){
@@ -117,10 +112,8 @@ class doctorBlogController extends Controller
                 Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
                 $posts = Post::latest()->take(3)->get();
                 $latest = Post::latest()->take(1)->get();
-                $id = $latest[0]->user_id;
-                $author = User::where('id', $id)->first()->get();
                 return view('blog.doctorBlog', [
-                    'posts' => $posts, 'latest' => $latest, 'authors' => $author, 
+                    'posts' => $posts, 'latest' => $latest, 
                 ]); 
                 return view('blog.doctorBlog');
             }
@@ -138,11 +131,9 @@ class doctorBlogController extends Controller
                         Session('alert_1', '');
                         $posts = Post::latest()->take(3)->get();
                         $latest = Post::latest()->take(1)->get();
-                        $id = $latest[0]->user_id;
-                        $author = User::where('id', 1)->first()->get();
             
                         return view('blog.doctorBlog', [
-                            'posts' => $posts, 'latest' => $latest, 'authors' => $author,
+                            'posts' => $posts, 'latest' => $latest,
                         ]); 
                     }
                     else{

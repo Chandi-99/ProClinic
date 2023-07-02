@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'dob' => ['required', 'date', 'before:today'],
             'gender' => ['required', 'string', 'max:10'],
             'nic' => ['required', 'string', 'min:10','max:12', 'unique:patients'],
-            'contact' => ['required', 'max:20', 'unique:patients'],
+            'contact' => ['required','min:10', 'max:10', 'unique:patients'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

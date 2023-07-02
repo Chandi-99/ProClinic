@@ -22,7 +22,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
      <!-- CSS FILES -->
-     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/report.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-icons.css" rel="stylesheet">
     <link href="/css/proclinic_layout.css" rel="stylesheet">
 

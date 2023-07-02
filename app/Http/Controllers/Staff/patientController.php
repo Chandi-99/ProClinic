@@ -33,15 +33,15 @@ class patientController extends Controller
             'dob' => ['required', 'date', 'before:today', 'after:1923-01-01'],
             'gender' => ['required', 'string', 'max:10'],
             'nic' => ['required', 'string', 'min:10','max:12', 'unique:users'],
-            'contact' => ['required', 'max:20', 'unique:users'],
+            'contact' => ['required', 'max:10','min:10', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
 
         if ($validator->fails()) {
-            //->withErrors($validator);
-            return view('staff.newpatient')->with('alert_2', 'Patient Account Creation Unsuccessful. One or More Inputs are Invalid!'); 
+            Session::flash('alert_2', 'Patient Account Creation Unsuccessful. One or More Inputs are Invalid!');
+            return view('staff.newpatient');
         }
         else{     
             
@@ -67,7 +67,8 @@ class patientController extends Controller
              ]);
 
             $patient->save();
-            return view('staff.newpatient')->with('alert_2', 'Patient Account Creation successful!'); 
+            Session::flash('alert_2', 'Patient Account Creation successful!');
+            return view('staff.newpatient');
 
         }
     }

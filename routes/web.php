@@ -22,7 +22,7 @@ Route::get('/staff', [App\Http\Controllers\Staff\StaffController::class, 'index'
 Route::get('/doctor', [App\Http\Controllers\Doctor\doctorDashboardController::class, 'index'])->name('doctordashboard');
 Route::get('/home', [App\Http\Controllers\Home\HomeController::class, 'index']);
 
-Route::post('welcome', [App\Http\Controllers\Home\welcomeController::class, 'store'])->name('welcome');
+Route::post('/welcome', [App\Http\Controllers\Home\welcomeController::class, 'store'])->name('welcome');
 Route::post('home', [App\Http\Controllers\Home\HomeController::class, 'store'])->name('home');
 
 Route::get('donation', [App\Http\Controllers\Home\donationController::class, 'index'])->name('donation');;

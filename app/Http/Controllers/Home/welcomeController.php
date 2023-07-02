@@ -40,7 +40,8 @@ class welcomeController extends Controller
         if($request->has('form1')){
             $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
             if($medicine == null){
-                return redirect('patient.welcome')->with('alert_1', 'Medicine not found!');
+                Session::flash('alert_1', 'Medicine Not Found!');
+                return view('patient.welcome');
             }
             else{
                 return view('patient.searchmedicine',['medi'=>$medicine]);

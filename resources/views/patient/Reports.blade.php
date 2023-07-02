@@ -3,7 +3,6 @@
 @php
 use Illuminate\Support\Facades\Storage;
 @endphp
-
 <main>
 
     <div class="container">
@@ -12,34 +11,46 @@ use Illuminate\Support\Facades\Storage;
     <p  style="display:inline;font-weight:bold;font: size 18px;">Date of Birth: </p><p style="display:inline;">{{Auth::user()->patient->dob}} </p></br>
     <p  style="display:inline;font-weight:bold;font-size:18px;">Gender: </p><p style="display:inline;">{{Auth::user()->patient->gender}} </p>
     </br></br>
-    <div class="row">
+
+
+    <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
+    @csrf
     @if ($reports)
-        <h7 style="display:inline;font-weight:bold;font-size:17px;">Saved Reports Images:</h7>
-        <div>
+        <h7 style="display:inline;font-weight:bold;font-size:17px;" class="text-danger">Saved Reports Images:</h7>
+        <div class="row">
             @foreach ($reports as $report)
-                <p>{{$report->report_name}}</p>
-                <img src="{{ url('public/Reports/'.$report->image_path) }}" alt="User Report" style="width: 200px; height: auto;" />               
+            <div class="col-sm-6 col-md-4 mb-3 align-items-center">
+                <p style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">{{$report->report_name}}</p>
+                <input type="text" name="deletereportid" value="{{$report->id}}" hidden/>
+                <button name="form1" name="deletebutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;margin:0px auto;display:flex;">Delete</button>
+                <img  src="{{ url('public/Reports/'.$report->image_path) }}" class="fluid img-thumbnail imgzoom" />     
+            </div>
             @endforeach
         </div>
     @else
         <p>No any Report saved yet.</p>
     @endif
-    </div>
-
+    </form>
     </br>
-    <div class="row">
+    <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
+    @csrf
     @if ($pdfreports)
-        <h7 style="display:inline;font-weight:bold;font-size:17px;">Saved Reports PDFs:</h7>
-        <div>
+        <h7 style="display:inline;font-weight:bold;font-size:17px;" class="text-danger">Saved Reports PDFs:</h7>
+        <div class="row ">
             @foreach ($pdfreports as $pdfreport)
-                <a href="http:8000/{{$pdfreport->path}}"> {{$pdfreport->pdfreport_name}}</a>      
+            <div class="col-sm-6 col-md-4 mb-3 align-items-center">
+                <a href="/public/PDFReports/{{$pdfreport->path}}" style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">
+                {{$pdfreport->pdfreport_name}}</a>
+                <input type="text" name="deletepdfid" value="{{$pdfreport->id}}" hidden/>
+                <button name="form2" name="deletepdfbutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</button>
+                <iframe src="/public/PDFReports/{{$pdfreport->path}}" class="fluid img-thumbnail" ></iframe>      
+            </div>
             @endforeach
         </div>
     @else
         <p>No any Report saved yet.</p>
     @endif
-    </div>
-
+    </form>
     @if (session('alert_2'))
         <div class="alert alert-danger">
             {{ session('alert_2') }}
@@ -63,8 +74,7 @@ use Illuminate\Support\Facades\Storage;
             <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" style="font-size:medium;" required>
             </div>
             </br>
-
-            <button type="submit"  class="custom-btn">Upload Report</button>
+            <button type="submit" name="form3" class="custom-btn">Upload Report</button>
     </form>
     </div>
 </main>
