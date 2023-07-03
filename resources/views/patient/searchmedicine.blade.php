@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-<main>
 <section class="section-padding section-bg ">
     <div class="container ">
         <div class="col-12 ">
@@ -55,6 +54,5 @@
             <a class="custom-btn" href="{{route('welcome')}}" >Go Back</a>
         </div>
     </div>
-</main>
 
 @endsection

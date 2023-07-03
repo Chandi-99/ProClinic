@@ -39,7 +39,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 ">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="{{route('/medicine')}}" class="d-block "  style="text-decoration:none;">
+                    <a href="{{route('medicine.index')}}" class="d-block "  style="text-decoration:none;">
                     <img src="/images/room.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
                     <p class="featured-block-text " style="text-decoration:none;">New <strong>Medicines</strong></p>
                     </a>

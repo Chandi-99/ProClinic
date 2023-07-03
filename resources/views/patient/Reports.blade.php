@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Storage;
                 <p style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">{{$report->report_name}}</p>
                 <input type="text" name="deletereportid" value="{{$report->id}}" hidden/>
                 <button name="form1" name="deletebutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;margin:0px auto;display:flex;">Delete</button>
+                <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
                 <img  src="{{ url('public/Reports/'.$report->image_path) }}" class="fluid img-thumbnail imgzoom" />     
             </div>
             @endforeach
@@ -32,8 +37,6 @@ use Illuminate\Support\Facades\Storage;
     @endif
     </form>
     </br>
-    <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
-    @csrf
     @if ($pdfreports)
         <h7 style="display:inline;font-weight:bold;font-size:17px;" class="text-danger">Saved Reports PDFs:</h7>
         <div class="row ">
@@ -41,7 +44,13 @@ use Illuminate\Support\Facades\Storage;
             <div class="col-sm-6 col-md-4 mb-3 align-items-center">
                 <a href="/public/PDFReports/{{$pdfreport->path}}" style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">
                 {{$pdfreport->pdfreport_name}}</a>
-                <input type="text" name="deletepdfid" value="{{$pdfreport->id}}" hidden/>
+                <a href="{{ route('report.destroy', $pdfreport->id) }}" class="btn btn-primary">Edit</a>
+
+                <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
                 <button name="form2" name="deletepdfbutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</button>
                 <iframe src="/public/PDFReports/{{$pdfreport->path}}" class="fluid img-thumbnail" ></iframe>      
             </div>
@@ -50,7 +59,6 @@ use Illuminate\Support\Facades\Storage;
     @else
         <p>No any Report saved yet.</p>
     @endif
-    </form>
     @if (session('alert_2'))
         <div class="alert alert-danger">
             {{ session('alert_2') }}

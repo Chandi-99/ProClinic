@@ -60,9 +60,13 @@ Route::post('/doctorblog', [App\Http\Controllers\Blog\doctorBlogController::clas
 Route::get('/blog/{post}', [\App\Http\Controllers\Blog\BlogPostController::class, 'index']);
 Route::post('/blog/{post}', [\App\Http\Controllers\Blog\BlogPostController::class, 'update']);
 
-Route::get('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'index']);
-Route::post('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'update']);
-
-
-
+Route::get('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'index'])->name('medicine.index');
+Route::post('/medicine', [App\Http\Controllers\Staff\medicineController::class, 'update'])->name('medicine.update');
+Route::get('/medicine/edit/{id}', [App\Http\Controllers\Staff\medicineEditController::class, 'index']);
+Route::post('/medicine/edit/{id}', [App\Http\Controllers\Staff\medicineEditController::class, 'edit']);
+Route::get('/medicine/delete/{id}', function ($id) {
+    $medicine = App\Models\Medicine::find($id);
+    $medicine->delete();
+    return redirect('/medicine');
+});
 

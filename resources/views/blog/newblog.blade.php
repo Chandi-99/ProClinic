@@ -1,7 +1,7 @@
 @extends('layouts.doctorlayout')
 @section('content')
 
-<main>
+
     <div class="container" style="margin:0 auto;">
         @if (session('alert_1'))
             <div class="alert alert-success">
@@ -47,7 +47,5 @@
         </form>
 
     </div>
-
-</main>
 
 @endsection
