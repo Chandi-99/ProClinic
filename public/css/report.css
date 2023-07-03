@@ -15,11 +15,6 @@ h1 {
     font-weight: 700;
 }
 
-footer,
-footer .container .col {
-    height: 200px;
-}
-
 * {
     box-sizing: border-box;
 }

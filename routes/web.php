@@ -35,6 +35,16 @@ Route::post('auth', [App\Http\Controllers\Home\VideoChatController::class, 'auth
 
 Route::get('/user/reports', [App\Http\Controllers\Home\reportController::class, 'index'])->name('user.reports');
 Route::post('/user/reports', [App\Http\Controllers\Home\reportController::class, 'updateReports'])->name('user.reports.update');
+Route::get('/user/reports/{id}', function ($id) {
+    $report = App\Models\Report::find($id);
+    $report->delete();
+    return redirect('/user/reports');
+});
+Route::get('/user/pdfreports/{id}', function ($id) {
+    $pdf = App\Models\ReportPDF::find($id);
+    $pdf->delete();
+    return redirect('/user/reports');
+});
 
 Route::get('/rooms', [App\Http\Controllers\Staff\roomController::class, 'index'])->name('room');
 Route::post('/rooms', [App\Http\Controllers\Staff\roomController::class, 'create'])->name('room.create');

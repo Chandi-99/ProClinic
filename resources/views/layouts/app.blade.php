@@ -34,7 +34,6 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
 
 <body id="section_1">
 <header class="site-header">
@@ -98,11 +97,11 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('welcome')}}">Home</a>
+                        <a class="nav-link click-scroll " href="{{ ('/home') }}" >Home</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/') }}" >About</a>
+                        <a class="nav-link click-scroll " href="{{ ('/home') }}" >About</a>
                     </li>
 
                     <li class="nav-item dropdown ">
@@ -114,7 +113,7 @@
                     </li>
 
                     <li class="nav-item ms-3 ">
-                        <a class="nav-link custom-btn custom-border-btn btn " href="{{route('donation')}}">Donate</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{route('donation')}}">Donate</a>
                     </li>
 
                     <!-- Authentication Links -->

@@ -39,23 +39,8 @@ class reportController extends Controller
 
     public function updateReports(Request $request)
     {
-        // Validate the form input
-        //protected $primaryKey = 'SongID';
-        if($request->has('form1')){
-            
-            $id = $request['deletereportid'];
-            $report = Report::find($id)->get();
-            $report->each->delete();
-            return redirect('/user/reports');
-        }
-        else if($request->has('form2')){
-            
-            $id = $request['deletepdfid'];
-            $report = ReportPDF::find($id)->get();
-            $report->each->delete();
-            return redirect('/user/reports');
-        }
-        else if($request->has('form3')){
+
+        if($request->has('form3')){
             $validator = Validator::make($request->all(), [
                 'report' => 'required|file|mimes:jpeg,jpg,png,pdf|max:2048',
                 'report_name' => 'required|unique:reports',

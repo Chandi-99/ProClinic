@@ -20,14 +20,8 @@ use Illuminate\Support\Facades\Storage;
         <div class="row">
             @foreach ($reports as $report)
             <div class="col-sm-6 col-md-4 mb-3 align-items-center">
-                <p style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">{{$report->report_name}}</p>
-                <input type="text" name="deletereportid" value="{{$report->id}}" hidden/>
-                <button name="form1" name="deletebutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;margin:0px auto;display:flex;">Delete</button>
-                <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <p style="font-size:15px;font-weight:bold;" class="text-primary">{{$report->report_name}}</p>
+                <a href="/user/reports/{{$report->id}}"type="submit" class="btn btn-danger">Delete</a>
                 <img  src="{{ url('public/Reports/'.$report->image_path) }}" class="fluid img-thumbnail imgzoom" />     
             </div>
             @endforeach
@@ -35,23 +29,15 @@ use Illuminate\Support\Facades\Storage;
     @else
         <p>No any Report saved yet.</p>
     @endif
-    </form>
     </br>
     @if ($pdfreports)
         <h7 style="display:inline;font-weight:bold;font-size:17px;" class="text-danger">Saved Reports PDFs:</h7>
         <div class="row ">
             @foreach ($pdfreports as $pdfreport)
             <div class="col-sm-6 col-md-4 mb-3 align-items-center">
-                <a href="/public/PDFReports/{{$pdfreport->path}}" style="font-size:15px;font-weight:bold;text-align:center;" class="text-primary">
-                {{$pdfreport->pdfreport_name}}</a>
-                <a href="{{ route('report.destroy', $pdfreport->id) }}" class="btn btn-primary">Edit</a>
-
-                <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                <button name="form2" name="deletepdfbutton" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</button>
+                <p style="font-size:15px;font-weight:bold;" class="text-primary">{{$pdfreport->pdfreport_name}}</p>
+                <a href="/user/pdfreports/{{ $pdfreport->id }}" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</a>
+                </br>
                 <iframe src="/public/PDFReports/{{$pdfreport->path}}" class="fluid img-thumbnail" ></iframe>      
             </div>
             @endforeach
@@ -82,7 +68,8 @@ use Illuminate\Support\Facades\Storage;
             <label>Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" style="font-size:medium;" required>
             </div>
             </br>
-            <button type="submit" name="form3" class="custom-btn">Upload Report</button>
+            <a href="/home" class="btn btn-outline-primary btn-sm m-2">Go back</a>
+            <button type="submit" name="form3" class="custom-btn">Upload Report</button>     
     </form>
     </div>
 </main>
