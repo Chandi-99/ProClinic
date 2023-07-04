@@ -9,7 +9,7 @@
                         <h1 class="text-white">Blog</h1>
                     </div>
                 </div>
-            </div>
+        </div>
 </section>
         
 <section class="news-section section-padding mt-0 pt-2">

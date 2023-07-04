@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+//use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Collection;
 
 class reportController extends Controller
@@ -67,18 +68,22 @@ class reportController extends Controller
                     $fp = "public/PDFReports/".$filename;
                     $password = Str::substr($user->Patient->nic, -3);
                     $userPassword = "123456a";
+
                     $pdf = new Pdf($fp);
-    
-                    $result = $pdf->allow('AllFeatures')
+                    /*
+                    $pdf->setEncryption('owner', $password, '', 'AES-256');
+                    $pdf->save();
+                    */
+
+                    //return response()->download($pdfPath);
+                    //$pdf->dompdf->get_canvas()->get_cpdf()->setEncryption($password, $password);
+
+                    $pdf->allow('AllFeatures')
                                 ->setPassword($password)
-                                ->setUserPassword($userPassword)
+                                //->setUserPassword($userPassword)
                                 ->passwordEncryption(128)
                                 ->saveAs($fp);
-                      
-                    if ($result === false) {
-                        echo $pdf->getError();
-                    }
-                  
+
                     // Insert record
                     $insertData_arr = array(
                         'pdfreport_name' => $request['report_name'],
@@ -87,11 +92,10 @@ class reportController extends Controller
                         'patient_id'=> $patientid,
                         'path' => $filename,          
                     );
-    
-                    echo $result;
+
+                    //echo $result;
                     ReportPDF::create($insertData_arr);
-                    return response()->download("public/PDFReports/".$filename);
-                    //return redirect('/user/reports');
+                    return redirect('/user/reports');
                 }
                 else{
     

@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Storage;
         <div class="row ">
             @foreach ($pdfreports as $pdfreport)
             <div class="col-sm-6 col-md-4 mb-3 align-items-center">
-                <p style="font-size:15px;font-weight:bold;" class="text-primary">{{$pdfreport->pdfreport_name}}</p>
+                <a href="/public/PDFReports/{{$pdfreport->path}}"><p style="font-size:15px;font-weight:bold;" class="text-primary">{{$pdfreport->pdfreport_name}}</p></a>
                 <a href="/user/pdfreports/{{ $pdfreport->id }}" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</a>
                 </br>
                 <iframe src="/public/PDFReports/{{$pdfreport->path}}" class="fluid img-thumbnail" ></iframe>      

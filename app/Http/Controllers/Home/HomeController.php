@@ -37,6 +37,8 @@ class HomeController extends Controller
         
         if($usertype == 'patient'){
             //Session::put('patient_id', $patientid);
+            Session::flash('alert_1', '');
+            Session::flash('alert_2', '');
             return view('patient.home');
         }
         else if($usertype == 'admin'){

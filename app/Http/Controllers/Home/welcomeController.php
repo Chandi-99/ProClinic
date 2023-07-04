@@ -26,10 +26,14 @@ class welcomeController extends Controller
                 return view('staff.staffdashboard');
             }
             else if($usertype == 'patient'){
+                Session::flash('alert_1', '');
+                Session::flash('alert_2', '');
                 return view('patient.home');
             }
         }
         else{
+            Session::flash('alert_1', '');
+            Session::flash('alert_2', '');
             return view('patient.welcome');
         }
         

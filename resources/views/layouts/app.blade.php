@@ -97,11 +97,11 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/home') }}" >Home</a>
+                        <a class="nav-link click-scroll " href="{{ ('/welcome') }}" >Home</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/home') }}" >About</a>
+                        <a class="nav-link click-scroll " href="{{ ('/welcome') }}" >About</a>
                     </li>
 
                     <li class="nav-item dropdown ">
