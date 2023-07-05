@@ -16,7 +16,7 @@
                         <tr>
                             <td><strong>Company:       </strong> </td><td>{{ $medi[0]->company }}</td>
                         </tr>
-                        @if($medi[0]->availability == 'available')
+                        @if($medi[0]->availability == 'Available')
                             <tr>
                                 <td><strong>Availability:   </strong></td><td class="text-success">{{ $medi[0]->availability }}</td>
                             </tr>

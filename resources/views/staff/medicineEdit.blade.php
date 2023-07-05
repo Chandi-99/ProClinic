@@ -40,7 +40,15 @@
             </br>
 
             <div class="col-lg-6 col-12 ">
-            <label>Availability : </label><input type="text" name="availability" class="form-control form-control-lg @error('availability') is-invalid @enderror" value="{{$medicine->availability}}" required>
+            <label>Availability : </label><select name="availability" class="form-control form-control-lg @error('availability') is-invalid @enderror" value="{{$medicine->availability}}" required>
+                @if($medicine->availability == 'Available')
+                    <option selected>Available</option>
+                    <option>Unavailable</option>
+                @else
+                    <option selected>Unavailable</option>
+                    <option>Available</option>
+                @endif
+            </select>
             
             @error('availability')
                 <span class="invalid-feedback" role="alert">
@@ -51,7 +59,15 @@
             </br>
 
             <div class="col-lg-6 col-12 ">
-            <label>After Eat : </label><input type="text" name="after_eat" class="form-control form-control-lg @error('after_eat') is-invalid @enderror" value="{{$medicine->after_eat}}" required>
+            <label>After Eat : </label><select  name="after_eat" class="form-control form-control-lg @error('after_eat') is-invalid @enderror" value="{{$medicine->after_eat}}" required>
+                @if($medicine->after_eat == 'Yes')
+                    <option selected>Yes</option>
+                    <option>No</option>
+                @else
+                    <option selected>No</option>
+                    <option>Yes</option>
+                @endif
+            </select>
             
             @error('after_eat')
                 <span class="invalid-feedback" role="alert">
@@ -128,7 +144,7 @@
             </div>
             </br>
             </br>
-            <input type="reset"  style="background-color:skyblue;" class="custom-btn mb-4"/>
+            <input type="reset" class="custom-btn mb-4"/>
             <button type="submit"  class="custom-btn mb-4">Update Medicine</button>
             </br>       
         </form>

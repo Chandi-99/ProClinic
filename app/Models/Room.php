@@ -16,4 +16,8 @@ class Room extends Model
     public function NurseRooms() {
         return $this->hasMany(Nurse_Room::class);
     }
+
+    public function Visitings() {
+        return $this->hasMany(Visitings::class);
+    }
 }

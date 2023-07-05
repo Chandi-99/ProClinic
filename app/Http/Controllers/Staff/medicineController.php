@@ -41,7 +41,7 @@ class medicineController extends Controller
     
             if($validator->fails()){
                 Session::flash('alert_1', $validator->errors());
-                dd($validator->errors());
+                //dd($validator->errors());
                 return redirect('/medicine');
             }
             else{

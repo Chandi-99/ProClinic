@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,5 +78,16 @@ Route::get('/medicine/delete/{id}', function ($id) {
     $medicine = App\Models\Medicine::find($id);
     $medicine->delete();
     return redirect('/medicine');
+});
+
+Route::get('/doctor/visitings', [App\Http\Controllers\Doctor\visitingController::class, 'index'])->name('doctor.visiting');
+Route::post('/doctor/visitings', [App\Http\Controllers\Doctor\visitingController::class, 'update'])->name('doctor.visiting.update');
+Route::get('/doctor/visitings/edit/{id}', [App\Http\Controllers\Doctor\visitingEditController::class, 'index'])->name('doctor.visiting.edit');
+Route::post('/doctor/visitings/edit/{id}', [App\Http\Controllers\Doctor\visitingEditController::class, 'update'])->name('doctor.visiting.editpost');
+Route::get('/doctor/visitings/delete/{id}', function ($id) {
+    $visiting = App\Models\Visitings::where('id', $id)->get();
+    $visiting[0]->delete();
+    Session::flash('alert_1', 'Session removed. Need to attend same session until this month end!');
+    return redirect('/doctor/visitings');
 });
 

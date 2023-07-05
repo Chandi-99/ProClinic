@@ -4,8 +4,6 @@
     <div class="container ">
         <div class="col-12 ">
             <div class="custom-text-box ">
-                <form method="POST" name="form1" action="{{ route('medicine.update') }}" enctype="multipart/form-data">
-                    @csrf
                     <h6 class="mb-3">Medicines Saved:</h6>
                     <table style="border:1px solid black;">     
                         <tr style="border:1px solid black;">
@@ -74,7 +72,10 @@
             </br>
 
             <div class="col-lg-6 col-12 ">
-            <label>Availability : </label><input type="text" name="availability" class="form-control form-control-lg @error('availability') is-invalid @enderror" value="" required>
+            <label>Availability : </label><select type="text" name="availability" class="form-control form-control-lg @error('availability') is-invalid @enderror" value="" >
+                <option>Available</option>
+                <option>Unavailable</option>
+            </select>
             
             @error('availability')
                 <span class="invalid-feedback" role="alert">
@@ -85,7 +86,10 @@
             </br>
 
             <div class="col-lg-6 col-12 ">
-            <label>After Eat : </label><input type="text" name="after_eat" class="form-control form-control-lg @error('after_eat') is-invalid @enderror" value="" required>
+            <label>After Eat : </label><select type="text" name="after_eat" class="form-control form-control-lg @error('after_eat') is-invalid @enderror" value="" required>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
             
             @error('after_eat')
                 <span class="invalid-feedback" role="alert">
