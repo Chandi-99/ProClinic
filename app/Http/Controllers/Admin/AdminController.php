@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
@@ -14,17 +15,29 @@ class AdminController extends Controller
     }
 
     public function index(){
-        $usertype = Auth::user()->usertype;
         
-        if($usertype == 'patient'){
-            return view('patient.home');
-        }
-        else if($usertype == 'staff'){
-            return view('staff.staffdashboard');
+        $user = Auth::user();
+        if($user){
+            $usertype = $user->usertype;
+            if($usertype == 'admin'){
+                return view('adimn.admindashboard');
+            }
+            else if($usertype == 'staff'){
+                return view('staff.staffdashboard');
+            }
+            else if($usertype == 'patient'){
+                Session::flash('alert_1', '');
+                Session::flash('alert_2', '');
+                return view('patient.home');
+            }
+            else if($usertype == 'doctor'){
+                return view('doctor.doctordashboard');
+            }
         }
         else{
-            return view('admin.admindashboard');
+            Session::flash('alert_1', '');
+            Session::flash('alert_2', '');
+            return view('patient.welcome');
         }
-        
     }
 }

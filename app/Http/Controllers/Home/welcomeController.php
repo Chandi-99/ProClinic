@@ -17,7 +17,6 @@ class welcomeController extends Controller
     {
         $user = Auth::user();
         if($user){
-
             $usertype = $user->usertype;
             if($usertype == 'admin'){
                 return view('adimn.admindashboard');
@@ -30,8 +29,12 @@ class welcomeController extends Controller
                 Session::flash('alert_2', '');
                 return view('patient.home');
             }
+            else if($usertype == 'doctor'){
+                return view('doctor.doctordashboard');
+            }
         }
         else{
+            
             Session::flash('alert_1', '');
             Session::flash('alert_2', '');
             return view('patient.welcome');
