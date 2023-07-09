@@ -20,7 +20,7 @@ class AdminController extends Controller
         if($user){
             $usertype = $user->usertype;
             if($usertype == 'admin'){
-                return view('adimn.admindashboard');
+                return view('admin.admindashboard');
             }
             else if($usertype == 'staff'){
                 return view('staff.staffdashboard');

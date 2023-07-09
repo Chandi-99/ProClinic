@@ -161,12 +161,13 @@
         </section>
         <section class="cta-section section-padding section-bg " id="search_med">
             <div class="container ">
-                 @if (session('alert_1'))
-                    <div class="alert alert-danger">
-                        {{ session('alert_1') }}
-                                </div>
-                @endif
+                 
                 <div class="row justify-content-center align-items-center ">
+                    @if (session('alert_1'))
+                        <div class="alert alert-danger">
+                            {{ session('alert_1') }}
+                        </div>
+                    @endif
                     <div class="col-lg-5 col-12 ms-auto ">
                         <h2 class="mb-0 ">All your Medicines from One Place! <br> We got thousands of Medicines </br>that you need.</h2>
                     </div>
@@ -188,7 +189,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 ">
                         <div class="custom-block-wrap ">
-                            <img src="images/causes/group-african-kids-paying-attention-class.jpg " class="custom-block-image img-fluid " alt=" ">
+                            <img src="images/causes/image_01.jpg " class="custom-block-image img-fluid " alt=" ">
 
                             <div class="custom-block ">
                                 <div class="custom-block-body ">
@@ -213,7 +214,7 @@
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 ">
                         <div class="custom-block-wrap ">
-                            <img src="images/causes/poor-child-landfill-looks-forward-with-hope.jpg " class="custom-block-image img-fluid " alt=" ">
+                            <img src="images/causes/image_02.jpg " class="custom-block-image img-fluid " alt=" ">
 
                             <div class="custom-block ">
                                 <div class="custom-block-body ">
@@ -243,7 +244,7 @@
 
                     <div class="col-lg-4 col-md-6 col-12 ">
                         <div class="custom-block-wrap ">
-                            <img src="images/causes/african-woman-pouring-water-recipient-outdoors.jpg " class="custom-block-image img-fluid " alt=" ">
+                            <img src="images/causes/image_03.jpg " class="custom-block-image img-fluid " alt=" ">
 
                             <div class="custom-block ">
                                 <div class="custom-block-body ">
