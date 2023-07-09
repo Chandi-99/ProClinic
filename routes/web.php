@@ -91,3 +91,6 @@ Route::get('/doctor/visitings/delete/{id}', function ($id) {
     return redirect('/doctor/visitings');
 });
 
+Route::get('/newappointment/{id}', [App\Http\Controllers\Home\appointmentController::class, 'index'])->name('appointment');
+Route::post('/newappointment/{id}', [App\Http\Controllers\Home\appointmentController::class, 'update'])->name('appointment.update');
+

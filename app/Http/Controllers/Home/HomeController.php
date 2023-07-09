@@ -79,15 +79,16 @@ class HomeController extends Controller
 
                 if($request['cvfile']) {
 
-                    $name = $request->cv_name;
-                    $path = $request->file('cvfile')->storeAs('cvfiles', $request->file('cvfile')->getClientOriginalName());
+                    $file= $request->file('cvfile');
+                    $filename= date('YmdHi').$file->getClientOriginalName();
+                    $file-> move(public_path('public/cvfiles'), $filename);
                     // Insert record
                     $insertData_arr = array(
                         'cv_name' => $request->cv_name,
                         'cv_email' => $request->cv_email,
                         'cv_position' => $request->cv_position,
                         'cv_aboutme' => $request->cv_aboutme,
-                        'cv_file_path' => "cvfiles/".$request->file('cvfile')->getClientOriginalName()
+                        'cv_file_path' => $filename,
                     );
 
                     Candidate::create($insertData_arr);

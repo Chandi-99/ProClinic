@@ -14,6 +14,8 @@
                     <p class="mb-0 " style="text-align:justify;">Thank you for submitting your application to our company. We have received it and will be reviewing it carefully.
                      We will be in touch with you soon to schedule an interview. In the meantime, please feel free to contact us if you have any questions.</p>
                        <br>
+
+                    <a href="/welcome" class="btn btn-outline-primary btn-sm m-2">Go back</a>
                        
                     </div>
             

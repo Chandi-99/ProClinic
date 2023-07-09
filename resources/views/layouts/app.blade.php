@@ -117,6 +117,7 @@
                     </li>
 
                     <!-- Authentication Links -->
+
                     @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
@@ -149,6 +150,7 @@
                         </div>
                     </li>
                     @endguest
+
                 </ul>
             </div>
         </div>

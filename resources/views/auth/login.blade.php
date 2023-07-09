@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <section class="col-lg-12 col-12">
-<!--style="background-image: url(/public/1.jpg); background-size:cover; background-color: rgba(0,0,0,0.25);"-->
 <div class="container mt-4 mb-4" >
     <div class="row justify-content-center">
         <div class="col-md-8">
