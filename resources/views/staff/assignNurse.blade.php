@@ -71,6 +71,7 @@
                             <div class="col-md-6">
                                 <select id="session" type="text" class="form-control @error('session') is-invalid @enderror" name="session" value="{{ old('session') }}" required autocomplete="session">
                                     <option>Morning</option>
+                                    <option>Afternoon</option>
                                     <option>Evening</option>
                                     <option>Night</option>
                                 </select>

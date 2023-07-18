@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('prescription_id')->nullable();
             $table->unsignedBigInteger('bill_id')->nullable();
             $table->integer('appo_number');
-            $table->time('start_time');
+            $table->string('status');
+            $table->date('date');
+            $table->string('start_time');
             $table->foreign('visiting_id')->references('id')->on('visitings');
             $table->foreign('bill_id')->references('id')->on('bills');
             //$table->foreign('prescription_id')->references('id')->on('prescriptions');

@@ -15,5 +15,7 @@ class Appointment extends Model
         'prescription_id',
         'bill_id',
         'start_time',
+        'status',
+        'date',
     ];
 }

@@ -120,7 +120,6 @@ class blogController extends Controller
                 return view('blog.blog', [
                     'posts' => $posts, 'latest' => $latest,
                 ]);
-                return view('blog.doctorBlog');
             }
             else{
                 $email = $request->all()['email'];
@@ -137,7 +136,7 @@ class blogController extends Controller
                         $posts = Post::latest()->take(3)->get();
                         $latest = Post::latest()->take(1)->get();
             
-                        return view('blog.doctorBlog', [
+                        return view('blog.blog', [
                             'posts' => $posts, 'latest' => $latest, 
                         ]); 
                     }
@@ -154,7 +153,7 @@ class blogController extends Controller
                     return view('blog.blog', [
                         'posts' => $posts, 'latest' => $latest, 
                     ]);
-                     return view('blog.doctorBlog');
+                     return view('blog.blog');
                  }
             }
 
