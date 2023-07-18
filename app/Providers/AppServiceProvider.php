@@ -22,10 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Validator::extend('within_30_days', function ($attribute, $value, $parameters, $validator) {
-            $currentDate = Carbon::now();
-            $maxDate = $currentDate->copy()->addDays(30);
+            $today = Carbon::today();
+            $thirtyDaysFromNow = $today->copy()->addDays(30);
+            $dateToValidate = Carbon::parse($value);
     
-            return Carbon::parse($value)->between($currentDate, $maxDate, true);
+            return $dateToValidate->between($today, $thirtyDaysFromNow);
         });
     }
 }

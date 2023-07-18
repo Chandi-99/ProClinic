@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Visitings;
-use App\Models\Holiday;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Carbon;
 class appointmentController extends Controller
 {
     public function __construct()
