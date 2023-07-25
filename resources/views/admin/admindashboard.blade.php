@@ -68,15 +68,15 @@
                   >
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Type</th>
+                        <th>Session</th>
+                        <th>Start Time</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <!-- <tbody>
                       <tr>
                         <td>Donna Snider</td>
                         <td>Customer Support</td>
@@ -95,7 +95,7 @@
                         <th>Start date</th>
                         <th>Salary</th>
                       </tr>
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div>
               </div>

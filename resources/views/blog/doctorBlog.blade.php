@@ -126,7 +126,7 @@
 
                         <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
                             @if (session('alert_3'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-danger">
                                 {{ session('alert_3') }}
                             </div>
                             @endif

@@ -28,7 +28,7 @@ class postController extends Controller
 
          // Validate the form input
          $validator = Validator::make($request->all(), [
-            'image' => 'required|file|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required|file|mimes:jpeg,jpg,png|max:4096',
             'body' => 'required',
             'title' => 'required| unique:posts',
         ]);
@@ -54,7 +54,7 @@ class postController extends Controller
                     $data['user_id'] = $user->id;
                 }
                 $data->save();
-                return view('blog.newblog');
+                return redirect('/doctorblog');
     
             }
 

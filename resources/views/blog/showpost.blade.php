@@ -3,10 +3,10 @@
 @section('content')
 <section class="news-section section-padding mt-0 pt-2">
     <div class="container">
-        <div class="col-lg-7 col-12">
+        <div class="col-10" style="margin:0 auto;">
             <div class="news-block">
             
-                <div class="news-block-top" style="width:500px; height:350px;">
+                <div class="news-block-top" style="width:500px; height:350px; margin: 0 auto;">
                     <img src="{{ url('public/BlogImages/'.$latest[0]->image) }}" width="100%" z-index ='0'/>
                     <div class="news-category-block">
                         <p href="#" class="category-block-link">
@@ -15,23 +15,23 @@
                     </div>
                 </div>
                         
-                <div class="news-block-info">
-                    <div class="d-flex mt-2">
-                        <div class="news-block-date">
+                <!-- <div class="news-block-info" > -->
+                    <div class="d-flex mt-2"  >
+                        <div class="news-block-date" style="margin:0 auto;">
                             <p>
                                 <i class="bi-calendar4 custom-icon me-1"></i>
                                 {{$latest[0]->created_at}}
                                 </p>
                         </div>
 
-                        <div class="news-block-author mx-5">
+                        <div class="news-block-author mx-5" style="margin:0 auto;">
                             <p>
                                 <i class="bi-person custom-icon me-1"></i>
                                     By {{$latest[0]->user->name}}
                             </p>
                         </div>
 
-                        <div class="news-block-comment">
+                        <div class="news-block-comment" style="margin:0 auto;">
                             <p>
                                 <i class="bi-chat-left custom-icon me-1"></i>
                                 {{$latest[0]->comments->count()}} Comments
@@ -98,7 +98,7 @@
                         </div>
                         
                     </form>
-                </div>                          
+                <!-- </div>                           -->
             </div>
         </div>
         
