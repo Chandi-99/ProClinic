@@ -114,9 +114,9 @@
                         </div>
 
                         <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
-                            @if (session('alert_3'))
+                            @if (session('alert_01'))
                             <div class="alert alert-success">
-                                {{ session('alert_3') }}
+                                {{ session('alert_01') }}
                             </div>
                             @endif
                             <form class="custom-form search-form" action="{{route('blog.update')}}" method="post" role="form">

@@ -15,7 +15,7 @@
         "mikehaertl/php-pdftk": "^0.13.0",
         "notifylk/notify-php": "*@dev",
         "pusher/pusher-php-server": "^7.2",
-        "stripe/stripe-php": "^10.13",
+        "stripe/stripe-php": "^10.18",
         "yajra/laravel-datatables": "*",
         "yoeunes/toastr": "^2.3"
     },

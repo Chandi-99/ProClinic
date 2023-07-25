@@ -25,7 +25,8 @@ Route::get('/home', [App\Http\Controllers\Home\HomeController::class, 'index']);
 Route::post('/welcome', [App\Http\Controllers\Home\welcomeController::class, 'store'])->name('welcome');
 Route::post('home', [App\Http\Controllers\Home\HomeController::class, 'store'])->name('home');
 
-Route::get('donation', [App\Http\Controllers\Home\donationController::class, 'index'])->name('donation');;
+Route::get('donation', [App\Http\Controllers\Home\donationController::class, 'index'])->name('donation');
+Route::post('donation', [App\Http\Controllers\Home\donationController::class, 'donate'])->name('donationpost');
 
 Route::get('blog', [App\Http\Controllers\Blog\blogController::class, 'index'])->name('blog');
 Route::post('blog', [App\Http\Controllers\Blog\blogController::class, 'update'])->name('blog.update');
@@ -96,4 +97,5 @@ Route::post('/newappointment/{id}', [App\Http\Controllers\Home\appointmentContro
 Route::get('/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Home\appointmentNextController::class, 'index'])->name('appointment.check');
 Route::post('/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Home\appointmentNextController::class, 'check'])->name('appointment.validate');
 
-
+Route::get('/payment', [App\Http\Controllers\Home\PaymentController::class, 'index'])->name('payment');
+Route::post('/payment', [App\Http\Controllers\Home\PaymentController::class, 'pay']);

@@ -23,14 +23,16 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- CSS FILES -->
-    <link href="/css/report.css" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-icons.css" rel="stylesheet">
-    <link href="/css/proclinic_layout.css" rel="stylesheet">
+
 
     <!--Bootstrap File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="/css/proclinic_layout.css" rel="stylesheet">
+    <link href="/css/report.css" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -83,79 +85,6 @@
             </div>
         </div>
     </header>
-    <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
-        <div class="container">
-            <a class="navbar-brand " href="{{ ('/') }}">
-                <img src="/images/logo.png" class="logo img-fluid ">
-                <span style="font-size:30px; color:#5bc1ac;"> ProClinic
-                    <small style="font-size:17px;" id="title">Medical Center</small>
-                </span>
-            </a>
-
-            <button class="navbar-toggler " type="button " data-bs-toggle="collapse " data-bs-target="#navbarNav " aria-controls="navbarNav " aria-expanded="false " aria-label="Toggle navigation ">
-                <span class="navbar-toggler-icon "></span>
-            </button>
-
-            <div class="collapse navbar-collapse " id="navbarNav ">
-                <ul class="navbar-nav ms-auto ">
-                    <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/welcome') }}">Home</a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/welcome') }}">About</a>
-                    </li>
-
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link click-scroll " href="{{ route('blog') }}">Blog</a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="#footer ">Contact</a>
-                    </li>
-
-                    <li class="nav-item ms-3 ">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="{{route('donation')}}">Donate</a>
-                    </li>
-
-                    <!-- Authentication Links -->
-
-                    @guest
-                    @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll " href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll " href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    @endif
-
-                    @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                    @endguest
-
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <main class="py-4">
         @yield('content')
@@ -204,7 +133,7 @@
                     <p class="text-white d-flex mt-3 ">
                         <i class="bi-geo-alt me-2 mb-3"></i> No 20, Galle Road, Colombo 06, Sri Lanka
                     </p>
-                    <a href="https://googlemaps.com " class="custom-btn  mt-3 " style="text-decoration:none;">Get Direction</a>
+                    <a href="https://googlemaps.com " class="custom-btn  pb-1 pt-1" style="text-decoration:none;">Get Direction</a>
                 </div>
             </div>
         </div>
@@ -255,6 +184,19 @@
     <script src="/js/counter.js "></script>
     <script src="/js/custom.js "></script>
     <script src="https://js.stripe.com/v3/"></script>
+
+</body>
+
+<!-- JAVASCRIPT FILES -->
+<script src="/js/jquery.min.js "></script>
+<script src="/js/bootstrap.min.js "></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/jquery.sticky.js "></script>
+<script src="/js/click-scroll.js "></script>
+<script src="/js/counter.js "></script>
+<script src="/js/custom.js "></script>
+<script src="https://js.stripe.com/v3/"></script>
 
 </body>
 
