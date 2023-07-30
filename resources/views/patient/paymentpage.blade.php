@@ -23,21 +23,21 @@
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Card Number</label>
-                                    <input autocomplete='off' class='form-control card-number' maxlength="16" type='text'>
+                                    <input type="number" autocomplete='off' class='form-control card-number' oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" />
                                 </div>
                             </div>
 
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-4 form-group cvc required'>
                                     <label class='control-label'>CVC</label>
-                                    <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' maxlength="3" type='text'>
+                                    <input type="number" autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" />
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Month</label> <input class='form-control card-expiry-month' placeholder='MM' maxlength="2" type='text'>
+                                    <label class='control-label'>Expiration Month</label><input type="number" placeholder='MM' autocomplete='off' class='form-control card-expiry-month' oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" />
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
                                     <label class='control-label'>Expiration Year</label>
-                                    <input class='form-control card-expiry-year' placeholder='YYYY' maxlength="4" type='text'>
+                                    <input type="number" placeholder='YYYY' autocomplete='off' class='form-control card-expiry-year' oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" />
                                 </div>
                             </div>
 
@@ -54,15 +54,15 @@
                             </div>
 
                         </form>
-                        
+
                     </div>
-                    
+
                 </div>
-                <a class="btn btn-info" href="{{route('donation')}}" >Go Back</a>
+                <a class="btn btn-info" href="{{route('donation')}}">Go Back</a>
             </div>
-            
+
         </div>
-        
+
     </div>
 </section>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>

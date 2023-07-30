@@ -197,7 +197,7 @@ class appointmentNextController extends Controller
                         else if($type == 'Virtual')
                         $amounttopay = Doctor::where('id', $doctor_id)->select('echanneling_rate')->get();
 
-                        //here comes payemnt gateway
+                        //here comes payment gateway
 
                         if($session == 'Morning'){
                             $startTime = '08:00 AM';
@@ -259,6 +259,9 @@ class appointmentNextController extends Controller
 
                          Mail::to($emaildoctor)->send(new DoctorAppointment($appo_id, $email[0]->email, $patientName, $type, $doctorName, $date, $session, $startTime,
                          $AppointmentNumber, $doctorFees, $bill->id, $prescription->id));
+
+                         Session::flash('success', 'Appointment Created successfully!');
+                         return redirect('/newappointment/'.$patient_id);
                     }
                 }
                 catch(Exception $ex){

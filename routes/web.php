@@ -99,3 +99,7 @@ Route::post('/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Home\appoi
 
 Route::get('/payment', [App\Http\Controllers\Home\PaymentController::class, 'index'])->name('payment');
 Route::post('/payment', [App\Http\Controllers\Home\PaymentController::class, 'pay']);
+
+Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index'])->name('chat');
+Route::post('/chat', [App\Http\Controllers\Home\ChatController::class, 'sendMessage'])->name('chat.send');
+

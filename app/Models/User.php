@@ -43,11 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Patient() {
+    public function Patient()
+    {
         return $this->hasOne(Patient::class);
     }
 
-    public function Doctor() {
+    public function Doctor()
+    {
         return $this->hasOne(Doctor::class);
     }
 
@@ -59,5 +61,17 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(comment::class);
+    }
+
+    // app/User.php
+
+    /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

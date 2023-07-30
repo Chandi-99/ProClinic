@@ -40,3 +40,7 @@ app.mount('#app');
 
 var myFile = "";
 Vue.component('video - chat', require('. / components / VideoChat.vue').default);
+
+resources / assets / js / app.js
+
+require('./bootstrap');

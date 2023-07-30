@@ -27,6 +27,7 @@ class appointmentController extends Controller
         $type = null;
         $days = '';
         $sessionsRegistered = ['Morning'=> false, 'Afternoon'=> false, 'Evening' => false, 'Night' => false];
+         
         return view('patient.appointment', ['doctors' => $doctors, 'specialities'=> $specialities, 'isReadonly' => $isReadonly, 'isVisible'=> $isVisible,
         'selectedDoctorFName' => $name, 'selectedDoctorSpeciality'=> $special, 'type'=> $type, 'days'=> $days, 'session' => $sessionsRegistered]);
     }
@@ -44,7 +45,9 @@ class appointmentController extends Controller
                 return redirect('/newappointment/{id}');
             }
             else{
-                $selectedDoctor = Doctor::where('id', $request['doctor'])->first()->get();
+                $values = explode(' ', $request['doctor']);
+                
+                $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->first()->get();
                 
                 if($request['speciality'] != $selectedDoctor[0]->specialization){
                     Session::flash('alert_1', 'There is No Doctor Registered With that Specialization!');
@@ -60,7 +63,7 @@ class appointmentController extends Controller
                         else{
                             
                             $patientid = Auth::user()->id;
-                            $doctorid = $request['doctor'];
+                            $doctorid = $selectedDoctor[0]->id;
                             $url = route('appointment.check', ['id' => $patientid, 'Id' => $doctorid, 'type' => $request['type']]);
                             return redirect()->to($url);
                         }
