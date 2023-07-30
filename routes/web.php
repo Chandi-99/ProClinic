@@ -103,3 +103,11 @@ Route::post('/payment', [App\Http\Controllers\Home\PaymentController::class, 'pa
 Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index'])->name('chat');
 Route::post('/chat', [App\Http\Controllers\Home\ChatController::class, 'sendMessage'])->name('chat.send');
 
+Route::get('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old');
+Route::get('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'index'])->name('incoming');
+
+Route::get('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'index'])->name('prescription');
+Route::post('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'download'])->name('prescription.download');
+
+Route::get('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'index'])->name('medical');
+Route::post('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'download'])->name('medical.download');

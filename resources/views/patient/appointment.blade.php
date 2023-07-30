@@ -6,7 +6,7 @@
         <div class="row" >
             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="/newappointment/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
+                    <a href="/oldappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
                         <img src="/images/test1.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
 
                         <p class="featured-block-text " style="text-decoration:none;">View <strong>Old Appointments</strong></p>
@@ -16,7 +16,7 @@
 
             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="/newappointment/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
+                    <a href="/incomingappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
                         <img src="/images/test2.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
 
                         <p class="featured-block-text " style="text-decoration:none;">View <strong>Incoming Appointments</strong></p>
