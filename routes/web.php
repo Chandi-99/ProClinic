@@ -122,3 +122,9 @@ Route::post('/joinappointment/{id}/{Id}', [App\Http\Controllers\Home\MedicalCont
 
 Route::get('/editDoctor/{id}', [App\Http\Controllers\Doctor\DoctorEditController::class, 'index']);
 Route::post('/editDoctor/{id}', [App\Http\Controllers\Doctor\DoctorEditController::class, 'update']);
+
+Route::get('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'index']);
+Route::post('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);
+
+Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'index']);
+Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);

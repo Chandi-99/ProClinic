@@ -194,4 +194,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facades\DomPDF::class,
     ])->toArray(),
 
+    'timezone' => 'Asia/Colombo', // Replace 'Your/Timezone' with your desired time zone
+
 ];

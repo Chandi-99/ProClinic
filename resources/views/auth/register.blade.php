@@ -94,7 +94,7 @@
                             <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('NIC') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic">
+                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12"  required autocomplete="nic">
                                 @error('nic')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Invalid NIC Number</strong>
@@ -154,7 +154,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class=" custom-btn">
+                                <button type="submit" class="btn custom-btn pt-2 pb-2">
                                     {{ __('Register') }}
                                 </button>
                             </div>

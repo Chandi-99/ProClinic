@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Http\Controllers\Controller;
@@ -43,7 +42,7 @@ class appointmentController extends Controller
 
             if($validator->fails()){
                 Session::flash('alert_1', $validator->errors());
-                return redirect('/newappointment/{id}');
+                return redirect('/newappointment/'.$id);
             }
             else{
                 $values = explode(' ', $request['doctor']);
@@ -52,20 +51,22 @@ class appointmentController extends Controller
                 
                 if($request['speciality'] != $selectedDoctor[0]->specialization){
                     Session::flash('alert_1', 'There is No Doctor Registered With that Specialization!');
-                    return redirect('/newappointment/{id}');
+                    return redirect('/newappointment/'.$id);
                 }
                 else{
                    try{
+            
                         $visitings = Visitings::where('doctor_id', $selectedDoctor[0]->id)->where('type', $request['type'])->get();
+                        
                         if(empty($visitings)){
                             Session::flash('alert_1', 'This Doctor did not registered for Appointment Type '.$request['type']);
-                            return view('/newappointment/{id}');
+                            return view('/newappointment/'.$id);
                         }
                         else{
                             
                             $patientid = Patient::where('user_id',$id)->get();
                             $doctorid = $selectedDoctor[0]->id;
-                            $url = route('appointment.check', ['id' => $patientid[0]->id, 'Id' => $doctorid, 'type' => $request['type']]);
+                            $url = route('appointment.check', ['id' => $id, 'Id' => $doctorid, 'type' => $request['type']]);
                             return redirect()->to($url);
                         }
 

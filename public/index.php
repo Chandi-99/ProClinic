@@ -51,5 +51,11 @@ $kernel = $app->make(Kernel::class);
 $response = $kernel->handle(
     $request = Request::capture()
 )->send();
+// $request = Request::capture();
+// $clonedRequest = clone $request;
+
+// $response = $kernel->handle($request)->send();
+// $kernel->terminate($clonedRequest, $response);
+
 
 $kernel->terminate($request, $response);
