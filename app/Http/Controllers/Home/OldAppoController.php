@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class OldAppoController extends Controller
@@ -11,8 +12,11 @@ class OldAppoController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($patientID, $appoID){
-        return view('patient.oldappointments');
+    public function index($patientID){
+        $appointments = Appointment::where('patient_id', $patientID)
+                                    //->where('status',"End")
+                                    ->get();
+        return view('patient.oldappointments',['appointments'=> $appointments]);
     }
 
     public function update($patientID, $appoID){

@@ -18,4 +18,14 @@ class Appointment extends Model
         'status',
         'date',
     ];
+
+    public function Visiting(){
+        return $this->belongsTo(Visitings::class);
+    }
+
+    public function Patient(){
+        $patient = Patient::where('patient_id', $this->patient_id)->get();
+        return $patient[0];
+        //return $this->belongsTo(Patient::class);
+    }
 }

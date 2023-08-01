@@ -38,9 +38,22 @@
                     @csrf
                     <strong style="font-weight:bold; font-size:large;">Available Sessions:</strong>
                     <select name="session" class="form-control form-control-lg @error('session') is-invalid @enderror mb-1" style="width:50%;" {{ $isReadOnly ? 'disabled' : '' }}>
-                    @foreach ($sessions as $value => $isTrue)
-                        @if ($isTrue)
-                            <option value="{{ $value }}">{{ $value }}</option>
+                    @foreach ($sessions as $value)
+                        @if ($value == 'morning_true')
+                            <option value="Morning">Morning</option>
+                            @continue
+                        @endif
+                        @if ($value == 'afternoon_true')
+                            <option value="Afternoon">Afternoon</option>
+                            @continue
+                        @endif
+                        @if ($value == 'evening_true')
+                            <option value="Evening">Evening</option>
+                            @continue
+                        @endif
+                        @if ($value == 'night_true')
+                            <option value="Night">Night</option>
+                            @continue
                         @endif
                     @endforeach
                     </select>

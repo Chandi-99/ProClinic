@@ -30,5 +30,9 @@ class Patient extends Model
     public function PDFReports() {
         return $this->hasMany(ReportPDF::class);
     }
+
+    public function Appointments() {
+        return $this->hasMany(Appointment::class);
+    }
 }
 

@@ -63,22 +63,26 @@ class appointmentNextController extends Controller
             $days = '';
             $date = null;
             $isReadOnly = true;
+            $selecteddate = Carbon::parse($request['date']);
             $sessionsRegistered = ['Morning'=> false, 'Afternoon'=> false, 'Evening' => false, 'Night' => false];
-            $sessions = Visitings::where('doctor_id', $doctor_id)->select('session')->distinct()->get();
-    
+            $sessions = Visitings::where('doctor_id', $doctor_id)->where('type', $type)->where('day',$selecteddate->format('l'))->select('session')->distinct()->get();
             foreach($sessions as $session){
                 if($session->session == 'Morning'){
-                    $sessionsRegistered['Morning'] = true;
+                    $sessionsRegistered['Morning'] = 'morning_true';
+                    continue;
                 }
                 else if($session->session == 'Afternoon'){
-                    $sessionsRegistered['Afternoon'] = true;
+                    $sessionsRegistered['Afternoon'] = 'afternoon_true';
+                    continue;
                 }
                 else if
                 ($session->session == 'Evening'){
-                    $sessionsRegistered['Evening'] = true;
+                    $sessionsRegistered['Evening'] = 'evening_true';
+                    continue;
                 }
                 else if($session->session == 'Night'){
-                    $sessionsRegistered['Night'] = true;
+                    $sessionsRegistered['Night'] = 'night_true';
+                    continue;
                 }
             }
     
@@ -111,21 +115,21 @@ class appointmentNextController extends Controller
                         if($day->day == $dayOfWeek){
                             $isReadOnly = false;
                             $sessionsRegistered = ['Morning'=> false, 'Afternoon'=> false, 'Evening' => false, 'Night' => false];
-                            $sessions = Visitings::where('doctor_id', $doctor_id)->where('day', $dayOfWeek)->select('session')->distinct()->get();
+                            $sessions = Visitings::where('doctor_id', $doctor_id)->where('day', $dayOfWeek)->where('type', $type)->select('session')->distinct()->get();
                             
                             foreach($sessions as $session){
                                 if($session->session == 'Morning'){
-                                    $sessionsRegistered['Morning'] = true;
+                                    $sessionsRegistered['Morning'] = 'morning_true';
                                 }
                                 else if($session->session == 'Afternoon'){
-                                    $sessionsRegistered['Afternoon'] = true;
+                                    $sessionsRegistered['Afternoon'] = 'afternoon_true';
                                 }
                                 else if
                                 ($session->session == 'Evening'){
-                                    $sessionsRegistered['Evening'] = true;
+                                    $sessionsRegistered['Evening'] ='evening_true';
                                 }
                                 else if($session->session == 'Night'){
-                                    $sessionsRegistered['Night'] = true;
+                                    $sessionsRegistered['Night'] = 'night_true';
                                 }
                             }
                             $date = $request['date'];
@@ -149,21 +153,21 @@ class appointmentNextController extends Controller
             $date = null;
             $isReadOnly = true;
             $sessionsRegistered = ['Morning'=> false, 'Afternoon'=> false, 'Evening' => false, 'Night' => false];
-            $sessions = Visitings::where('doctor_id', $doctor_id)->select('session')->distinct()->get();
+            $sessions = Visitings::where('doctor_id', $doctor_id)->where('type', $type)->select('session')->distinct()->get();
     
             foreach($sessions as $session){
                 if($session->session == 'Morning'){
-                    $sessionsRegistered['Morning'] = true;
+                    $sessionsRegistered['Morning'] = 'morning_true';
                 }
                 else if($session->session == 'Afternoon'){
-                    $sessionsRegistered['Afternoon'] = true;
+                    $sessionsRegistered['Afternoon'] = 'afternoon_true';
                 }
                 else if
                 ($session->session == 'Evening'){
-                    $sessionsRegistered['Evening'] = true;
+                    $sessionsRegistered['Evening'] = 'evening_true';
                 }
                 else if($session->session == 'Night'){
-                    $sessionsRegistered['Night'] = true;
+                    $sessionsRegistered['Night'] = 'night_true';
                 }
             }
     
@@ -182,7 +186,20 @@ class appointmentNextController extends Controller
                     $date = Carbon::parse($request['hiddendate']);
                     $day = $date->format('l');
                     $session = $request['session'];
-                    $visiting_id = Visitings::where('session', $session)->where('doctor_id', $doctor_id)->where('day', $day)->select('id')->first()->get();
+                    if($session == "morning_true"){
+                        $session = 'Morning';
+                    }
+                    else if($session == "afternoon_true"){
+                        $session = 'Afternoon';
+                    }
+                    else if($session == "evening_true"){
+                        $session = 'Evening';
+                    }
+                    else if($session == "night_true"){
+                        $session = 'Night';
+                    }
+
+                    $visiting_id = Visitings::where('session', $session)->where('type', $type)->where('doctor_id', $doctor_id)->where('day', $day)->select('id')->get();
                     $max_appo = Visitings::where('id', $visiting_id[0]->id)->select('max_per_session')->get();
                     $appoCount = Appointment::where('visiting_id', $visiting_id[0]->id)->where('date', $date)->count();
 
@@ -194,10 +211,8 @@ class appointmentNextController extends Controller
                         if($type == 'Physical'){
                             $amounttopay = Doctor::where('id', $doctor_id)->select('normal_rate')->get();
                         }
-                        else if($type == 'Virtual')
+                        else if($type == 'TeleMedicine')
                         $amounttopay = Doctor::where('id', $doctor_id)->select('echanneling_rate')->get();
-
-                        //here comes payment gateway
 
                         if($session == 'Morning'){
                             $startTime = '08:00 AM';
@@ -255,13 +270,13 @@ class appointmentNextController extends Controller
                         $doctorFees = $amounttopay[0]->normal_rate;
 
                         Mail::to($email)->send(new PatientAppointment($appo_id, $email[0]->email, $patientName, $type, $doctorName, $date, $session, $startTime,
-                         $AppointmentNumber, $doctorFees, $bill->id, $prescription->id));
+                        $AppointmentNumber, $doctorFees, $bill->id, $prescription->id));
 
-                         Mail::to($emaildoctor)->send(new DoctorAppointment($appo_id, $email[0]->email, $patientName, $type, $doctorName, $date, $session, $startTime,
-                         $AppointmentNumber, $doctorFees, $bill->id, $prescription->id));
+                        Mail::to($emaildoctor)->send(new DoctorAppointment($appo_id, $email[0]->email, $patientName, $type, $doctorName, $date, $session, $startTime,
+                        $AppointmentNumber, $doctorFees, $bill->id, $prescription->id));
 
-                         Session::flash('success', 'Appointment Created successfully!');
-                         return redirect('/newappointment/'.$patient_id);
+                        Session::flash('success', 'Appointment Created successfully!');
+                        return redirect('/newappointment/'.$patient_id);
                     }
                 }
                 catch(Exception $ex){

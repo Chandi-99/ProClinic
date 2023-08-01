@@ -44,7 +44,7 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center ">
-                            <a href="{{route('videochat')}}" class="d-block " style="text-decoration:none;">
+                            <a href="{{route('login')}}" class="d-block " style="text-decoration:none;">
                                 <img src="images/certificate.png " class="featured-block-image img-fluid " alt=" " height="130px" width="130px">
 
                                 <p class="featured-block-text " >Request <strong>Medical Certificate</strong></p>

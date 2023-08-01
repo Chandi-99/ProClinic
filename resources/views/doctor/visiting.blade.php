@@ -5,8 +5,8 @@
     <div class="container ">
         <div class="col-12 ">
             <div class="custom-text-box ">
-                <h6 class="mb-3">Visitings Registered by You:</h6>
-                <table style="border:1px solid black;">     
+                <h6 class="mb-3 text-center">Visitings Registered by You:</h6>
+                <table style="border:1px solid black;" class="table table-striped table-bordered">     
                     <tr style="border:1px solid black;">
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Visiting ID</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Day</strong></td>

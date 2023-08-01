@@ -34,54 +34,51 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $usertype = Auth::user()->usertype;
-        
-        if($usertype == 'patient'){
+
+        if ($usertype == 'patient') {
             //Session::put('patient_id', $patientid);
             Session::flash('alert_1', '');
             Session::flash('alert_2', '');
             return view('patient.home');
-        }
-        else if($usertype == 'admin'){
+        } else if ($usertype == 'admin') {
             return view('admin.admindashboard');
-        }
-        else{
+        } else {
             return view('staff.staffdashboard');
         }
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        if($request->has('form1')){
-            $medicine = DB::select('select * from medicines where `medicines`.`medi_name`='.'"'.$request['medicine_name'].'"');
-            if($medicine == null){
+        if ($request->has('form1')) {
+            $medicine = DB::select('select * from medicines where `medicines`.`medi_name`=' . '"' . $request['medicine_name'] . '"');
+            if ($medicine == null) {
                 Session::flash('alert_1', 'Medicine Not Found!');
                 return view('patient.home');
-            }
-            else{
-                return view('patient.searchmedicine',['medi'=>$medicine]);
+            } else {
+                return view('patient.searchmedicine', ['medi' => $medicine]);
             }
         }
-        if ($request->has('form2')){
-            
+        if ($request->has('form2')) {
+
             $validator = Validator::make($request->all(), [
-            'cv_name' => ['required','string', 'max:20'],
-            'cv_email' => ['required','string', 'email','max:20'],
-            'cv_position' => ['required','string', 'max:20'],
-            'cv_aboutme' => ['required','string', 'max:300'],
-            'cvfile' => ['required'],
+                'cv_name' => ['required', 'string', 'max:20'],
+                'cv_email' => ['required', 'string', 'email', 'max:20'],
+                'cv_position' => ['required', 'string', 'max:20'],
+                'cv_aboutme' => ['required', 'string', 'max:300'],
+                'cvfile' => ['required'],
             ]);
 
             if ($validator->fails()) {
-        
+
                 return redirect()->back()->with('alert', 'Only PDF Allowed!');
-            }
-            else{
+            } else {
 
-                if($request['cvfile']) {
+                if ($request['cvfile']) {
 
-                    $file= $request->file('cvfile');
-                    $filename= date('YmdHi').$file->getClientOriginalName();
-                    $file-> move(public_path('public/cvfiles'), $filename);
+                    $file = $request->file('cvfile');
+                    $filename = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move(public_path('public/cvfiles'), $filename);
                     // Insert record
                     $insertData_arr = array(
                         'cv_name' => $request->cv_name,
@@ -93,13 +90,9 @@ class HomeController extends Controller
 
                     Candidate::create($insertData_arr);
                     return view('patient.CV-Confirmation');
-
                 }
-
             }
-            
-        } 
-        else if ($request->has('form3')) {
+        } else if ($request->has('form3')) {
 
             $temp =  Contact::create([
                 'fname' => $request['fname'],
@@ -111,7 +104,5 @@ class HomeController extends Controller
             $temp->save();
             return view('patient.contactus');
         }
-
     }
-
 }

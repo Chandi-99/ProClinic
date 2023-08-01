@@ -104,10 +104,21 @@ Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index'])-
 Route::post('/chat', [App\Http\Controllers\Home\ChatController::class, 'sendMessage'])->name('chat.send');
 
 Route::get('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old');
+Route::post('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old.post');
+
 Route::get('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'index'])->name('incoming');
+Route::post('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'index'])->name('incoming.post');
+Route::get('/incomingappointments/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'check'])->name('incoming.check');
+Route::get('/incomingappointments/join/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'join'])->name('incoming.join');
 
 Route::get('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'index'])->name('prescription');
 Route::post('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'download'])->name('prescription.download');
 
 Route::get('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'index'])->name('medical');
 Route::post('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'download'])->name('medical.download');
+
+Route::get('/joinappointment/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'index'])->name('joinappointment');
+Route::post('/joinappointment/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'join'])->name('joinappointment.join');
+
+Route::get('/editDoctor/{id}', [App\Http\Controllers\Doctor\DoctorEditController::class, 'index']);
+Route::post('/editDoctor/{id}', [App\Http\Controllers\Doctor\DoctorEditController::class, 'update']);

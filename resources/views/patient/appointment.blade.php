@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <section class="section-padding section-bg mt-0 pt-2">
     <div class="container ">
@@ -69,12 +68,7 @@
                     <strong> Speciality: </strong>
                     <select name="speciality" class="form-control form-control-lg @error('speciality') is-invalid @enderror" {{ $isReadonly ? 'disabled' : '' }}>
                         @foreach($specialities as $speciality)
-                        @if($selectedDoctorSpeciality == $speciality)
-                        <option selected>{{$speciality->specialization}}</option>
-                        @else
                         <option>{{$speciality->specialization}}</option>
-                        @endif
-
                         @endforeach
                     </select>
 
@@ -92,10 +86,10 @@
                     <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" {{ $isReadonly ? 'disabled' : '' }}>
                         @if($type == 'Physical' || $type == '')
                         <option selected>Physical</option>
-                        <option>Virtual</option>
-                        @elseif($type == 'Virtual')
+                        <option>TeleMedicine</option>
+                        @elseif($type == 'TeleMedicine')
                         <option>Physical</option>
-                        <option selected>Virtual</option>
+                        <option selected>VirtuTeleMedicineal</option>
                         @endif
                     </select>
 

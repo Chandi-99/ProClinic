@@ -19,4 +19,8 @@ class Visitings extends Model
     public function Room() {
         return $this->belongsTo(Room::class);
     }
+
+    public function Appointments(){
+        return $this->hasMany(Appointment::class);
+    }
 }

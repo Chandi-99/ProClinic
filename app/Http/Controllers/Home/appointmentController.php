@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Http\Controllers\Controller;
+use App\Models\Patient;
 use App\Models\Visitings;
 use Exception;
 use Illuminate\Support\Facades\Session;
@@ -62,9 +63,9 @@ class appointmentController extends Controller
                         }
                         else{
                             
-                            $patientid = Auth::user()->id;
+                            $patientid = Patient::where('user_id',$id)->get();
                             $doctorid = $selectedDoctor[0]->id;
-                            $url = route('appointment.check', ['id' => $patientid, 'Id' => $doctorid, 'type' => $request['type']]);
+                            $url = route('appointment.check', ['id' => $patientid[0]->id, 'Id' => $doctorid, 'type' => $request['type']]);
                             return redirect()->to($url);
                         }
 
