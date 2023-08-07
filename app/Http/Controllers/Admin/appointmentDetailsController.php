@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Patient;
+use App\Models\Doctor;
+use App\Models\Visitings;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +29,12 @@ class appointmentDetailsController extends Controller
             if ($usertype == 'patient') {
                 return view('patient.home');
             } else if ($usertype == 'admin') {
+                $appointments = Appointment::all();
+                $doctors = Doctor::all();
                 $patients = Patient::all();
-                return view('admin.patientsdetails', ['patients' => $patients]);
+                $search_appointments = [];
+                return view('admin.appointmentdetails', ['appointments' => $appointments, 'doctors' => $doctors, 'patients' => $patients, 'search_appointments'=>$search_appointments]);
+
             } else if ($usertype == 'doctor') {
                 return view('doctor.doctordashboard');
             } else {
@@ -41,30 +48,121 @@ class appointmentDetailsController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fname' => ['required', 'string', 'max:20'],
-            'lname' => ['required', 'string', 'max:20'],
+            'appo_id' => ['string', 'max:20'],
+            'doctor_id' => ['string', 'max:20'],
+            'patient_id' => ['string', 'max:20'],
+            'appointmentdate' => ['before:tomorrow'],
         ]);
 
         if ($validator->fails()) {
-
-            $patients = Patient::all();
-            Session::flash('error', 'Invalid First name or Last name');
-
-            return view('admin.patientsdetails', [
-                'patients' => $patients,
-            ]);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         } else {
-            $patients = Patient::where('fname', $request['fname'])->where('lname', $request['lname'])->first();
-            if (!empty($patients)) {
-                $patients = Patient::where('fname', $request['fname'])->where('lname', $request['lname'])->get();
-                Session::flash('success', 'Patient Found!');
-                return view('admin.patientsdetails', [
-                    'patients' => $patients,
-                ]);
-                
-            } else {
-                return redirect('showpatients')->with('error', 'There is No patient registered for that name');
+
+            $appoidfilter = $doctoridfilter = $patientidfilter = $appodatefilter = '';
+            if ($request['appo_id'] != null) {
+                $appoidfilter = 'yes';
             }
+            if ($request['doctor_id'] != null) {
+                $doctoridfilter = 'yes';
+                $doctor = Doctor::where('id', $request['doctor_id'])->first();
+                if (!empty($doctor)) {
+                    $doctor = Doctor::where('id', $request['doctor_id'])->get();
+                    $visitings = Visitings::where('doctor_id', $request['doctor_id'])->first();
+                    if (!empty($visitings)) {
+                        $visitings = Visitings::where('doctor_id', $request['doctor_id'])->get();
+                    } else {
+                        dd($visitings);
+                        return redirect()->back()->with('error', 'Selected Doctor has not registrered in any Visitings!')->withInput();
+                    }
+                } else {
+                    return redirect()->back()->with('error', 'Invalid Doctor!')->withInput();
+                }
+            }
+            if ($request['patient_id'] != null) {
+                $patientidfilter = 'yes';
+                $patient = Patient::where('patient_id', $request['patient_id'])->first();
+                if (!empty($patient)) {
+                    $patient = Patient::where('patient_id', $request['patient_id'])->get();
+                } else {
+                    return redirect()->back()->with('error', 'Invalid Patient!')->withInput();
+                }
+            }
+            if ($request['appointmentdate'] != null) {
+                $appodatefilter = 'yes';
+            }
+
+            $i = 0;
+            $appointmentArray = [];
+
+            if ($appoidfilter == 'yes' &&  $doctoridfilter == "yes" && $patientidfilter == "yes" && $appodatefilter == "yes") {
+                foreach ($visitings as $visiting) {
+                    $appointment = Appointment::where('id', $request['appo_id'])->where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->first();
+                    if (!empty($appointment)) {
+                        $appointment = Appointment::where('id', $request['appo_id'])->where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->get();
+                        $appointmentArray[$i++] = $appointment;
+                    } else {
+                        continue;
+                    }
+                }
+                if ($i == 0) {
+                    return redirect()->back()->with('error', 'No Appointments Found!')->withInput();
+                }
+            } else if ($appoidfilter == 'yes' &&  $doctoridfilter == "yes" && $patientidfilter == "yes") {
+                foreach ($visitings as $visiting) {
+                    $appointment = Appointment::where('id', $request['appo_id'])->where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->first();
+                    if (!empty($appointment)) {
+                        $appointment = Appointment::where('id', $request['appo_id'])->where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->get();
+                        $appointmentArray[$i++] = $appointment;
+                    } else {
+                        continue;
+                    }
+                }
+                if ($i == 0) {
+                    return redirect()->back()->with('error', 'No Appointments Found!')->withInput();
+                }
+            } else if ($appoidfilter == 'yes' &&  $doctoridfilter == "yes" && $appodatefilter == "yes") {
+                foreach ($visitings as $visiting) {
+                    $appointment = Appointment::where('id', $request['appo_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->first();
+                    if (!empty($appointment)) {
+                        $appointment = Appointment::where('id', $request['appo_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->get();
+                        $appointmentArray[$i++] = $appointment;
+                    } else {
+                        continue;
+                    }
+                }
+                if ($i == 0) {
+                    return redirect()->back()->with('error', 'No Appointments Found!')->withInput();
+                }
+            } else if ($appoidfilter == 'yes' &&  $appodatefilter == "yes" && $patientidfilter == "yes") {
+
+                $appointment = Appointment::where('id', $request['appo_id'])->first();
+                if (!empty($appointment)) {
+                    $appointment = Appointment::where('id', $request['appo_id'])->where('patient_id', $request['patient_id'])->where('date', $request['appointmentdate'])->get();
+                    $appointmentArray[$i++] = $appointment;
+                } else {
+                    return redirect()->back()->with('error', 'No Appointments Found!')->withInput();
+                }
+            } else if ($patientidfilter == 'yes' &&  $doctoridfilter == "yes" && $appodatefilter == "yes") {
+                foreach ($visitings as $visiting) {
+                    $appointment = Appointment::where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->first();
+                    if (!empty($appointment)) {
+                        $appointment = Appointment::where('patient_id', $request['patient_id'])->where('visiting_id', $visiting->id)->where('date', $request['appointmentdate'])->get();
+                        $appointmentArray[$i++] = $appointment;
+                    } else {
+                        continue;
+                    }
+                }
+                if ($i == 0) {
+                    return redirect()->back()->with('error', 'No Appointments Found!')->withInput();
+                }
+            }
+
+            $doctors = Doctor::all();
+            $patients = Patient::all();
+            $appointments = [];
+            return view('admin.appointmentdetails', ['appointments' => $appointments, 'doctors' => $doctors, 'patients' => $patients, 'search_appointments'=>$appointmentArray ]);
         }
     }
 }

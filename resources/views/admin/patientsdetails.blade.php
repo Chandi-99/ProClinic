@@ -27,7 +27,7 @@
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" required autocomplete="fname" autofocus>
                                 @error('fname')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>Invalid First Name</strong>
+                                    <strong>Invalid Last Name</strong>
                                 </span>
                                 @enderror
                             </div>

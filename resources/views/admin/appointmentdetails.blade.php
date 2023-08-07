@@ -4,29 +4,61 @@
 <div class="row justify-content-center mb-4">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="text-align:center;"><b>{{ __('Search Doctor') }}</b></div>
+                <div class="card-header" style="text-align:center;"><b>{{ __('Search Appointment') }}</b></div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('doctordetails.search')}}">
+                    <form method="POST" action="{{route('appointmentdetails.search')}}">
                         @csrf
                         <div class="row mb-3">
-                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Doctor First Name') }}</label>
+                            <label for="appo_id" class="col-md-4 col-form-label text-md-end">{{ __('Appointment ID') }}</label>
                             <div class="col-md-6">
-                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" required autocomplete="fname" autofocus>
-                                @error('fname')
+                                <input id="appo_id" type="number" class="form-control @error('appo_id') is-invalid @enderror" name="appo_id" autocomplete="appo_id" autofocus>
+                                @error('appo_id')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>Invalid First Name</strong>
+                                    <strong>Invalid Appointment ID</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Doctor Last Name') }}</label>
+                            <label for="doctor_id" class="col-md-4 col-form-label text-md-end">{{ __('Doctor Name') }}</label>
                             <div class="col-md-6">
-                                <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" required autocomplete="fname" autofocus>
-                                @error('fname')
+                                <select id="doctor_id" type="text" class="form-control @error('doctor_name') is-invalid @enderror" name="doctor_id"  autocomplete="doctor_id" autofocus>
+                                @foreach($doctors as $doctor)
+                                <option value="{{$doctor->id}}">{{$doctor->fname}} {{$doctor->lname}}</option>
+                                @endforeach
+                                </select>
+                                @error('doctor_id')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>Invalid First Name</strong>
+                                    <strong>Invalid Doctor Name</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="patient_id" class="col-md-4 col-form-label text-md-end">{{ __('Doctor Name') }}</label>
+                            <div class="col-md-6">
+                                <select id="patient_id" type="text" class="form-control @error('doctor_name') is-invalid @enderror" name="patient_id"  autocomplete="patient_id" autofocus>
+                                @foreach($patients as $patient)
+                                <option value="{{$patient->patient_id}}">{{$patient->fname}} {{$patient->lname}}</option>
+                                @endforeach
+                                <select>
+                                @error('patient_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid patient Name</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="appointmentdate" class="col-md-4 col-form-label text-md-end">{{ __('Appointment Date') }}</label>
+                            <div class="col-md-6">
+                                <input id="appointmentdate" type="date" class="form-control @error('appointmentdate') is-invalid @enderror" name="appointmentdate" autocomplete="appointmentdate" autofocus>
+                                @error('appointmentdate')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid Date</strong>
                                 </span>
                                 @enderror
                             </div>
@@ -52,37 +84,42 @@
         <table id="rooms" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Doctor ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Gender</th>
-                    <th>Date of Birth</th>
-                    <th>Registration Number</th>
-                    <th>Specialization</th>
-                    <th>Normal Rate</th>
-                    <th>E-channeling Rate</th>
-                    <th>Registered Day</th>
-                    <th>Contact</th>
+                    <th class="text-center">Appointment ID</th>
+                    <th class="text-center">Appointment Number</th>
+                    <th class="text-center">Room Name</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Doctor Name</th>
+                    <th class="text-center">Patient Name</th>
+                    <th class="text-center">Type</th>
+                    <th class="text-center">Start Time</th>
+                    <th class="text-center">Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($doctors as $doctor)
+                @foreach($appointments as $appointment)
                 <tr>
-                    <td>Doc_{{ $doctor->id }}</td>
-                    <td>{{ $doctor->fname }}</td>
-                    <td>{{ $doctor->lname }}</td>
-                    <td>{{ $doctor->gender }}</td>
-                    <td>{{ $doctor->dob }}</td>
-                    <td>{{ $doctor->regNum }}</td>
-                    <td>{{ $doctor->specialization }}</td>
-                    <td>{{ $doctor->normal_rate }}</td>
-                    @if($doctor->echanneling_rate  == 0)
-                    <td>__('Not Registered') </td>
-                    @else
-                    <td>{{ $doctor->echanneling_rate }}</td>
-                    @endif
-                    <td>{{ $doctor->created_at->format('Y-m-d') }}</td>
-                    <td>0{{ $doctor->contact }}</td>
+                    <td class="text-center">Appo_{{ $appointment->id }}</td>
+                    <td class="text-center">{{ $appointment->appo_number }}</td>
+                    <td class="text-center">{{ $appointment->Visiting->Room->room_name }}</td>
+                    <td class="text-center">{{ $appointment->date }}</td>
+                    <td class="text-center">{{ $appointment->Visiting->Doctor->fname }} {{ $appointment->Visiting->Doctor->lname }}</td>
+                    <td class="text-center">{{ $appointment->Patient()->fname }} {{ $appointment->Patient()->lname }}</td>
+                    <td class="text-center">{{ $appointment->Visiting->type }}</td>
+                    <td class="text-center">{{ $appointment->start_time }}</td>
+                    <td class="text-center">{{ $appointment->status}}</td>
+                </tr>
+                @endforeach
+                @foreach($search_appointments as $appointment)
+                <tr>
+                    <td class="text-center">Appo_{{ $appointment[0]->id }}</td>
+                    <td class="text-center">{{ $appointment[0]->appo_number }}</td>
+                    <td class="text-center">{{ $appointment[0]->Visiting->Room->room_name }}</td>
+                    <td class="text-center">{{ $appointment[0]->date }}</td>
+                    <td class="text-center">{{ $appointment[0]->Visiting->Doctor->fname }} {{ $appointment[0]->Visiting->Doctor->lname }}</td>
+                    <td class="text-center">{{ $appointment[0]->Patient()->fname }} {{ $appointment[0]->Patient()->lname }}</td>
+                    <td class="text-center">{{ $appointment[0]->Visiting->type }}</td>
+                    <td class="text-center">{{ $appointment[0]->start_time }}</td>
+                    <td class="text-center">{{ $appointment[0]->status}}</td>
                 </tr>
                 @endforeach
             </tbody>

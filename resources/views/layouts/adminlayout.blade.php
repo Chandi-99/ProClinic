@@ -124,7 +124,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('blog') }}">Appointments</a>
+                        <a class="nav-link click-scroll " href="{{ route('appointmentdetails') }}">Appointments</a>
                     </li>
 
                     <!-- Authentication Links -->
