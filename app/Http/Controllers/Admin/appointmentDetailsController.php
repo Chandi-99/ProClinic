@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class patientDetailsController extends Controller
+class appointmentDetailsController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +21,6 @@ class patientDetailsController extends Controller
     {
         try {
 
-            Session::flash('alert_2', '');
             $usertype = Auth::user()->usertype;
 
             if ($usertype == 'patient') {

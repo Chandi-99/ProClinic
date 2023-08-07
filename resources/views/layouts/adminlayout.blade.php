@@ -116,7 +116,7 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ ('/') }}" >Doctors</a>
+                        <a class="nav-link click-scroll " href="{{route('doctordetails')}}" >Doctors</a>
                     </li>
 
                     <li class="nav-item dropdown ">

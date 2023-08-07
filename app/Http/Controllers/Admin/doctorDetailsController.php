@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Patient;
+use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class patientDetailsController extends Controller
+class doctorDetailsController extends Controller
 {
     public function __construct()
     {
@@ -20,22 +20,24 @@ class patientDetailsController extends Controller
     public function index()
     {
         try {
-
             Session::flash('alert_2', '');
             $usertype = Auth::user()->usertype;
 
             if ($usertype == 'patient') {
                 return view('patient.home');
             } else if ($usertype == 'admin') {
-                $patients = Patient::all();
-                return view('admin.patientsdetails', ['patients' => $patients]);
+                $doctors = Doctor::all();
+                return view('admin.doctordetails', ['doctors' => $doctors]);
             } else if ($usertype == 'doctor') {
                 return view('doctor.doctordashboard');
             } else {
                 return view('staff.staffdashboard');
             }
         } catch (Exception $ex) {
-            Session::flash('error', 'Exception Occured!');
+            Session::flash('error', $ex->getMessage());
+            $doctors = Doctor::all();
+            return view('admin.doctordetails', ['doctors' => $doctors]);
+
         }
     }
 
@@ -48,23 +50,21 @@ class patientDetailsController extends Controller
 
         if ($validator->fails()) {
 
-            $patients = Patient::all();
             Session::flash('error', 'Invalid First name or Last name');
-
-            return view('admin.patientsdetails', [
-                'patients' => $patients,
+            $doctors = Doctor::all();
+            return view('admin.doctordetails', [
+                'doctors' => $doctors
             ]);
+
         } else {
-            $patients = Patient::where('fname', $request['fname'])->where('lname', $request['lname'])->first();
-            if (!empty($patients)) {
-                $patients = Patient::where('fname', $request['fname'])->where('lname', $request['lname'])->get();
-                Session::flash('success', 'Patient Found!');
-                return view('admin.patientsdetails', [
-                    'patients' => $patients,
+            $doctors = Doctor::where('fname', $request['fname'])->where('lname', $request['lname'])->first();
+            if (!empty($doctors)) {
+                $doctors = Doctor::where('fname', $request['fname'])->where('lname', $request['lname'])->get();
+                return view('admin.doctordetails', [
+                    'doctors' => $doctors
                 ]);
-                
             } else {
-                return redirect('showpatients')->with('error', 'There is No patient registered for that name');
+                return redirect('showdoctors')->with('error', 'There is No Doctor registered for that name');;
             }
         }
     }
