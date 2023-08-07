@@ -248,8 +248,7 @@ class appointmentNextController extends Controller
                         $prescription->description = 'Initial Description';
                         $prescription->save();
 
-                        $userId = Patient::where('patient_id', $patient_id)->first()->get();
-                        $email = User::where('id', $userId[0]->user_id)->select('email')->first()->get();
+                        $email = User::where('id', $user_id)->select('email')->first()->get();
                         $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->first()->get();
                         $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->first()->get();
                         $patientName = $patientFName[0]->fname . ' ' . $patientLName[0]->lname;
@@ -280,7 +279,7 @@ class appointmentNextController extends Controller
 
                         Mail::to($emaildoctor)->send(new DoctorAppointment(
                             $appo_id,
-                            $email[0]->email,
+                            $emaildoctor[0]->email,
                             $patientName,
                             $type,
                             $doctorName,

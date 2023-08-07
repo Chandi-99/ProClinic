@@ -6,7 +6,6 @@ use App\Models\Nurse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class nurseController extends Controller

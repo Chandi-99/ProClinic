@@ -112,7 +112,7 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('welcome')}}">Patients</a>
+                        <a class="nav-link click-scroll " href="{{route('patientdetails')}}">Patients</a>
                     </li>
 
                     <li class="nav-item ">
@@ -120,7 +120,7 @@
                     </li>
 
                     <li class="nav-item dropdown ">
-                    <a class="nav-link click-scroll " href="{{ route('blog') }}" >Staff & Rooms</a>
+                    <a class="nav-link click-scroll " href="{{ route('newstaff') }}" >Staff & Rooms</a>
                     </li>
 
                     <li class="nav-item ">
@@ -164,7 +164,7 @@
             </div>
           </div>
     </nav>
-    <main class="mt-5 pt-3" style="margin-left:10px; margin-right:10px;">
+    <main class="mt-1 pt-3" style="margin-left:10px; margin-right:10px;">
         @yield('content')
     </main>
     <script src="./js/bootstrap.bundle.min.js"></script>

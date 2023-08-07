@@ -1,6 +1,6 @@
 @extends('layouts.adminlayout')
 @section('content')
-<section class="section-padding section-bg mb-0 pt-5">
+<section class="section-padding section-bg mb-0 pt-2">
 <div class="container-fluid">
   <h1 style="text-align:center; color:black;font-size:30px; padding-bottom:5px;">Admin Dashboard</h1>
   <div class="row">

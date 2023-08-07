@@ -56,6 +56,12 @@ Route::post('/newPatient', [App\Http\Controllers\Staff\patientController::class,
 Route::get('/newDoctor', [App\Http\Controllers\Staff\doctorController::class, 'index'])->name('doctor');
 Route::post('/newDoctor', [App\Http\Controllers\Staff\doctorController::class, 'create'])->name('doctor.create');
 
+Route::get('/newStaff', [App\Http\Controllers\Admin\newStaffController::class, 'index'])->name('newstaff');
+Route::post('/newStaff', [App\Http\Controllers\Admin\newStaffController::class, 'create'])->name('newstaff.create');
+
+Route::get('/showpatients', [App\Http\Controllers\Admin\patientDetailsController::class, 'index'])->name('patientdetails');
+Route::post('/showpatients', [App\Http\Controllers\Admin\patientDetailsController::class, 'search'])->name('patientdetails.search');
+
 Route::get('/newpost', [App\Http\Controllers\Blog\postController::class, 'index'])->name('post');
 Route::post('/newpost', [App\Http\Controllers\Blog\postController::class, 'create'])->name('post.create');
 
