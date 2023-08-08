@@ -14,5 +14,6 @@ class Contact extends Model
         'lname',
         'contact_email',
         'message',
+        'status'
     ];
 }

@@ -15,6 +15,6 @@ class Candidate extends Model
         'cv_position',
         'cv_aboutme',
         'cv_file_path',
-        '',
+        'status'
     ];
 }

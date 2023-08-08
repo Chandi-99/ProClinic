@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>{{ 'ProClinic' }}</title>
@@ -16,9 +14,9 @@
     <style>
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 
     <!-- Fonts -->
@@ -31,82 +29,83 @@
     <link href="/css/proclinic_layout.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<!-- Datatable script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+    <!-- Datatable script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
 
     <!--Bootstrap File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-  </head>
-  <header class="site-header">
+</head>
+<header class="site-header">
 
- <div class="container">
-    <div class="row">
+    <div class="container">
+        <div class="row">
 
-        <div class="col-lg-8 col-12 d-flex flex-wrap">
-            <p class="d-flex me-4 mb-0">
-                <i class="bi-geo-alt me-2"></i> No 20, Galle Road, Colombo 06, Sri Lanka.
-            </p>
+            <div class="col-lg-8 col-12 d-flex flex-wrap">
+                <p class="d-flex me-4 mb-0">
+                    <i class="bi-geo-alt me-2"></i> No 20, Galle Road, Colombo 06, Sri Lanka.
+                </p>
 
-            <p class="d-flex mb-0">
-                <i class="bi-envelope me-2"></i>
+                <p class="d-flex mb-0">
+                    <i class="bi-envelope me-2"></i>
 
-                <a href="mailto:info@company.com">
+                    <a href="mailto:info@company.com">
                         info@proclinic.com
                     </a>
-            </p>
-        </div>
+                </p>
+            </div>
 
-        <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
-            <ul class="social-icon" >
-                <li class="social-icon-item ">
-                    <a href=" https://twitter.com " class="social-icon-link bi-twitter"></a>
-                </li>
+            <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                <ul class="social-icon">
+                    <li class="social-icon-item ">
+                        <a href=" https://twitter.com " class="social-icon-link bi-twitter"></a>
+                    </li>
 
-                <li class=" social-icon-item ">
-                    <a href="https://facebook.com " class="social-icon-link bi-facebook "></a>
-                </li>
+                    <li class=" social-icon-item ">
+                        <a href="https://facebook.com " class="social-icon-link bi-facebook "></a>
+                    </li>
 
-                <li class=" social-icon-item ">
-                    <a href="https://instagram.com " class="social-icon-link bi-instagram "></a>
-                </li>
+                    <li class=" social-icon-item ">
+                        <a href="https://instagram.com " class="social-icon-link bi-instagram "></a>
+                    </li>
 
-                <li class="social-icon-item " >
-                    <a href="https://youtube.com " class="social-icon-link bi-youtube "></a>
-                </li>
+                    <li class="social-icon-item ">
+                        <a href="https://youtube.com " class="social-icon-link bi-youtube "></a>
+                    </li>
 
-                <li class="social-icon-item ">
-                    <a href="https://whatsapp.com " class="social-icon-link bi-whatsapp "></a>
-                </li>
-            </ul>
+                    <li class="social-icon-item ">
+                        <a href="https://whatsapp.com " class="social-icon-link bi-whatsapp "></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 </header>
+
 <body>
-      <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
-          <div class="container">
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg ">
+        <div class="container">
             @if (Route::has('login'))
             <a class="navbar-brand " href="{{ route('admindashboard') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
-                <span style="font-size:30px; color:#5bc1ac;" > ProClinic
-                        <small style="font-size:17px;" id="title">Medical Center</small>
-                    </span>
+                <span style="font-size:30px; color:#5bc1ac;"> ProClinic
+                    <small style="font-size:17px;" id="title">Medical Center</small>
+                </span>
             </a>
             @else
             <a class="navbar-brand " href="{{ route('login') }}">
                 <img src="/images/logo.png" class="logo img-fluid ">
-                <span style="font-size:30px; color:#5bc1ac;" > ProClinic
-                        <small style="font-size:17px;" id="title">Medical Center</small>
-                    </span>
+                <span style="font-size:30px; color:#5bc1ac;"> ProClinic
+                    <small style="font-size:17px;" id="title">Medical Center</small>
+                </span>
             </a>
             @endif
             <button class="navbar-toggler " type="button " data-bs-toggle="collapse " data-bs-target="#navbarNav " aria-controls="navbarNav " aria-expanded="false " aria-label="Toggle navigation ">
-                    <span class="navbar-toggler-icon "></span>
+                <span class="navbar-toggler-icon "></span>
             </button>
 
             <div class="collapse navbar-collapse " id="navbarNav ">
@@ -116,11 +115,11 @@
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('doctordetails')}}" >Doctors</a>
+                        <a class="nav-link click-scroll " href="{{route('doctordetails')}}">Doctors</a>
                     </li>
 
                     <li class="nav-item dropdown ">
-                    <a class="nav-link click-scroll " href="{{ route('newstaff') }}" >Staff & Rooms</a>
+                        <a class="nav-link click-scroll " href="{{ route('newstaff') }}">Staff & Rooms</a>
                     </li>
 
                     <li class="nav-item ">
@@ -130,15 +129,15 @@
                     <!-- Authentication Links -->
                     @guest
                     @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll " href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll " href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
                     @endif
 
                     @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll " href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll " href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
                     @endif
 
                     @else
@@ -148,10 +147,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -162,7 +160,7 @@
                     @endguest
                 </ul>
             </div>
-          </div>
+        </div>
     </nav>
     <main class="mt-1 pt-3" style="margin-left:10px; margin-right:10px;">
         @yield('content')
@@ -202,20 +200,20 @@
                         <i class="bi-telephone me-2 "></i>
 
                         <a href="tel: 120-240-9600 " class="footer-menu-link " style="text-decoration:none;">
-                                011-2554540
-                            </a>
+                            011-2554540
+                        </a>
                     </p>
 
                     <p class="text-white d-flex ">
                         <i class="bi-envelope me-2 "></i>
 
                         <a href="mailto:info@proclinic.com " class="footer-menu-link " style="text-decoration:none;">
-                                info@proclinic.org
-                            </a>
+                            info@proclinic.org
+                        </a>
                     </p>
 
                     <p class="text-white d-flex mt-3 ">
-                        <i class="bi-geo-alt me-2 mb-3" ></i> No 20, Galle Road, Colombo 06, Sri Lanka
+                        <i class="bi-geo-alt me-2 mb-3"></i> No 20, Galle Road, Colombo 06, Sri Lanka
                     </p>
                     <a href="https://googlemaps.com " class="custom-btn  mt-3 " style="text-decoration:none;">Get Direction</a>
                 </div>
@@ -227,7 +225,7 @@
                 <div class="row ">
 
                     <div class="col-lg-6 col-md-7 col-12 ">
-                        <p class="copyright-text mb-0 ">Developed by: <span style="font-weight:bold;">Chandi_99 Solutions</span> &nbsp  Follow on: <a href="https://www.linkedin.com/in/udara-chandimal-8a5b19199/ " style="font-weight:bold;" target="_blank ">Linkedin</a></p>
+                        <p class="copyright-text mb-0 ">Developed by: <span style="font-weight:bold;">Chandi_99 Solutions</span> &nbsp Follow on: <a href="https://www.linkedin.com/in/udara-chandimal-8a5b19199/ " style="font-weight:bold;" target="_blank ">Linkedin</a></p>
                     </div>
                     <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto ">
                         <ul class="social-icon">
@@ -257,6 +255,7 @@
             </div>
         </div>
     </footer>
-  
-  </body>
+
+</body>
+
 </html>

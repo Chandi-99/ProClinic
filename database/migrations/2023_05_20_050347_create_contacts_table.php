@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('lname');
             $table->string('message');
             $table->string('contact_email');
+            $table->string('status');
             $table->timestamps();
         });
     }

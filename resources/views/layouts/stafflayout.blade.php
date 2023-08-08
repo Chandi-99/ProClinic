@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>{{ 'ProClinic' }}</title>
 
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -20,13 +28,6 @@
     <link href="/css/bootstrap-icons.css" rel="stylesheet">
     <link href="/css/proclinic_layout.css" rel="stylesheet">
 
-    <style>
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    </style>
     <!-- DataTables CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 

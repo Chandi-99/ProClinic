@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cv_email');
             $table->string('cv_aboutme');
             $table->string('cv_file_path');
+            $table->string('status');
         });
     }
 

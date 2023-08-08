@@ -82,6 +82,7 @@ class welcomeController extends Controller
                         'cv_position' => $request->cv_position,
                         'cv_aboutme' => $request->cv_aboutme,
                         'cv_file_path' => $filename,
+                        'status' => 'unread',
                     );
 
                     Candidate::create($insertData_arr);
@@ -99,6 +100,7 @@ class welcomeController extends Controller
                 'lname' => $request['lname'],
                 'contact_email' => $request['contact_email'],
                 'message' => $request['message'],
+                'status' => 'unread',
             ]);
 
             $temp->save();
