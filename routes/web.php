@@ -68,6 +68,24 @@ Route::post('/showdoctors', [App\Http\Controllers\Admin\doctorDetailsController:
 Route::get('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsController::class, 'index'])->name('appointmentdetails');
 Route::post('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsController::class, 'search'])->name('appointmentdetails.search');
 
+Route::get('/staff/showPatients', [App\Http\Controllers\Staff\patientDetailsNewController::class, 'index'])->name('patientDetails');
+Route::post('/staff/showPatients', [App\Http\Controllers\Staff\patientDetailsNewController::class, 'search'])->name('patientDetails.search');
+
+Route::get('/staff/showDoctors', [App\Http\Controllers\Staff\doctorDetailsNewController::class, 'index'])->name('doctorDetails');
+Route::post('/staff/showDoctors', [App\Http\Controllers\Staff\doctorDetailsNewController::class, 'search'])->name('doctorDetails.search');
+
+Route::get('/staff/showAppointments', [App\Http\Controllers\Staff\appointmentDetailsNewController::class, 'index'])->name('appointmentDetails');
+Route::post('/staff/showAppointments', [App\Http\Controllers\Staff\appointmentDetailsNewController::class, 'search'])->name('appointmentDetails.search');
+
+Route::get('/viewMessages', [App\Http\Controllers\Staff\viewMessageController::class, 'index'])->name('viewmessages');
+Route::post('/viewMessages', [App\Http\Controllers\Staff\viewMessageController::class, 'search'])->name('viewmessages.search');
+
+Route::get('/viewMessages/allread', [App\Http\Controllers\Staff\viewMessageController::class, 'allread'])->name('allread');
+Route::get('/viewMessages/allunread', [App\Http\Controllers\Staff\viewMessageController::class, 'allunread'])->name('allunread');
+
+Route::get('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'index'])->name('viewapplications');
+Route::post('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'search'])->name('viewapplications.search');
+
 Route::get('/newpost', [App\Http\Controllers\Blog\postController::class, 'index'])->name('post');
 Route::post('/newpost', [App\Http\Controllers\Blog\postController::class, 'create'])->name('post.create');
 

@@ -1,4 +1,4 @@
-@extends('layouts.adminlayout')
+@extends('layouts.stafflayout')
 @section('content')
 <div class="container">
     <div class="row justify-content-center mb-4">
@@ -7,7 +7,7 @@
                 <div class="card-header" style="text-align:center;"><b>{{ __('Search Patient') }}</b></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{route('patientdetails.search')}}">
+                    <form method="POST" action="{{route('patientDetails.search')}}">
                         @csrf
                         <div class="row mb-3">
                             <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Patient First Name') }}</label>
@@ -80,6 +80,5 @@
         </table>
     </div>
     </br>
-
 </div>
 @endsection

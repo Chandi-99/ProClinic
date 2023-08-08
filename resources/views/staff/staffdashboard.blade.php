@@ -7,7 +7,7 @@
                 <div class="card-body py-5 pb-0">Total Number of Sessions Today</div>
                 <h1 style="padding:10px;">{{$sessioncount}}</h1>
                 <div class="card-footer d-flex">
-                    <a href="{{route('patientdetails')}}" style="color:white;">View Details</a>
+                    <a href="{{route('patient')}}" style="color:white;">View Details</a>
                     <span class="ms-auto">
                         <i class="bi bi-chevron-right"></i>
                     </span>
@@ -19,7 +19,7 @@
                 <div class="card-body py-5 pb-0">Total Number of Appointments Today</div>
                 <h1 style="padding:10px;">{{$appointmentcount}}</h1>
                 <div class="card-footer d-flex">
-                    <a href="{{route('doctordetails')}}" style="color:white;">View Details</a>
+                    <a href="{{route('appointmentDetails')}}" style="color:white;">View Details</a>
                     <span class="ms-auto">
                         <i class="bi bi-chevron-right"></i>
                     </span>
@@ -31,7 +31,7 @@
                 <div class="card-body py-5 pb-0">Total Number of New Messages</div>
                 <h1 style="padding:10px;">{{$messagecount}}</h1>
                 <div class="card-footer d-flex">
-                    <a href="{{ route('appointmentdetails') }}" style="color:white;">View Details</a>
+                    <a href="{{ route('viewmessages') }}" style="color:white;">View Details</a>
                     <span class="ms-auto">
                         <i class="bi bi-chevron-right"></i>
                     </span>
@@ -43,7 +43,7 @@
                 <div class="card-body py-5 pb-0">Total Number of New Applications</div>
                 <h1 style="padding:10px;">{{$applicationcount}}</h1>
                 <div class="card-footer d-flex">
-                    <a href="#" style="color:white;">View Details</a>
+                    <a href="{{ route('viewapplications') }}" style="color:white;">View Details</a>
                     <span class="ms-auto">
                         <i class="bi bi-chevron-right"></i>
                     </span>

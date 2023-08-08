@@ -4,33 +4,37 @@
     <div class="container mt-0 pt-0">
         <div class="col-12 mt-0 pt-0">
             <div class="custom-text-box mt-0 ">
-                <h6 class="mb-3">Medicines Saved:</h6>
+                <h6 class="mb-3" class="text-center">Medicines Saved:</h6>
                 <table style="border:1px solid black;" class="table table-striped table-bordered">
+                <thead>
                     <tr style="border:1px solid black;">
                         <td style="border:1px solid black; padding:10px;" class="text-center "><strong>Name</strong></td>
-                        <td style="border:1px solid black; padding:10px;" class="text-center "><strong>Weight </strong></td>
+                        <td style="border:1px solid black; padding:10px;" class="text-center "><strong>Weight (mg) </strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Company</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Availability</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Unit Price</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Edit/Delete</strong></td>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach($medicines as $medi)
                     <tr>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$medi->medi_name}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$medi->mg}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$medi->company}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$medi->availability}}</td>
-                        <td style="border:1px solid black; padding:10px;" class="text-center">{{$medi->unit_price}}</td>
+                        <td style="border:1px solid black; padding:10px;" class="text-center">Rs. {{$medi->unit_price}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">
                             <a href="/medicine/edit/{{ $medi->id }}" class="btn btn-primary " style="font-size:15px;font-weight:bold;">Edit</a>
                             <a href="/medicine/delete/{{ $medi->id }}" class="btn btn-danger" style="font-size:15px;font-weight:bold;">Delete</a>
                         </td>
                     </tr>
                     @endforeach
+                </tbody>
                 </table>
             </div>
         </div>
-        <div class="container" style="margin:0 auto;">
+        <div class="container " style="margin:0 auto;">
             <div class="custom-text-box">
                 @if (session('alert_1'))
                 <div class="alert alert-danger">
@@ -39,7 +43,7 @@
                 @endif
                 <form method="POST" name="form2" action="{{ route('medicine.update') }}" enctype="multipart/form-data">
                     @csrf
-                    <h5 for="image">Create New Medicine:</h5>
+                    <h5 for="image" class="text-center">Create New Medicine:</h5>
                     </br>
                     <div class="col-lg-6 col-12 ">
                         <strong>Medicine Name: </strong><input type="text" name="medi_name" class="form-control form-control-lg @error('medi_name') is-invalid @enderror" value="" required>
@@ -178,8 +182,8 @@
                     </div>
                     </br>
 
-                    <input type="reset" style="background-color:skyblue;" class="custom-btn mb-4" />
-                    <button type="submit" name="form2" class="custom-btn mb-4">Add Medicine</button>
+                    <input type="reset" style="background-color:skyblue;" class="btn custom-btn pt-2 pb-2" />
+                    <button type="submit" name="form2" class="btn custom-btn pt-2 pb-2">Add Medicine</button>
                     </br>
                 </form>
 

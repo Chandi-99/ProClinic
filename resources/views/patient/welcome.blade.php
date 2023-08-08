@@ -314,7 +314,7 @@
 
                             <textarea name="cv_aboutme" style="font-size:15px;" rows="3" class="form-control form-control-lg" placeholder="Tell us Little bit About you " required></textarea>
 
-                            <button type="submit" class="custom-btn" name="form2" style="text-decoration:none; font-weight:lighter;">Submit</button>
+                            <button type="submit" class="custom-btn pt-2 pb-2" name="form2" style="text-decoration:none; font-weight:lighter; font-size:large">Submit</button>
                         </form>
                     </div>
 
@@ -412,7 +412,7 @@
 
                             <textarea name="message" rows="5 " style="font-size:15px;" class="form-control form-control-lg" id="message " placeholder="What can we help you? "></textarea>
 
-                            <button type="submit" class="form-control-lg custom-btn mt-3" style="text-decoration:none; font-weight:lighter;" name="form3">Send Message</button>
+                            <button type="submit" class="form-control-lg custom-btn mt-3 pt-2 pb-2" style="text-decoration:none; font-weight:lighter; font-size:large;" name="form3">Send Message</button>
                         </form>
                     </div>
 

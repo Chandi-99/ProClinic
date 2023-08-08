@@ -55,18 +55,18 @@ class welcomeController extends Controller
             }
         }
         if ($request->has('form2')){
-            
+
             $validator = Validator::make($request->all(), [
-            'cv_name' => ['required','string', 'max:20'],
+            'cv_name' => ['required', 'max:20'],
             'cv_email' => ['required','string', 'email','max:20'],
             'cv_position' => ['required','string', 'max:20'],
             'cv_aboutme' => ['required','string', 'max:300'],
-            'cvfile' => ['required'],
+            'cvfile' => 'required|file|mimes:pdf|max:2048',
             ]);
 
             if ($validator->fails()) {
         
-                return redirect()->back()->with('alert', 'Only PDF Allowed!');
+                return redirect()->back()->with('alert', $validator->errors());
             }
             else{
 

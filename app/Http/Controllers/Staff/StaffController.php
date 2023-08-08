@@ -32,7 +32,7 @@ class StaffController extends Controller
 
                 $messagecount = Contact::where('status', 'unread')->first();
                 if(!empty($messagecount)){
-                    $messagecount = Contact::where('status', 'unread')->get();
+                    $messagecount = Contact::where('status', 'unread')->count();
                 }
                 else{
                     $messagecount = 0;
@@ -40,7 +40,7 @@ class StaffController extends Controller
 
                 $applicationcount = Candidate::where('status', 'unread')->first();
                 if(!empty($applicationcount)){
-                    $applicationcount = Candidate::where('status', 'unread')->get();
+                    $applicationcount = Candidate::where('status', 'unread')->count();
                 }
                 else{
                     $applicationcount = 0;

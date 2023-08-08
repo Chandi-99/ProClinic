@@ -17,6 +17,62 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        .message-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .message-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 20px);
+            /* Adjust as needed for responsiveness */
+        }
+
+        .top-right {
+            position: absolute;
+            display: inline-block;
+            top: 10px;
+            right: 10px;
+        }
+
+        .menu-icon {
+            position: absolute;
+            display: inline-block;
+        }
+
+        .icon {
+            cursor: pointer;
+        }
+
+
+        .dropdownNew {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 5px;
+            min-width: 170px;
+            z-index: 1;
+        }
+
+        .dropdownNew a {
+            display: block;
+            padding: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdownNew a:hover {
+            background-color: #ddd;
+        }
     </style>
 
     <!-- Fonts -->
@@ -111,19 +167,19 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('staffdashboard')}}">Patients</a>
+                        <a class="nav-link click-scroll " href="{{route('patientDetails')}}">Patients</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('staffdashboard') }}">Doctors</a>
+                        <a class="nav-link click-scroll " href="{{ route('doctorDetails') }}">Doctors</a>
                     </li>
 
-                    <li class="nav-item dropdown ">
+                    <li class="nav-item ">
                         <a class="nav-link click-scroll " href="{{ route('room') }}">Rooms</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{ route('staffdashboard') }}">Appointments</a>
+                        <a class="nav-link click-scroll " href="{{route('appointmentDetails')}}">Appointments</a>
                     </li>
 
                     <!-- Authentication Links -->

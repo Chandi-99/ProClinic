@@ -1,16 +1,15 @@
-@extends('layouts.adminlayout')
+@extends('layouts.stafflayout')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-4">
+<div class="row justify-content-center mb-4">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="text-align:center;"><b>{{ __('Search Patient') }}</b></div>
-
+                <div class="card-header" style="text-align:center;"><b>{{ __('Search Doctor') }}</b></div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('patientdetails.search')}}">
+                    <form method="POST" action="{{route('doctorDetails.search')}}">
                         @csrf
                         <div class="row mb-3">
-                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Patient First Name') }}</label>
+                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Doctor First Name') }}</label>
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" required autocomplete="fname" autofocus>
                                 @error('fname')
@@ -22,7 +21,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Patient Last Name') }}</label>
+                            <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('Doctor Last Name') }}</label>
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" required autocomplete="fname" autofocus>
                                 @error('fname')
@@ -49,31 +48,41 @@
         </div>
     </div>
     <div class="row mt-3">
-        <h5 style="text-align:center;">Registered Patients</h5>
+        <h5 style="text-align:center;">Registered Doctors</h5>
         <table id="rooms" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Patient ID</th>
+                    <th>Doctor ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Gender</th>
                     <th>Date of Birth</th>
-                    <th>Address</th>
+                    <th>Registration Number</th>
+                    <th>Specialization</th>
+                    <th>Normal Rate</th>
+                    <th>E-channeling Rate</th>
                     <th>Registered Day</th>
                     <th>Contact</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($patients as $patient)
+                @foreach ($doctors as $doctor)
                 <tr>
-                    <td>St_{{ $patient->patient_id }}</td>
-                    <td>{{ $patient->fname }}</td>
-                    <td>{{ $patient->lname }}</td>
-                    <td>{{ $patient->gender }}</td>
-                    <td>{{ $patient->dob }}</td>
-                    <td>{{ $patient->address }}</td>
-                    <td>{{ $patient->created_at->format('Y-m-d') }}</td>
-                    <td>0{{ $patient->contact }}</td>
+                    <td>Doc_{{ $doctor->id }}</td>
+                    <td>{{ $doctor->fname }}</td>
+                    <td>{{ $doctor->lname }}</td>
+                    <td>{{ $doctor->gender }}</td>
+                    <td>{{ $doctor->dob }}</td>
+                    <td>{{ $doctor->regNum }}</td>
+                    <td>{{ $doctor->specialization }}</td>
+                    <td>{{ $doctor->normal_rate }}</td>
+                    @if($doctor->echanneling_rate  == 0)
+                    <td>__('Not Registered') </td>
+                    @else
+                    <td>{{ $doctor->echanneling_rate }}</td>
+                    @endif
+                    <td>{{ $doctor->created_at->format('Y-m-d') }}</td>
+                    <td>0{{ $doctor->contact }}</td>
                 </tr>
                 @endforeach
             </tbody>
