@@ -2,11 +2,11 @@
 @section('content')
 <section class="section-padding section-bg mb-0 pt-0 mt-0 pt-0">
     <div class="container pt-3">
-        <!-- if($monthly == 'yes') -->
+        @if($monthly == 'yes')
         <h5 class="text-center">ProClinic Earning Report (Month - month)</h5>
-        <!-- else -->
+        @else
         <h5 class="text-center">ProClinic Earning Report Overall</h5>
-        <!-- endif -->
+        @endif
         </br>
         <div class="col-md-8" style="margin:0 auto;">
             <div class="card pt-3 mb-3">

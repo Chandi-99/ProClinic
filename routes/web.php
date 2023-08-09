@@ -69,7 +69,6 @@ Route::get('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsCo
 Route::post('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsController::class, 'search'])->name('appointmentdetails.search');
 
 Route::get('/viewearnings', [App\Http\Controllers\Admin\viewEarningController::class, 'index'])->name('viewearnings');
-Route::post('/viewearnings', [App\Http\Controllers\Admin\viewEarningController::class, 'search'])->name('viewearnings.search');
 
 Route::get('/viewearnings/thismonth', [App\Http\Controllers\Admin\viewEarningController::class, 'thismonth'])->name('viewearnings.thismonth');
 Route::get('/viewearnings/overall', [App\Http\Controllers\Admin\viewEarningController::class, 'overall'])->name('viewearnings.overall');

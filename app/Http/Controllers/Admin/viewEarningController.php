@@ -28,10 +28,6 @@ class viewEarningController extends Controller
         }
     }
 
-    public function search(Request $request){
-
-    }
-
     public function thismonth(){
 
     }
