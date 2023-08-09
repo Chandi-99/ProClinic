@@ -46,7 +46,6 @@ class appointmentController extends Controller
             }
             else{
                 $values = explode(' ', $request['doctor']);
-                
                 $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->first()->get();
                 
                 if($request['speciality'] != $selectedDoctor[0]->specialization){

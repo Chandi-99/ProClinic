@@ -60,8 +60,8 @@ class AdminController extends Controller
                     $total = 0;  
 
                     foreach($bills as $bill){
-                        $appo = Appointment::where('id', $bill->appo_id)->get();
-                        $carbonDate = Carbon::parse($appo[0]->date);
+                        $appo = Appointment::where('id', $bill->appo_id)->first();
+                        $carbonDate = Carbon::parse($appo->date);
                         $monthofappo = $carbonDate->month;
                         if($monthofappo == $thismonth){
                             $total += $bill->total;

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('start_time');
             $table->foreign('visiting_id')->references('id')->on('visitings');
             $table->foreign('bill_id')->references('id')->on('bills');
-            //$table->foreign('prescription_id')->references('id')->on('prescriptions');
             $table->timestamps();
         });
     }

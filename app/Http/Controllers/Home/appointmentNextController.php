@@ -216,7 +216,6 @@ class appointmentNextController extends Controller
                         try {
 
                             $appointment = new Appointment();
-
                             $appointment->visiting_id = $visiting_id[0]->id;
                             $appointment->patient_id = $patient_id;
                             $appointment->appo_number = $appoCount + 1;
@@ -230,7 +229,6 @@ class appointmentNextController extends Controller
                         } catch (Exception $ex) {
                             dd($ex);
                         }
-
 
                         $appo_id = $appointment->id;
                         $bill = new Bill();
