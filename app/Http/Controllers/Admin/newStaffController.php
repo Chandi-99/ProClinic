@@ -34,7 +34,7 @@ class newStaffController extends Controller
             } else if ($usertype == 'admin') {
                 $nurses = Nurse::all();
                 $staffmembers = Staff::all();
-                $rooms = Room::all();
+                $rooms = Room::withCount('visitings')->get();
                 return view('admin.staffroom', ['nurses' => $nurses, 'staffmembers' => $staffmembers, 'rooms' => $rooms]);
                 
             } else if ($usertype == 'doctor') {

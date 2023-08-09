@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('gender');
             $table->integer('contact');
             $table->date('dob');
+            $table->string('email');
             $table->timestamps();
         });
     }

@@ -1,73 +1,7 @@
 @extends('layouts.adminlayout')
 @section('content')
-<div class="container">
-    <div class="row mt-2">
-        <h5 style="text-align:center;">All Rooms</h5>
-        <table id="rooms" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Room ID</th>
-                    <th>Room Name</th>
-                    <th>Room Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($rooms as $room)
-                <tr>
-                    <td>{{ $room->id }}</td>
-                    <td>{{ $room->room_name }}</td>
-                    <td>{{ $room->room_desc }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-
-    <div class="row mt-3">
-        <h5 style="text-align:center;">Working Staff</h5>
-        <table id="rooms" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Staff ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Registration Number</th>
-                    <th>Date of Birth</th>
-                    <th>Gender</th>
-                    <th>Position</th>
-                    <th>Contact</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($staffmembers as $member)
-                <tr>
-                    <td>St_{{ $member->id }}</td>
-                    <td>{{ $member->fname }}</td>
-                    <td>{{ $member->lname }}</td>
-                    <td>{{ $member->regNum }}</td>
-                    <td>{{ $member->dob }}</td>
-                    <td>{{ $member->gender }}</td>
-                    <td>{{ $member->position }}</td>
-                    <td>0{{ $member->contact }}</td>
-                </tr>
-                @endforeach
-                @foreach ($nurses as $nurse)
-                <tr>
-                    <td>Nu_{{ $nurse->id }}</td>
-                    <td>{{ $nurse->fname }}</td>
-                    <td>{{ $nurse->lname }}</td>
-                    <td>{{ $nurse->regNum }}</td>
-                    <td>{{ $nurse->dob }}</td>
-                    <td>{{ $nurse->gender }}</td>
-                    <td>{{ $nurse->position }}</td>
-                    <td>0{{ $nurse->contact }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</br>
+<section class="section-padding section-bg mb-0 pt-1">
+<div class="container pt-3">
     <div class="row justify-content-center mb-4">
         <div class="col-md-8">
             <div class="card">
@@ -212,11 +146,11 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-2">
                             <div class="col-md-6 offset-md-4">
-                                <button type="reset" class="custom-btn pt-1 pb-1">
-                                    {{ __('Reset') }}
-                                </button>
+                                <a href="/admin" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                        {{ __('Back') }}
+                                </a>
                                 <button type="submit" class="custom-btn pt-1 pb-1">
                                     {{ __('Register') }}
                                 </button>
@@ -227,5 +161,77 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-2 custom-text-box">
+        <h5 style="text-align:center;">All Rooms</h5>
+        <table id="rooms" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Room ID</th>
+                    <th>Room Name</th>
+                    <th>Room Description</th>
+                    <th>Number of Sessions Registered for that Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($rooms as $room)
+                <tr class="text-center">
+                    <td>{{ $room->id }}</td>
+                    <td>{{ $room->room_name }}</td>
+                    <td>{{ $room->room_desc }}</td>
+                    <td>{{ $room->visitings_count}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mt-3 custom-text-box">
+        <h5 style="text-align:center;">Working Staff</h5>
+        <table id="rooms" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Staff ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Registration Number</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($staffmembers as $member)
+                <tr class="text-center">
+                    <td>St_{{ $member->id }}</td>
+                    <td>{{ $member->fname }}</td>
+                    <td>{{ $member->lname }}</td>
+                    <td>{{ $member->regNum }}</td>
+                    <td>{{ $member->dob }}</td>
+                    <td>{{ $member->gender }}</td>
+                    <td>{{ $member->position }}</td>
+                    <td><a href="mailto:{{$member->User->email}} " style="text-decoration:none;">{{ $member->User->email }}</a></td>
+                    <td><a href="tel: 0{{$member->contact}} " style="text-decoration:none;">0{{ $member->contact }}</a></td>
+                </tr>
+                @endforeach
+                @foreach ($nurses as $nurse)
+                <tr class="text-center">
+                    <td>Nu_{{ $nurse->id }}</td>
+                    <td>{{ $nurse->fname }}</td>
+                    <td>{{ $nurse->lname }}</td>
+                    <td>{{ $nurse->regNum }}</td>
+                    <td>{{ $nurse->dob }}</td>
+                    <td>{{ $nurse->gender }}</td>
+                    <td>{{ $nurse->position }}</td>
+                    <td><a href="mailto:{{$nurse->email}} " style="text-decoration:none;">{{ $nurse->email }}</a></td>
+                    <td><a href="tel: 0{{$nurse->contact}} " style="text-decoration:none;">0{{ $nurse->contact }}</a></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+</section>
 @endsection

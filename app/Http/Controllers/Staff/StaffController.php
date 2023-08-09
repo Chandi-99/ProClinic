@@ -49,8 +49,7 @@ class StaffController extends Controller
                 if(!empty($appointments)){
                     $appointments = Appointment::where('date', $today)->get();
                     $appointmentcount = Appointment::where('date', $today)->count(); 
-                    $sessioncount = Appointment::where('date', $today)->select('visiting_id')->distinct()->get();
-
+                    $sessioncount = Appointment::where('date', $today)->select('visiting_id')->distinct()->count();
                     return view('staff.staffdashboard', ['appointments' => $appointments, 'appointmentcount'=> $appointmentcount, 
                     'sessioncount' => $sessioncount, 'messagecount' => $messagecount, 'applicationcount' => $applicationcount]);
                 }

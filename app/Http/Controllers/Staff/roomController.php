@@ -14,7 +14,7 @@ class roomController extends Controller
     }
     
     public function index(){
-        $rooms = Room::all();
+        $rooms = Room::withCount('visitings')->get();
 
         return view('staff.room', [
             'rooms' => $rooms,

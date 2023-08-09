@@ -1,6 +1,7 @@
 @extends('layouts.stafflayout')
 @section('content')
-<div class="container">
+<section class="section-padding section-bg mb-0 pt-1">
+<div class="container pt-3">
 <div class="row justify-content-center mb-4">
         <div class="col-md-8">
             <div class="card">
@@ -66,7 +67,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a type="reset" href="/admin" class="custom-btn pt-1 pb-1">
+                                <a href="/admin" class="custom-btn pt-1 pb-1">
                                     {{ __('Back') }}
                                 </a>
                                 <button type="submit" class="custom-btn pt-1 pb-1">
@@ -79,7 +80,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 custom-text-box">
         <h5 style="text-align:center;">Registered Doctors</h5>
         <table id="rooms" class="table table-striped table-bordered">
             <thead>
@@ -126,6 +127,6 @@
         </table>
     </div>
     </br>
-
 </div>
+</section>
 @endsection

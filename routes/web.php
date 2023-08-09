@@ -68,6 +68,12 @@ Route::post('/showdoctors', [App\Http\Controllers\Admin\doctorDetailsController:
 Route::get('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsController::class, 'index'])->name('appointmentdetails');
 Route::post('/showappointments', [App\Http\Controllers\Admin\appointmentDetailsController::class, 'search'])->name('appointmentdetails.search');
 
+Route::get('/viewearnings', [App\Http\Controllers\Admin\viewEarningController::class, 'index'])->name('viewearnings');
+Route::post('/viewearnings', [App\Http\Controllers\Admin\viewEarningController::class, 'search'])->name('viewearnings.search');
+
+Route::get('/viewearnings/thismonth', [App\Http\Controllers\Admin\viewEarningController::class, 'thismonth'])->name('viewearnings.thismonth');
+Route::get('/viewearnings/overall', [App\Http\Controllers\Admin\viewEarningController::class, 'overall'])->name('viewearnings.overall');
+
 Route::get('/staff/showPatients', [App\Http\Controllers\Staff\patientDetailsNewController::class, 'index'])->name('patientDetails');
 Route::post('/staff/showPatients', [App\Http\Controllers\Staff\patientDetailsNewController::class, 'search'])->name('patientDetails.search');
 
@@ -85,6 +91,9 @@ Route::get('/viewMessages/allunread', [App\Http\Controllers\Staff\viewMessageCon
 
 Route::get('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'index'])->name('viewapplications');
 Route::post('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'search'])->name('viewapplications.search');
+
+Route::get('/viewApplications/allread', [App\Http\Controllers\Staff\viewApplicationController::class, 'allread'])->name('allreadApplications');
+Route::get('/viewApplications/allunread', [App\Http\Controllers\Staff\viewApplicationController::class, 'allunread'])->name('allunreadApplications.search');
 
 Route::get('/newpost', [App\Http\Controllers\Blog\postController::class, 'index'])->name('post');
 Route::post('/newpost', [App\Http\Controllers\Blog\postController::class, 'create'])->name('post.create');

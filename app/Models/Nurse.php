@@ -16,6 +16,7 @@ class Nurse extends Model
         'regNum',
         'dob',
         'contact',
+        'email',
     ];
 
     public function NurseRooms() {

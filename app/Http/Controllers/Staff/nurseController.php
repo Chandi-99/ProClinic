@@ -46,13 +46,14 @@ class nurseController extends Controller
             'gender' => ['required', 'string', 'max:10'],
             'position' => ['required', 'string', 'max:15'],
             'contact' => ['required', 'max:20', 'unique:nurses'],
+            'email' => ['required', 'max:30', 'unique:nurses'],
         ]);
 
 
         if ($validator->fails()) {
-
+            //'Nurse Account Creation Unsuccessful. One or More Inputs are Invalid!'
             $nurses = Nurse::orderByDesc('created_at')->get();
-            Session::flash('alert_2', 'Nurse Account Creation Unsuccessful. One or More Inputs are Invalid!');
+            Session::flash('alert_2', $validator->errors());
             
             return view('staff.newNurse', [
                 'nurses' => $nurses,
@@ -69,15 +70,11 @@ class nurseController extends Controller
                 'position'=> $request['position'],
                 'gender'=> $request['gender'],
                 'dob'=> $request['dob'],
+                'email'=> $request['email'],
              ]);
 
             $nurse->save();  
-            $nurses = Nurse::orderByDesc('created_at')->get();
-
-            Session::flash('alert_2', 'Nurse Account Creation Successful!');
-            return view('staff.newNurse', [
-                'nurses' => $nurses,
-            ]);
+            return redirect()->back()->with('success', 'Nurse Account Creation Successful!');
 
         }
 

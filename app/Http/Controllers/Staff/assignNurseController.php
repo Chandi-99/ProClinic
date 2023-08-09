@@ -1,19 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Staff;
+
 use App\Http\Controllers\Controller;
 use App\Models\Nurse;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Holiday;
 use App\Models\Nurse_Room;
 use App\Models\Room;
-use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-
-use function PHPUnit\Framework\isEmpty;
+use App\Mail\NurseAssignment;
 
 class assignNurseController extends Controller
 {
@@ -22,25 +20,22 @@ class assignNurseController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request){
+    public function index()
+    {
         $usertype = Auth::user()->usertype;
-        
-        if($usertype == 'patient'){
-            return view('patient.home');
-        }
-        else if($usertype == 'admin'){
-            return view('admin.admindashboard');
-        }
-        else if($usertype == 'doctor'){
-            return view('doctor.doctordashboard');
-        }
-        else{ 
 
-            Session::flash('alert_2', '');
+        if ($usertype == 'patient') {
+            return view('patient.home');
+        } else if ($usertype == 'admin') {
+            return view('admin.admindashboard');
+        } else if ($usertype == 'doctor') {
+            return view('doctor.doctordashboard');
+        } else {
+
             $today = date('Y-m-d');
             $nurses = Nurse::orderByDesc('created_at')->get();
-            $rooms = Room::orderByDesc('created_at')->get();
-            $data = Nurse_Room::where('date', '=', $today)->get();
+            $rooms = Room::orderBy('room_name', 'asc')->get();
+            $data = Nurse_Room::where('date', $today)->get();
 
             return view('staff.assignNurse', [
                 'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
@@ -48,7 +43,8 @@ class assignNurseController extends Controller
         }
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $holiday = Holiday::all();
         $validator = Validator::make($request->all(), [
             'nurse' => ['required', 'string', 'max:30'],
@@ -58,95 +54,75 @@ class assignNurseController extends Controller
         ]);
 
         foreach ($holiday as $holiDay) {
-            if($request['date'] == $holiDay){
-                Session::flash('alert_2', $request['date'].' is a holiday.');
-                
-                $today = date('Y-m-d');
-                $nurses = Nurse::orderByDesc('created_at')->get();
-                $rooms = Room::orderByDesc('created_at')->get();
-                $data = Nurse_Room::where('date', '=', $today)->get();
-            
-                return view('staff.assignNurse', [
-                    'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
-                ]);
+            if ($request['date'] == $holiDay) {
+                return redirect()->back()->with('alert', $request['date'] . ' is a holiday.');
             }
         }
 
-        $nurse = $request['nurse'];
-        $values = explode(' ', $nurse);
-        $fname = $values[0];
-        $lname = $values[1];
+        // $nurse = $request['nurse'];
+        // $values = explode(' ', $nurse);
+        // $fname = $values[0];
+        // $lname = $values[1];
 
-        $nurseSelected = Nurse::where('fname', '=', $fname)
-                            ->Where('lname', '=', $lname)
-                            ->get();
-        
-        $room = $request['room'];
-        $roomSelected = Room::where('room_name', '=', $room)->get();
+        // $nurseSelected = Nurse::where('fname', $fname)
+        //     ->Where('lname', $lname)
+        //     ->get();
 
-        foreach($nurseSelected as $nurse){
-            foreach($roomSelected as $room){
-                $status = Nurse_Room::where('date', '=', $request['date'])
-            ->Where('room_id', '=', $room->id)
-            ->where('session', '=', $request['session'])
+        $nurseSelected = Nurse::find($request['nurse']);
+        $roomSelected = Room::find($request['room']);
+
+        $status1 = Nurse_Room::where('date', $request['date'])
+            ->Where('room_id', $roomSelected->id)
+            ->where('session',  $request['session'])
             ->get();
-            }
+        $status2 = Nurse_Room::where('date', $request['date'])
+            ->where('session',  $request['session'])
+            ->get();
+
+        if (count($status1) > 0) {
+            return redirect()->back()->with('error', 'Someone is already assigned for that room.');
+        } 
+        else if(count($status2) > 0){
+            return redirect()->back()->with('error', 'Selected Nurse is already assigned for another room.');
         }
-
-        //echo $status;
-        if(count($status) > 0){
-
-            Session::flash('alert_2', 'Someone is already assigned for that room.');      
-            $today = date('Y-m-d');
-            $nurses = Nurse::orderByDesc('created_at')->get();
-            $rooms = Room::orderByDesc('created_at')->get();
-            $data = Nurse_Room::where('date', '=', $today)->get();
-            
-            return view('assignNurse', [
-                'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
-            ]);
-        }else{
+        else{
 
             if ($validator->fails()) {
-                Session::flash('alert_2', 'Nurse Assignment to a Room Unsuccessful. Invalid date choosed!');
-                $today = date('Y-m-d');
-                $nurses = Nurse::orderByDesc('created_at')->get();
-                $rooms = Room::orderByDesc('created_at')->get();
-                $data = Nurse_Room::where('date', '=', $today)->get();
-                
-                return view('staff.assignNurse', [
-                    'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
-                ]);
-    
-            }
-            else{     
-            
-                foreach($nurseSelected as $nurse){
-                    foreach($roomSelected as $room){
+                return redirect()->back()->with('error', $validator->errors());
+            } else {
+
                         $nurseRoom = Nurse_Room::create([
-                            'nurse_id' => $nurse->id,
-                            'room_id' => $room->id,
-                            'session'=> $request['session'],
-                            'date'=> $request['date'],
-                         ]);
-            
-                        $nurseRoom->save(); 
-        
-                        Session::flash('alert_2', 'Nurse Assign to the Room Successfully!');
-                        $today = date('Y-m-d');
-                        $nurses = Nurse::orderByDesc('created_at')->get();
-                        $rooms = Room::orderByDesc('created_at')->get();
-                        $data = Nurse_Room::where('date', '=', $today)->get();
-                        
-                        return view('staff.assignNurse', [
-                            'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
+                            'nurse_id' => $nurseSelected->id,
+                            'room_id' => $roomSelected->id,
+                            'session' => $request['session'],
+                            'date' => $request['date'],
                         ]);
-                    }
-                }
 
-    
+                        $nurseRoom->save();
+                        $time = "";
+
+                        if ($request['session'] == 'Morning') {
+                            $time = '07:30 AM';
+                        } else if ($request['session'] == 'Afternoon') {
+                            $time = '11.30 PM';
+                        } else if ($request['session'] == 'Evening') {
+                            $time = '02.30 PM';
+                        } else if ($request['session'] == 'Night') {
+                            $time = '06.00 PM';
+                        }
+
+                        Mail::to($nurseSelected->email)->send(new NurseAssignment(
+                            $nurseSelected->email,
+                            $nurseSelected->fname,
+                            $nurseSelected->lname,
+                            $request['date'],
+                            $time,
+                            $roomSelected->room_name,
+                            $request['session']
+                        ));
+                        dd($nurseSelected->email);
+                        return redirect()->back()->with('success', 'Nurse Assign to the Room Successfully!');
             }
-
         }
     }
 }

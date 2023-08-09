@@ -19,4 +19,12 @@ class Staff extends Model
         'user_id',
     ];
 
+    public function User() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function Staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
 }

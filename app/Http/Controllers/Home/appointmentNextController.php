@@ -11,7 +11,6 @@ use App\Models\Doctor;
 use App\Models\Bill;
 use App\Models\Patient;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Prescription;
 use Exception;
 use Illuminate\Support\Facades\Session;
