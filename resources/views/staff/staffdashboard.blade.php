@@ -1,7 +1,7 @@
 @extends('layouts.stafflayout')
 @section('content')
 <section class="section-padding section-bg mb-0 pt-1">
-    <div class="row mt-4 custom-text-box" style="margin-left:20px;margin-right:20px;">
+    <div class="row mt-2 custom-text-box" style="margin-left:20px;margin-right:20px;">
         <div class="col-md-3 mb-3" style="text-align:center;">
             <div class="card bg-primary text-white h-100">
                 <div class="card-body py-5 pb-0">Total Number of Sessions Today</div>

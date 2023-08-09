@@ -164,3 +164,6 @@ Route::post('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionContr
 
 Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'index']);
 Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);
+
+Route::get('/viewMyearnings', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'index'])->name('vieweMyarnings');
+Route::get('/viewMyearnings/overall', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'overall'])->name('vieweMyarnings.overall');
