@@ -1,13 +1,13 @@
 @extends('layouts.doctorlayout')
 @section('content')
 
-<section class="section-padding section-bg ">
-    <div class="container ">
-        <div class="col-12 ">
-            <div class="custom-text-box ">
-                <h6 class="mb-3 text-center">Visitings Registered by You:</h6>
-                <table style="border:1px solid black;" class="table table-striped table-bordered">
-                    <tr style="border:1px solid black;">
+<section class="section-padding section-bg pt-4 mt-0">
+    <div class="container">
+        <div class="custom-text-box ">
+            <h6 class="mb-3 text-center">Visitings Registered By You:</h6>
+            <table style="border:1px solid black;" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Visiting ID</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Day</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Session</strong></td>
@@ -17,8 +17,10 @@
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Max Patients Per Session</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Edit/Delete</strong></td>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach($visitings as $visit)
-                    <tr>
+                    <tr class="table table-striped table-bordered">
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->id}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->day}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->session}}</td>
@@ -47,90 +49,88 @@
                         </td>
                     </tr>
                     @endforeach
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="custom-text-box" style="margin:0 auto;">
-            @if (session('alert_1'))
-            <div class="alert alert-primary">
-                {{ session('alert_1') }}
+
+        <div class="col-md-8" style="margin:0 auto;">
+            <div class="card pt-3 mb-3">
+                <div class="card-body">
+                    <form method="POST" action="{{route('doctor.visiting.update')}}">
+                        @csrf
+                        <h5 class="text-center">Create New Visiting:</h5>
+                        </br>
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Day of the Week:  ') }}</strong></label>
+                            <select name="day" class="form-control form-control-lg @error('day') is-invalid @enderror" style="width:30%;" value="" required>
+                                <option selected>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                            @error('day')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Session:  ') }}</strong></label>
+                            <select name="session" class="form-control form-control-lg @error('session') is-invalid @enderror" style="width:30%;" value="" required>
+                                <option selected>Morning</option>
+                                <option>Afternoon</option>
+                                <option>Evening</option>
+                                <option>Night</option>
+                            </select>
+                            @error('session')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Type:  ') }}</strong></label>
+                            <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" style="width:30%;" value="" required>
+                                <option>Physical</option>
+                                <option>TeleMedicine</option>
+                            </select>
+                            @error('type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Max Patients For a Session:  ') }}</strong></label>
+                            <select name="max_per_session" style="width:30%;" class="form-control form-control-lg @error('max_per_session') is-invalid @enderror" value="">
+                                @for($integer = 1; $integer <= 15; $integer ++) <option>{{$integer}}</option>
+                                    @endfor
+                            </select>
+                            @error('max_per_session')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="row mb-0 mt-2 pt-4" style="margin-right:100px;">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="/doctor" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                    {{ __('Back') }}
+                                </a>
+                                <button type="submit" class="custom-btn pt-1 pb-1">
+                                    {{ __('Add New Visiting') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            @endif
-            @if (session('alert_2'))
-            <div class="alert alert-danger">
-                {{ session('alert_2') }}
-            </div>
-            @endif
-            <form method="POST" action="{{ route('doctor.visiting.update') }}" enctype="multipart/form-data">
-                @csrf
-                <h5 for="image">Create New Visiting:</h5>
-                </br>
-                <div class="col-lg-6 col-12 ">
-                    <label> Day of the Week: </label>
-                    <select name="day" class="form-control form-control-lg @error('day') is-invalid @enderror" style="width:30%;" value="" required>
-                        <option selected>Monday</option>
-                        <option>Tuesday</option>
-                        <option>Wednesday</option>
-                        <option>Thursday</option>
-                        <option>Friday</option>
-                        <option>Saturday</option>
-                        <option>Sunday</option>
-                    </select>
-
-                    @error('day')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                </br>
-                <div class="col-lg-6 col-12 ">
-                    <label>Session </label>
-                    <select name="session" class="form-control form-control-lg @error('session') is-invalid @enderror" style="width:30%;" value="" required>
-                        <option selected>Morning</option>
-                        <option>Afternoon</option>
-                        <option>Evening</option>
-                        <option>Night</option>
-                    </select>
-
-                    @error('session')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                </br>
-                <div class="col-lg-6 col-12 ">
-                    <label>Type : </label><select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" style="width:30%;" value="" required>
-                        <option>Physical</option>
-                        <option>TeleMedicine</option>
-                    </select>
-
-                    @error('type')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                </br>
-
-                <div class="col-lg-6 col-12 ">
-                    <label>Max Patients For a Session : </label><select name="max_per_session" style="width:30%;" class="form-control form-control-lg @error('max_per_session') is-invalid @enderror" value="">
-                        @for($integer = 1; $integer <= 15; $integer ++) <option>{{$integer}}</option>
-                            @endfor
-                    </select>
-
-                    @error('max_per_session')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                </br>
-                <button type="submit" class="custom-btn mb-4 pt-1 pb-1">Add New Visiting</button>
-                </br>
-            </form>
-            <a href="/doctor" class="btn btn-primary mb-4 pt-1 pb-1">Back</a>
         </div>
     </div>
 </section>

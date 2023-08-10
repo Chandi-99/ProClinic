@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Mail\Subscribe;
 use App\Models\comment;
 
 class BlogPostController extends Controller
@@ -18,17 +17,25 @@ class BlogPostController extends Controller
     public function index(int $id){
         $latest = post::where('id', $id)->get();
         Session('alert_2', '');
-        return view('blog.showpost', [
-            'latest' => $latest, 
-        ]);
+        if(!empty(Auth::user()) && Auth::user()->usertype == 'doctor'){
+            return view('blog.showpost1', [
+                'latest' => $latest
+            ]);
+        }
+        else{
+            return view('blog.showpost2', [
+                'latest' => $latest
+            ]);
+        }
+
     }
 
     public function update(int $id, Request $request){
         if($request['comment'] == null){
-            Session::flash('alert_2', 'No comment entered!');
+            return redirect()->back()->with('error', 'No comment entered!');
         }
         else if(User::find(Auth::user()) == null){
-            Session::flash('alert_2', 'Please log in to make comments!');
+            return redirect()->back()->with('alert', 'Please log in to make comments!');
         }
         else{
             
@@ -37,7 +44,7 @@ class BlogPostController extends Controller
             ]);
 
             if($validator->fails()){
-                Session::flash('alert_2', 'No Comment Entered!');
+                return redirect()->back()->with('error', 'No Comment Entered!');
             }
             else{
 
@@ -54,10 +61,6 @@ class BlogPostController extends Controller
         
         }
 
-        $latest = post::where('id', $id)->get();
-        $id = $latest[0]->user_id;
-        return view('blog.showpost', [
-             'latest' => $latest, 
-        ]);
+        return redirect()->back()->with('success', 'Comment Posted Successfully!');
     }
 }

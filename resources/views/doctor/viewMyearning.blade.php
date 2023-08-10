@@ -15,12 +15,15 @@
                         <div class="menu-icon">
                             <span class="icon" style="float:right;">&#9776;</span>
                             <div class="dropdownNew">
-                                <a href='/viewearnings' id="mark-all-read">This Month</a>
-                                <a href='/viewearnings/overall' id="mark-all-unread">Overall</a>
+                                <a href='/viewMyearnings' id="mark-all-read">This Month</a>
+                                <a href='/viewMyearnings/overall' id="mark-all-unread">Overall</a>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3 pt-3" style="padding-left: 100px; padding-right: 100px; font-size:larger;">
+                        <label class="col-form-label"><strong>Doctor Name: </strong>{{$doctor->fname}}  {{$doctor->lname}}</label></br>
+                        <label class="col-form-label"><strong>Specialization: </strong>{{$doctor->specialization}}</label></br>
+                        <label class="col-form-label"><strong>Total Sessions: </strong>{{$sessionCount}}</label></br>
                         <label class="col-form-label"><strong>Total Revenue: </strong>Rs.{{$totalRevenue}}.00</label></br>
                         <label class="col-form-label"><strong>Total Patient Visits: </strong> {{$totalAppointments}}</lable></br>
                         <label class="col-form-label"><strong>Target Revenue: </strong> Rs.{{$targetProfit}}.00 </label></br>
@@ -60,7 +63,7 @@
                         @endif
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a href="/admin" class="custom-btn pt-1 pb-1">
+                                <a href="/doctor" class="custom-btn pt-1 pb-1">
                                     {{ __('Back') }}
                                 </a>
                             </div>

@@ -110,8 +110,7 @@ class viewEarningController extends Controller
                     }
                 }
             }
-            function highest($a, $b, $c, $d)
-            {
+            function highest($a, $b, $c, $d){
                 $max = $a;
                 if ($b > $max) {
                     $max = $b;

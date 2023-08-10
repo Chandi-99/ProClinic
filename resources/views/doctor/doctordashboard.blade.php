@@ -52,7 +52,7 @@
                 <div class="card bg-danger text-white h-100" style="text-align:center;">
                     <div class="card-body py-5 pb-0">Total Earning for This Month</div>
                     <h1 style="padding:10px;">{{$total}}</h1>
-                    <a href="/doctor/visitings" style="color:white;">
+                    <a href="/viewMyearnings" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details
                             <span class="ms-auto">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 ">
                     <div class="featured-block d-flex justify-content-center align-items-center ">
-                        <a href="{{ route('patient') }}" class="d-block " style="text-decoration:none;">
+                        <a href="{{ route('viewMyearnings') }}" class="d-block " style="text-decoration:none;">
                             <img src="/images/money.jpg " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
                             <p class="featured-block-text " style="text-decoration:none;">View <strong>Earnings</strong></p>
                         </a>

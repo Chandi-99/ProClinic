@@ -2,7 +2,6 @@
 @section('content')
 <section class="section-padding section-bg mb-0 pt-1">
   <div class="container-fluid pt-3">
-    <h1 style="text-align:center; color:black;font-size:30px; padding-bottom:5px;">Admin Dashboard</h1>
     <div class="row custom-text-box" style="margin:0 20px;">
       <div class="col-md-3 mb-3" style="text-align:center;">
         <div class="card bg-primary text-white h-100">
