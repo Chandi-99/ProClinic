@@ -79,20 +79,7 @@ class TodaySessionController extends Controller
             }
             return view('doctor.todaysession', ['appointments' => $appoArray, 'length' => $k, 'docname' => $docname, 'speciality' => $speciality, 'today' => $today, 'day' => $day, 'visitings' => $visitings]);
         } else {
-            if ($request->ajax()) {
-                // Get the data from the database.
-                $data = User::all();
-
-                // Return the data in JSON format.
-                return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function (User $user) {
-                        return view('datatable.action', compact('user'));
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
-            return view('staff.staffdashboard');
+            return redirect('/staff');
         }
     }
 
@@ -121,7 +108,7 @@ class TodaySessionController extends Controller
             $timeDifference = $carbonTime1->diff($carbonTime2);
 
             $hours = $timeDifference->h;
-            if($hours > 2){
+            if($hours > 4){//chnage this to 2
                 Session::flash('error', "Session can only start within 2 hours before the start time or 2 hours after the start time!");
                 return redirect()->back();
             }
@@ -138,7 +125,7 @@ class TodaySessionController extends Controller
             $timeDifference = $carbonTime1->diff($carbonTime2);
 
             $hours = $timeDifference->h;
-            if($hours > 2){
+            if($hours > 4){
                 Session::flash('error', "Session can only start within 2 hours before the start time or 2 hours after the start time!");
                 return redirect()->back();
             }
@@ -155,7 +142,7 @@ class TodaySessionController extends Controller
             $timeDifference = $carbonTime1->diff($carbonTime2);
 
             $hours = $timeDifference->h;
-            if($hours > 2){
+            if($hours > 4){
                 Session::flash('error', "Session can only start within 2 hours before the start time or 2 hours after the start time!");
                 return redirect()->back();
             }
@@ -172,7 +159,7 @@ class TodaySessionController extends Controller
             $timeDifference = $carbonTime1->diff($carbonTime2);
 
             $hours = $timeDifference->h;
-            if($hours > 2){
+            if($hours > 4){
                 Session::flash('error', "Session can only start within 2 hours before the start time or 2 hours after the start time!");
                 return redirect()->back();
             }

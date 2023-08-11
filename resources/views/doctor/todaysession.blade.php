@@ -14,7 +14,7 @@
         <p style="color:black;"><strong>Specialization: </strong>{{$speciality}}</p>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th style="border:1px solid black; padding:10px;" class="text-center thead-dark">Appointment ID</th>
@@ -26,6 +26,8 @@
                         <th style="border:1px solid black; padding:10px;" class="text-center thead-dark">Patient Contact Number</th>
                         <th style="border:1px solid black; padding:10px;" class="text-center thead-dark">Status</th>
                     </tr>
+                </thead>
+                <tbody>
                     @for ($i = 0; $i < $length; $i++) <tr>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$appointments[$i]->id}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$appointments[$i]->appo_number}}</td>
@@ -36,12 +38,13 @@
                         <td style="border:1px solid black; padding:10px;" class="text-center">0{{$appointments[$i]->Patient()->contact}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$appointments[$i]->status}}</td>
                         </tr>
-                        @endfor
-                </thead>
+                    @endfor
+                </tbody>
+                
             </table>
         </div>
     </div>
-    <div class="container custom-text-box">
+    <div class="col-6 custom-text-box" style="margin:0px auto;">
         <h6 class="text-center">Select Session to Start</h6>
         <div class="card-body">
             <form method="POST" action="/todaysession/{{Auth::user()->id}}">
@@ -51,7 +54,7 @@
                     <label for="date" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Date') }} :</strong></label>
 
                     <div class="col-md-6">
-                        <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" style="width:30%;" value="{{ $today }}" required autocomplete="date" disabled>
+                        <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" style="width:50%;" value="{{ $today }}" required autocomplete="date" disabled>
 
                         @error('date')
                         <span class="invalid-feedback" role="alert">
@@ -65,7 +68,7 @@
                     <label for="day" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Day') }} :</strong></label>
 
                     <div class="col-md-6">
-                        <input id="day" type="text" class="form-control @error('date') is-invalid @enderror" name="day" style="width:30%;" value="{{ $day}}" required autocomplete="date" disabled>
+                        <input id="day" type="text" class="form-control @error('date') is-invalid @enderror" name="day" style="width:50%;" value="{{ $day}}" required autocomplete="date" disabled>
 
                         @error('day')
                         <span class="invalid-feedback" role="alert">
@@ -79,7 +82,7 @@
                     <label for="session" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Session') }} :</strong></label>
 
                     <div class="col-md-6">
-                        <select id="session" type="text" class="form-control @error('session') is-invalid @enderror" name="session" style="width:30%;" value="{{ old('session') }}" value="{{$today}}" required autocomplete="session">
+                        <select id="session" type="text" class="form-control @error('session') is-invalid @enderror" name="session" style="width:50%;" value="{{ old('session') }}" value="{{$today}}" required autocomplete="session">
                             @foreach($visitings as $visiting)
                             <option value="{{$visiting->id}}">{{$visiting->session}}</option>
                             @endforeach
@@ -94,6 +97,7 @@
 
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">
+                        <a class="btn custom-btn pt-1 pb-1" href="/doctor" style="margin-right: 10px;">Back</a>
 
                         <button type="submit" class="custom-btn pt-1 pb-1">
                             {{ __('Start') }}
@@ -101,9 +105,7 @@
                     </div>
                 </div>
             </form>
-            <a class="btn btn-primary pt-1 pb-1" href="/doctor">Back</a>
         </div>
-
     </div>
 </section>
 @endsection

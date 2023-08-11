@@ -1,40 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.stafflayout')
 @section('content')
-<section class="section-padding section-bg mt-0 pt-2">
+<section class="section-padding section-bg mt-0 pt-5">
     <div class="container ">
-        <div class="row" >
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
-                <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="/oldappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
-                        <img src="/images/test1.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
-
-                        <p class="featured-block-text " style="text-decoration:none;">View <strong>Old Appointments</strong></p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
-                <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="/incomingappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
-                        <img src="/images/test2.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
-
-                        <p class="featured-block-text " style="text-decoration:none;">View <strong>Incoming Appointments</strong></p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
-                <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="/chat" class="d-block " style="text-decoration:none;">
-                        <img src="/images/test3.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
-
-                        <p class="featured-block-text " style="text-decoration:none;">Talk to a <strong>Staff Member</strong></p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        </br>
-        </br>
         @if (Session::has('success'))
         <div class="alert alert-success text-center">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
@@ -43,14 +10,25 @@
         @endif
         <div class="custom-text-box  align-items-center mt-0 pt-2" style="padding-left: 50px;">
             <h6 class="text-center pt-2" style="font-size:larger;">Create Doctor Appointment</h6>
-            <form method="POST" action="/newappointment/{{Auth::user()->id}}">
+            <form method="POST" action="/staff/newappointment">
                 @csrf
+
                 <div class="col-lg-6 col-12">
-                    @if (session('alert_1'))
-                    <div class="alert alert-danger">
-                        {{ session('alert_1') }}
-                    </div>
-                    @endif
+                    <strong> Patient: </strong>
+                    <select type="text" id="patient" name="patient" class="form-control form-control-lg @error('patient') is-invalid @enderror" required {{ $isReadonly ? 'disabled' : '' }}>
+                    @foreach($patients as $patient)
+                        <option value="{{$patient->patient_id}}">{{$patient->fname}} {{$patient->lname}}</option>
+                    @endforeach
+                    </select>
+                    @error('patient')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div></br>
+
+
+                <div class="col-lg-6 col-12">
                     <strong> Doctor: </strong>
                     <input type="text" id="doctorInput" name="doctor" class="form-control form-control-lg @error('doctor') is-invalid @enderror" placeholder="Type doctor's name..." required {{ $isReadonly ? 'disabled' : '' }}>
                     <select id="doctorSelect" name="doctor" class="form-control form-control-lg" style="display: none;" {{ $isReadonly ? 'disabled' : '' }}>
@@ -81,7 +59,6 @@
                 </br>
 
                 <div class="col-lg-6 col-12 ">
-
                     <strong> Appointment Type: </strong>
                     <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" {{ $isReadonly ? 'disabled' : '' }}>
                         @if($type == 'Physical' || $type == '')
@@ -100,7 +77,7 @@
                     @enderror
                 </div>
                 </br>
-                <a class="btn btn-secondary" href="{{route('welcome')}}">Go Back</a>
+                <a class="btn btn-secondary" href="/staff">Go Back</a>
                 <button type="submit" name="form1" class="btn btn-success" {{ $isReadonly ? 'disabled' : '' }}>Submit</button>
             </form>
     </div>

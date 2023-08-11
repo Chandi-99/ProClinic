@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Doctor;
 use Illuminate\Http\Request;
 use app\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -46,20 +45,11 @@ class DiagnosisController extends Controller
             return view('doctor.diagnosis');
 
         } else {
-            if ($request->ajax()) {
-                // Get the data from the database.
-                $data = User::all();
-
-                // Return the data in JSON format.
-                return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function (User $user) {
-                        return view('datatable.action', compact('user'));
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
-            return view('staff.staffdashboard');
+            return redirect('/staff');
         }
+    }
+
+    public function update(){
+        return view('doctor.diagnosis');
     }
 }

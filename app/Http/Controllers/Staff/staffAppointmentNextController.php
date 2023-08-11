@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,13 +20,13 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PatientAppointment;
 use App\Mail\DoctorAppointment;
 
-class appointmentNextController extends Controller
+class staffAppointmentNextController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index(int $user_id, int $doctor_id, string $type){
+    public function index(int $patient_id, int $doctor_id, string $type){
         $alldays = Visitings::where('doctor_id', $doctor_id)->where('type', $type)->select('day')->distinct()->orderBy('day', 'asc')->get();
         $days = '';
         $date = null;
@@ -49,19 +49,16 @@ class appointmentNextController extends Controller
             }
         }
         Session::flash('alert_3', '');
-        $userpatient = User::where('id', $user_id)->get();
-        $patient = Patient::where('user_id', $userpatient[0]->id)->get();
-        $patient_id = $patient[0]->id;
+        $patient = Patient::where('patient_id', $patient_id)->get();
         $doctor = Doctor::where('id', $doctor_id)->get();
-        return view('patient.appointmentNext', ['days' => $days, 'sessions' => $sessionsRegistered, 'isReadOnly' => $isReadOnly, 'patientid' => $patient_id, 'doctorid' => $doctor_id, 'patient' => $patient, 'doctor' => $doctor, 'date' => $date, 'type' => $type]);
+        return view('staff.staffappointmentNext', ['days' => $days, 'sessions' => $sessionsRegistered, 'isReadOnly' => $isReadOnly, 'patientid' => $patient_id, 'doctorid' => $doctor_id, 'patient' => $patient, 'doctor' => $doctor, 'date' => $date, 'type' => $type]);
     }
 
-    public function check(int $user_id, int $doctor_id, string $type, Request $request)
+    public function check(int $patient_id, int $doctor_id, string $type, Request $request)
     {
-
         if ($request->has('form1')) {
             Session::flash('alert_3', '');
-            $patient = Patient::where('user_id', $user_id)->get();
+            $patient = Patient::where('patient_id', $patient_id)->get();
             $patient_id = $patient[0]->patient_id;
             $doctor = Doctor::where('id', $doctor_id)->get();
             $alldays = Visitings::where('doctor_id', $doctor_id)->where('type', $type)->select('day')->distinct()->orderBy('day', 'asc')->get();
@@ -143,7 +140,7 @@ class appointmentNextController extends Controller
         } else if ($request->has('form2')) {
 
             Session::flash('alert_3', '');
-            $patient = Patient::where('user_id', $user_id)->get();
+            $patient = Patient::where('patient_id', $patient_id)->get();
             $patient_id = $patient[0]->patient_id;
             $doctor = Doctor::where('id', $doctor_id)->get();
             $alldays = Visitings::where('doctor_id', $doctor_id)->where('type', $type)->select('day')->distinct()->orderBy('day', 'asc')->get();
@@ -247,8 +244,8 @@ class appointmentNextController extends Controller
                         $prescription->appo_id = $appo_id;
                         $prescription->description = 'Initial Description';
                         $prescription->save();
-
-                        $email = User::where('id', $user_id)->select('email')->first()->get();
+        
+                        $email = User::where('id', $patient[0]->user_id)->select('email')->first()->get();
                         $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->first()->get();
                         $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->first()->get();
                         $patientName = $patientFName[0]->fname . ' ' . $patientLName[0]->lname;
@@ -293,7 +290,7 @@ class appointmentNextController extends Controller
                         ));
 
                         Session::flash('success', 'Appointment Created successfully!');
-                        return redirect('/newappointment/' . $patient_id);
+                        return redirect('/staff');
                     }
                 } catch (Exception $ex) {
                     Session::flash('alert_3', $ex);
@@ -301,4 +298,5 @@ class appointmentNextController extends Controller
             }
         }
     }
+    
 }

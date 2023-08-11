@@ -1,7 +1,7 @@
 @extends('layouts.stafflayout')
 @section('content')
 <section class="section-padding section-bg mb-0 pt-1">
-    <div class="row mt-2 custom-text-box" style="margin-left:20px;margin-right:20px;">
+    <div class="row mt-2 custom-text-box" style="margin-left:50px;margin-right:50px;">
         <div class="col-md-3 mb-3" style="text-align:center;">
             <div class="card bg-primary text-white h-100">
                 <div class="card-body py-5 pb-0">Total Number of Sessions Today</div>
@@ -52,11 +52,11 @@
         </div>
     </div>
 
-    <div class="row custom-text-box mt-2" style="margin:10px 10px;">
+    <div class="row custom-text-box mt-2" style="margin-left:50px;margin-right:50px;">
         <div class="row ">
             <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 ">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
-                    <a href="" class="d-block " style="text-decoration:none;">
+                    <a href="/staff/newappointment" class="d-block " style="text-decoration:none;">
                         <img src="/images/appo.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
                         <p class="featured-block-text " style="text-decoration:none;">Make an <strong>Appointment</strong></p>
                     </a>
@@ -89,7 +89,7 @@
         </div>
     </div>
 </br>
-    <div class="row custom-text-box " style="margin:10px 10px;">
+    <div class="row custom-text-box " style="margin-left:50px;margin-right:50px;">
         <h3 class="text-center">Today Appointments</h3>
         <table class="table table-striped table-bordered">
             <thead>

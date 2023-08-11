@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div class="row custom-text-box mt-5">
+    <div class="row custom-text-box " style="margin:30px;">
         <h5 style="text-align:center;">All Rooms</h5>
         <table id="rooms" class="table table-striped table-bordered">
             <thead>

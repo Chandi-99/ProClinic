@@ -167,11 +167,16 @@ Route::post('/editDoctor/{id}', [App\Http\Controllers\Doctor\DoctorEditControlle
 Route::get('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'index']);
 Route::post('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);
 
-Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'index']);
-Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);
+Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'index']);
+Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'start']);
 
 Route::get('/viewMyearnings', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'index'])->name('viewMyearnings');
 Route::get('/viewMyearnings/overall', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'overall'])->name('viewMyearnings.overall');
 
 Route::get('/show/doctor/appointments', [App\Http\Controllers\Doctor\doctorAppointmentController::class, 'index'])->name('doctorappointmentdetails');
 Route::post('/show/doctor/appointments', [App\Http\Controllers\Doctor\doctorAppointmentController::class, 'search'])->name('doctorappointmentdetails.search');
+
+Route::get('/staff/newappointment', [App\Http\Controllers\Staff\staffAppointmentController::class, 'index'])->name('staffappointment');
+Route::post('/staff/newappointment', [App\Http\Controllers\Staff\staffAppointmentController::class, 'update'])->name('staffappointment.update');
+Route::get('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff\staffAppointmentNextController::class, 'index'])->name('staffappointment.check');
+Route::post('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff\staffAppointmentNextController::class, 'check'])->name('staffappointment.validate');

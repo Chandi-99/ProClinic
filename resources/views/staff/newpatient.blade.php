@@ -1,20 +1,20 @@
 @extends('layouts.stafflayout')
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <div class="row justify-content-center mb-4">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header" style="text-align:center;"><b>{{ __('Registration for Patients') }}</b></div>
+                <div class="card-header" style="text-align:center;"><b>{{ __('Registration for Patients') }}</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('patient.create') }}">
                         @csrf
                         <div class="text-center">
-                        @if(session('alert_2'))
+                            @if(session('alert_2'))
                             <div class="alert alert-success">
                                 {{ session('alert_2') }}
                             </div>
-                        @endif
+                            @endif
                         </div>
 
                         <div class="row mb-3">
@@ -24,9 +24,9 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -36,9 +36,9 @@
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
                                 @error('fname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid First Name</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid First Name</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -48,9 +48,9 @@
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
                                 @error('lname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid Last Name</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid Last Name</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -60,13 +60,13 @@
 
                             <div class="col-md-6">
                                 <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
-                                    <option >Male</option>
+                                    <option>Male</option>
                                     <option>Female</option>
                                 </select>
                                 @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Gender was Unidentified</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Gender was Unidentified</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -77,9 +77,9 @@
                             <div class="col-md-6">
                                 <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required>
                                 @error('dob')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid Date of Birth Inserted</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid Date of Birth Inserted</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -90,9 +90,9 @@
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
                                 @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid Address Entered</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid Address Entered</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -101,11 +101,11 @@
                             <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('NIC') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic">
+                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12">
                                 @error('nic')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid NIC Number</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Invalid NIC Number</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -114,11 +114,11 @@
                             <label for="contact" class="col-md-4 col-form-label text-md-end">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
+                                <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10">
                                 @error('contact')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -130,9 +130,9 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -144,9 +144,9 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -161,7 +161,10 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class=" custom-btn">
+                                <a href="/staff" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                    {{ __('Back') }}
+                                </a>
+                                <button type="submit" class="btn custom-btn pt-1 pb-1">
                                     {{ __('Register') }}
                                 </button>
                             </div>

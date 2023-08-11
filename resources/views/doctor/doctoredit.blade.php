@@ -284,7 +284,7 @@
                             <label for="contact" class="col-md-4 col-form-label text-md-end">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="contact" type="number" value="0{{$doctor[0]->contact}}" class="form-control @error('contact') is-invalid @enderror" name="contact" required autocomplete="contact">
+                                <input id="contact" type="number" value="0{{$doctor[0]->contact}}" class="form-control @error('contact') is-invalid @enderror" name="contact" required autocomplete="contact" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10">
                                 @error('contact')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

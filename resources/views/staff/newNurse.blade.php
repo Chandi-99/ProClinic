@@ -114,7 +114,7 @@
                                 <label for="contact" class="col-md-4 col-form-label text-md-end">{{ __('Contact Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
+                                    <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10">
                                     @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -146,17 +146,23 @@
                     <tr class="text-center">
                         <th>Nurse ID</th>
                         <th>Nurse Name</th>
+                        <th>Gender</th>
                         <th>Registered Number</th>
                         <th>Position</th>
+                        <th>Email</th>
+                        <th>Contact</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($nurses as $nurse)
                     <tr class="text-center">
                         <td>{{ $nurse->id }}</td>
-                        <td>{{ $nurse->fname }}</td>
+                        <td>{{ $nurse->fname }} {{ $nurse->lname }}</td>
+                        <td>{{ $nurse->gender }}</td>
                         <td>{{ $nurse->regNum }}</td>
                         <td>{{ $nurse->position }}</td>
+                        <td>{{ $nurse->email }}</td>
+                        <td>{{ $nurse->contact }}</td>
                     </tr>
                     @endforeach
                 </tbody>

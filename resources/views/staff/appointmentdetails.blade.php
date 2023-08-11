@@ -67,7 +67,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a href="/admin" class="custom-btn pt-1 pb-1">
+                                <a href="/staff" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
                                     {{ __('Back') }}
                                 </a>
                                 <button type="submit" class="custom-btn pt-1 pb-1">
@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="row mt-3 custom-text-box">
-        <h5 style="text-align:center;">Registered Doctors</h5>
+        <h5 style="text-align:center;">Appointments</h5>
         <table id="rooms" class="table table-striped table-bordered">
             <thead>
                 <tr>
