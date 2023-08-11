@@ -89,6 +89,10 @@ Route::get('/viewMessages/allunread', [App\Http\Controllers\Staff\viewMessageCon
 Route::get('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'index'])->name('viewapplications');
 Route::post('/viewApplications', [App\Http\Controllers\Staff\viewApplicationController::class, 'search'])->name('viewapplications.search');
 
+Route::get('/staffchat/{id}', [App\Http\Controllers\Staff\staffChatController::class, 'index']);
+Route::get('/staffchat/{id}/clearall', [App\Http\Controllers\Staff\staffChatController::class, 'clearChat']);
+Route::get('/staffchat/{id}/send', [App\Http\Controllers\Staff\staffChatController::class, 'send']);
+
 Route::get('/viewApplications/allread', [App\Http\Controllers\Staff\viewApplicationController::class, 'allread'])->name('allreadApplications');
 Route::get('/viewApplications/allunread', [App\Http\Controllers\Staff\viewApplicationController::class, 'allunread'])->name('allunreadApplications.search');
 
@@ -136,8 +140,9 @@ Route::post('/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Home\appoi
 Route::get('/payment', [App\Http\Controllers\Home\PaymentController::class, 'index'])->name('payment');
 Route::post('/payment', [App\Http\Controllers\Home\PaymentController::class, 'pay']);
 
-Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index'])->name('chat');
-Route::post('/chat', [App\Http\Controllers\Home\ChatController::class, 'sendMessage'])->name('chat.send');
+Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index']);
+Route::get('/chat/clearall', [App\Http\Controllers\Home\ChatController::class, 'clearChat']);
+Route::get('/send', [App\Http\Controllers\Home\ChatController::class, 'send']);
 
 Route::get('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old');
 Route::post('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old.post');
@@ -167,3 +172,6 @@ Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\TodaySession
 
 Route::get('/viewMyearnings', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'index'])->name('viewMyearnings');
 Route::get('/viewMyearnings/overall', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'overall'])->name('viewMyearnings.overall');
+
+Route::get('/show/doctor/appointments', [App\Http\Controllers\Doctor\doctorAppointmentController::class, 'index'])->name('doctorappointmentdetails');
+Route::post('/show/doctor/appointments', [App\Http\Controllers\Doctor\doctorAppointmentController::class, 'search'])->name('doctorappointmentdetails.search');

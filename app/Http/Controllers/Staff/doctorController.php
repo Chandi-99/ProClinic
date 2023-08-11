@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class doctorController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
@@ -41,8 +39,7 @@ class doctorController extends Controller
 
 
         if ($validator->fails()) {
-            Session::flash('alert_2', 'Doctor Account Creation Unsuccessful. One or More Inputs are Invalid!');
-            return view('staff.newdoctor'); 
+            return redirect()->back()->withErrors($validator); 
         }
         else{     
             
@@ -77,8 +74,7 @@ class doctorController extends Controller
              ]);
 
             $doctor->save();
-            
-            return view('staff.newdoctor');
+            return redirect()->back()->with('success', 'Doctor Account Creation Successful!');
 
         }
     }

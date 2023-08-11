@@ -203,7 +203,7 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="{{route('doctordashboard')}}">Appointments</a>
+                        <a class="nav-link click-scroll " href="/doctor/visitings">Appointments</a>
                     </li>
 
                     <li class="nav-item ">
@@ -211,7 +211,7 @@
                     </li>
 
                     <li class="nav-item dropdown ">
-                        <a class="nav-link click-scroll " href="{{ route('doctordashboard') }}">Payments</a>
+                        <a class="nav-link click-scroll " href="/viewMyearnings">Payments</a>
                     </li>
 
                     <li class="nav-item ">

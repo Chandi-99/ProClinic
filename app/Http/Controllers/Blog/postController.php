@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\NewPostAlert;
+use App\Models\subscriber;
 use App\Models\post;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class postController extends Controller
 {
@@ -19,8 +22,6 @@ class postController extends Controller
     }
 
     public function index(){
-        Session::flash('alert_1', '');
-        Session::flash('alert_2', '');
         return view('blog.newblog');
     }
 
@@ -34,8 +35,7 @@ class postController extends Controller
         ]);
 
         if($validator->fails()){
-            Session::flash('alert_1', 'Post Creation Unsuccessful!');
-            return view('blog.newblog');
+            return redirect()->back()->withErrors($validator);
         }
         else{
             $user = User::find(Auth::user()->id);
@@ -43,7 +43,6 @@ class postController extends Controller
             if($request['image']) {
 
                 $data= new post();
-
                 if($request->file('image')){
                     $file= $request->file('image');
                     $filename= date('YmdHi').$file->getClientOriginalName();
@@ -53,8 +52,21 @@ class postController extends Controller
                     $data['body'] = $request['body'];
                     $data['user_id'] = $user->id;
                 }
+
+                $today = Carbon::now();
+                $date = $today->format('Y-m-d');
+                $time = $today->format('h:i A');
                 $data->save();
-                return redirect('/doctorblog');
+                $emails = Subscriber::all();
+                foreach($emails as $email){
+                    Mail::to($email)->send(new NewPostAlert(
+                        $email,
+                        $request['title'],
+                        $date,
+                        $time
+                    ));
+                }
+                return redirect('/doctorblog')->with('success', 'Post Uploaded!');
     
             }
 

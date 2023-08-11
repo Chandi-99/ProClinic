@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header" style="text-align:center;"><b>{{ __('Search Appointment') }}</b></div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('appointmentdetails.search')}}">
+                        <form method="POST" action="{{route('doctorappointmentdetails.search')}}">
                             @csrf
                             <div class="row mb-3">
                                 <label for="appo_id" class="col-md-4 col-form-label text-md-end">{{ __('Appointment ID') }}</label>
@@ -22,32 +22,43 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="doctor_id" class="col-md-4 col-form-label text-md-end">{{ __('Doctor Name') }}</label>
-                                <div class="col-md-6">
-                                    <select id="doctor_id" type="text" class="form-control @error('doctor_name') is-invalid @enderror" name="doctor_id" autocomplete="doctor_id" autofocus>
-                                        @foreach($doctors as $doctor)
-                                        <option value="{{$doctor->id}}">{{$doctor->fname}} {{$doctor->lname}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('doctor_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid Doctor Name</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
                                 <label for="patient_id" class="col-md-4 col-form-label text-md-end">{{ __('Patient Name') }}</label>
                                 <div class="col-md-6">
                                     <select id="patient_id" type="text" class="form-control @error('doctor_name') is-invalid @enderror" name="patient_id" autocomplete="patient_id" autofocus>
                                         @foreach($patients as $patient)
                                         <option value="{{$patient->patient_id}}">{{$patient->fname}} {{$patient->lname}}</option>
                                         @endforeach
+                                        </select>
+                                        @error('patient_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>Invalid patient Name</strong>
+                                        </span>
+                                        @enderror
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="doctor_id" class="col-md-4 col-form-label text-md-end">{{ __('Status') }}</label>
+                                <div class="col-md-6">
+                                    <select id="status" type="text" class="form-control @error('status') is-invalid @enderror" name="status" autocomplete="status" autofocus>
+                                        @if($status == 'pending')
+                                        <option value="pending" selected>Pending</option>
+                                        <option value="finished">Finished</option>
+                                        <option value="absent" >Absent</option>
+                                        @elseif($status == 'finished')
+                                        <option value="pending" >Pending</option>
+                                        <option value="finished" selected>Finished</option>
+                                        <option value="absent" >Absent</option>
+                                        @else
+                                        <option value="pending" >Pending</option>
+                                        <option value="finished" >Finished</option>
+                                        <option value="absent" selected>Absent</option>
+                                        @endif
                                     </select>
-                                    @error('patient_id')
+                                    @error('status')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>Invalid patient Name</strong>
+                                        <strong>Invalid Status</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -67,7 +78,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <a href="/admin" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                    <a href="/doctor" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
                                         {{ __('Back') }}
                                     </a>
                                     <button type="submit" class="custom-btn pt-1 pb-1">

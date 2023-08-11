@@ -17,11 +17,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class reportController extends Controller
 {
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,7 +24,6 @@ class reportController extends Controller
 
     public function index()
     {
-        Session::flash('alert_2', '');
         $user = User::find(Auth::user()->id);
         $patient = $user->Patient;
         $reports = Report::where('patient_id',$patient->patient_id)->latest()->get();
@@ -39,7 +33,6 @@ class reportController extends Controller
 
     public function updateReports(Request $request)
     {
-
         if($request->has('form3')){
             $validator = Validator::make($request->all(), [
                 'report' => 'required|file|mimes:jpeg,jpg,png,pdf|max:2048',
@@ -48,8 +41,7 @@ class reportController extends Controller
             ]);
     
             if($validator->fails()){
-                Session::flash('alert_2', 'Report Name Already Taken or Invalid File Type!');
-                return redirect('/user/reports');
+                return redirect('/user/reports')->with('error', 'Report Name Already Taken or Invalid File Type!');
             }
             else{
     
@@ -66,24 +58,14 @@ class reportController extends Controller
                     $file-> move(public_path('public/PDFReports'), $filename);
                     $fp = "public/PDFReports/".$filename;
                     $password = Str::substr($user->Patient->nic, -3);
-                    $userPassword = "123456a";
 
                     $pdf = new Pdf($fp);
-                    /*
-                    $pdf->setEncryption('owner', $password, '', 'AES-256');
-                    $pdf->save();
-                    */
-
-                    //return response()->download($pdfPath);
-                    //$pdf->dompdf->get_canvas()->get_cpdf()->setEncryption($password, $password);
 
                     $pdf->allow('AllFeatures')
                                 ->setPassword($password)
-                                //->setUserPassword($userPassword)
                                 ->passwordEncryption(128)
                                 ->saveAs($fp);
 
-                    // Insert record
                     $insertData_arr = array(
                         'pdfreport_name' => $request['report_name'],
                         'date' => date("Y-m-d"),
@@ -92,7 +74,6 @@ class reportController extends Controller
                         'path' => $filename,          
                     );
 
-                    //echo $result;
                     ReportPDF::create($insertData_arr);
                     return redirect('/user/reports');
                 }

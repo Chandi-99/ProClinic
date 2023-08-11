@@ -19,7 +19,6 @@ return new class extends Migration
             $table->double('other_charges')->nullable();
             $table->double('total')->nullable();
             $table->double('discount')->nullable();
-            $table->foreign('appo_id')->references('id')->on('appointments');
             $table->timestamps();
         });
     }

@@ -76,11 +76,9 @@
                         @foreach($latest[0]->comments as $comment)
                         <tr>
                             <td>
-
                                 <h6 class="mb-0 pb-0 mt-0" style="font-weight:bold;font-size:large; display:inline;">{{$comment->user->name}} : &nbsp;</h6>
                                 <label class="mb-0 pb-0 mt-0 pb-0">{{$comment->comment}}</label>
                                 <p>({{$comment->created_at->format('Y-m-d')}} {{$comment->created_at->format('H:m')}}) </p>
-
                             <td>
                         </tr>
                         @endforeach

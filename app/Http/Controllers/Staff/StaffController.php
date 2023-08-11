@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
 use App\Models\Candidate;
 use App\Models\Contact;
+use App\Models\Chat;
 use Illuminate\Support\Carbon;
 
 class StaffController extends Controller
@@ -37,6 +38,16 @@ class StaffController extends Controller
                 else{
                     $messagecount = 0;
                 }
+
+                $textcount = Chat::where('status', 'unread')->where('sender_id', 'patient')->first();
+                if(!empty($textcount)){
+                    $textcount = Chat::where('status', 'unread')->count();
+                }
+                else{
+                    $textcount = 0;
+                }
+
+                $messagecount += $textcount;
 
                 $applicationcount = Candidate::where('status', 'unread')->first();
                 if(!empty($applicationcount)){

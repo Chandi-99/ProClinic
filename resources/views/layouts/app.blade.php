@@ -16,6 +16,45 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        .top-right {
+            position: absolute;
+            display: inline-block;
+            top: 10px;
+            right: 10px;
+        }
+
+        .menu-icon {
+            position: absolute;
+            display: inline-block;
+        }
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .dropdownNew {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 5px;
+            min-width: 170px;
+            z-index: 1;
+        }
+
+        .dropdownNew a {
+            display: block;
+            padding: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdownNew a:hover {
+            background-color: #ddd;
+        }
     </style>
 
     <!-- Fonts -->

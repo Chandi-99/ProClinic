@@ -85,19 +85,20 @@
                             </div>
                         </div>
 
-                        @foreach($latest->comments as $comment)
-                        <!-- <div class="author-comment d-flex mt-3 mb-4"> -->
-                        <h6 class="mb-0 pb-0 mt-0" style="font-weight:bold;font-size:large; display:inline;">{{$comment->user->name}} : &nbsp;</h6>
-                        <label class="mb-0 pb-0 mt-0 pb-0">{{$comment->comment}}</label>
-                        <p>({{$comment->created_at->format('Y-m-d')}} {{$comment->created_at->format('H:m')}}) </p>
-                        <!-- </div> -->
+                        <table class="table table-striped table-bordere">
+                            <tbody>
+                                @foreach($latest->comments as $comment)
+                                <tr>
+                                    <td>
+                                        <h6 class="mb-0 pb-0 mt-0" style="font-weight:bold;font-size:large; display:inline;">{{$comment->user->name}} : &nbsp;</h6>
+                                        <label class="mb-0 pb-0 mt-0 pb-0">{{$comment->comment}}</label>
+                                        <p>({{$comment->created_at->format('Y-m-d')}} {{$comment->created_at->format('H:i A')}}) </p>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                         @endforeach
-                        @endforeach
-                        @if (session('alert_2'))
-                        <div class="alert alert-success">
-                            {{ session('alert_2') }}
-                        </div>
-                        @endif
 
                         <form class="custom-form comment-form mt-4" action="{{route('blog.update')}}" method="post" role="form">
                             @csrf
@@ -106,7 +107,7 @@
                             <textarea name="comment" rows="4" class="form-control" id="comment-message" placeholder="Your comment here"></textarea>
 
                             <div class="col-lg-3 col-md-4 col-6 ms-auto">
-                                <button type="submit" name="form1" class="form-control">Comment</button>
+                                <button type="submit" name="form1" class="form-control pt-1 pb-1">Comment</button>
                         </form>
                     </div>
                 </div>
@@ -115,11 +116,6 @@
         </div>
 
         <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
-            @if (session('alert_01'))
-            <div class="alert alert-success">
-                {{ session('alert_01') }}
-            </div>
-            @endif
             <form class="custom-form search-form" action="{{route('blog.update')}}" method="post" role="form">
                 @csrf
                 <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search" required>
@@ -156,15 +152,10 @@
 
             <form class="custom-form subscribe-form" action="{{route('blog.update')}}" method="post" role="form">
                 @csrf
-                @if (session('alert_1'))
-                <div class="alert alert-success">
-                    {{ session('alert_1') }}
-                </div>
-                @endif
                 <h5 class="mb-4">Notified when new posts published</h5>
                 <input type="email" name="email" id="subscribe-email" class="form-control" placeholder="Email Address" required />
                 <div class="col-lg-12 col-12">
-                    <button type="submit" name="form4" class="form-control">Subscribe</button>
+                    <button type="submit" name="form4" style="font-size:larger;" class="form-control">Subscribe</button>
                 </div>
             </form>
         </div>

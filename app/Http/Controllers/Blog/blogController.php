@@ -11,7 +11,6 @@ use App\Models\comment;
 use App\Models\Subscriber;
 use Exception;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,8 +19,6 @@ class blogController extends Controller
     public function index(){
 
         if(Auth::user() == null ){
-            Session::flash('alert_1', '');
-            Session::flash('alert_2', '');
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
             return view('blog.blog', [
@@ -29,8 +26,6 @@ class blogController extends Controller
             ]); 
         }
         else if(Auth::user()->usertype == 'doctor'){
-            Session::flash('alert_1', '');
-            Session::flash('alert_2', '');
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
             return view('blog.doctorBlog', [
@@ -39,8 +34,6 @@ class blogController extends Controller
 
         }
         else if(Auth::user()->usertype == 'patient'){
-            Session::flash('alert_1', '');
-            Session::flash('alert_2', '');
             $posts = Post::latest()->take(3)->get();
             $latest = Post::latest()->take(1)->get();
             return view('blog.blog', [
@@ -52,11 +45,8 @@ class blogController extends Controller
 
     public function update(Request $request){
         if ($request->has('form1')){
-            if($request['comment'] == null){
-                Session::flash('alert_2', 'No comment entered!');
-            }
-            else if(User::find(Auth::user()) == null){
-                Session::flash('alert_2', 'Please log in to make comments!');
+            if(User::find(Auth::user()) == null){
+                return redirect()->back()->with('error', 'Please logging to make Comments!');
             }
             else{
                 
@@ -65,12 +55,11 @@ class blogController extends Controller
                 ]);
 
                 if($validator->fails()){
-                    Session::flash('alert_2', 'No Comment Entered!');
+                    return redirect()->back()->withErrors($validator);
                 }
                 else{
 
                     $latest = Post::latest()->take(1)->get();
-                    $id = $latest[0]->user_id;
                     $user = User::find(Auth::user());
                     $temp = new comment();
                     $temp['comment'] = $request['comment'];
@@ -78,15 +67,9 @@ class blogController extends Controller
                     $temp['post_id'] = $latest[0]->id;
 
                     $temp->save();
-                    Session('alert_2','');   
+                    return redirect()->back()->with('success', 'Comment Posted!');
                 }
             }
-
-            $posts = Post::latest()->take(3)->get();
-            $latest = Post::latest()->take(1)->get();
-            return view('blog.blog', [
-                'posts' => $posts, 'latest' => $latest, 
-            ]);
             
         }
         else if($request->has('form2')){
@@ -98,12 +81,7 @@ class blogController extends Controller
             }
             catch(Exception $ex){
 
-                Session::flash('alert_3', 'No Blog Post Found!');                           
-                $posts = Post::latest()->take(3)->get();
-                $latest = Post::latest()->take(1)->get();
-                return view('blog.blog', [
-                    'posts' => $posts, 'latest' => $latest,
-                ]);
+                return redirect()->back()->with('error', 'No Post Found!');
             }         
 
         }
@@ -114,12 +92,7 @@ class blogController extends Controller
             ]);
 
             if($validator->fails()){
-                Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
-                $posts = Post::latest()->take(3)->get();
-                $latest = Post::latest()->take(1)->get();
-                return view('blog.blog', [
-                    'posts' => $posts, 'latest' => $latest,
-                ]);
+                return redirect()->back()->withErrors($validator);
             }
             else{
                 $email = $request->all()['email'];
@@ -128,35 +101,15 @@ class blogController extends Controller
                  ]); 
      
                  if ($subscriber) {
-                     Mail::to($email)->send(new Subscribe($email));
-                     Session::flash('alert_1', 'Subscription Success! Check Inbox');
-                     
-                     if(Auth::user()->usertype == 'doctor'){
-                        Session('alert_1', '');
-                        $posts = Post::latest()->take(3)->get();
-                        $latest = Post::latest()->take(1)->get();
-            
-                        return view('blog.blog', [
-                            'posts' => $posts, 'latest' => $latest, 
-                        ]); 
+                    try{
+                        Mail::to($email)->send(new Subscribe($email));
                     }
-                    else{
-                        $posts = Post::latest()->take(3)->get();
-                        $latest = Post::latest()->take(1)->get();
-                        return view('blog.blog', [
-                            'posts' => $posts, 'latest' => $latest, 
-                        ]);
-                        return view('blog.blog');
+                    catch(Exception $ex){
+                        return redirect()->back()->with('error', 'Already Subscribed or Invalid Email!');
                     }
-                    $posts = Post::latest()->take(3)->get();
-                    $latest = Post::latest()->take(1)->get();
-                    return view('blog.blog', [
-                        'posts' => $posts, 'latest' => $latest, 
-                    ]);
-                     return view('blog.blog');
-                 }
-            }
+                }
 
+            }
         }
 
     }

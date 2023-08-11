@@ -9,7 +9,7 @@
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body py-5 pb-0">Total Number of Appointments Today</div>
                     <h1 style="padding:10px;">{{$appoCount}}</h1>
-                    <a href="/doctor/visitings" style="color:white;">
+                    <a href="/show/doctor/appointments" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details
                             <span class="ms-auto">

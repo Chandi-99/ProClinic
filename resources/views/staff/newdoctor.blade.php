@@ -122,7 +122,7 @@
 
                         
                         <div class="row mb-3">
-                            <label for="echanneling" class="col-md-4 col-form-label text-md-end">{{ __('E-channeling') }}</label>
+                            <label for="echanneling" class="col-md-4 col-form-label text-md-end">{{ __('E-channeling') }} </label>
 
                             <div class="col-md-6">
                                 <select id="echanneling" type="text" class="form-control @error('echanneling') is-invalid @enderror" name="echanneling" value="{{ old('echanneling') }}" required autocomplete="echanneling">
@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="row mb-3" id="echanneling_rate" hidden>
-                            <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('E-Channeling Rate') }}</label>
+                            <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('E-Channeling Rate') }} (Rs.)</label>
 
                             <div class="col-md-6" >
                                 
@@ -163,7 +163,7 @@
 
 
                         <div class="row mb-3" id="normal_rate">
-                            <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('Normal Channeling Rate') }}</label>
+                            <label for="nic" class="col-md-4 col-form-label text-md-end">{{ __('Normal Channeling Rate') }} (Rs.)</label>
 
                             <div class="col-md-6" >
                                 
@@ -228,7 +228,10 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="custom-btn">
+                                <a href="/staff" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                    Back
+                                </a>
+                                <button type="submit" class="custom-btn pt-1 pb-1" >
                                     {{ __('Register') }}
                                 </button>
                             </div>

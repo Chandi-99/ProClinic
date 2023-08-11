@@ -92,9 +92,7 @@ class newStaffController extends Controller
                  ]);
     
                 $staff->save();  
-    
-                Session::flash('Success', 'Nurse Account Creation Successful!');
-                return redirect('/newStaff');
+                return redirect('/newStaff')->with('success', 'Nurse Account Creation Successful!');
     
             }
         }

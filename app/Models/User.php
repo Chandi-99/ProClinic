@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Message;
 
 class User extends Authenticatable
 {
@@ -63,15 +64,8 @@ class User extends Authenticatable
         return $this->hasMany(comment::class);
     }
 
-    // app/User.php
-
-    /**
-     * A user can have many messages
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function messages()
+    public function Chats()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Chat::class);
     }
 }

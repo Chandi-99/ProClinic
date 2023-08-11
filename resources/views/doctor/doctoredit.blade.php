@@ -295,10 +295,11 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="custom-btn pt-1 pb-1" style="margin:5px">
+                                <a class="btn custom-btn pt-1 pb-1" href="/doctor" style="margin-right:5px">Back</a>
+                                <button type="submit" class="btn custom-btn pt-1 pb-1" >
                                     {{ __('Update') }}
                                 </button>
-                                <a class="btn btn-info pt-1 pb-1" href="/doctor">Back</a>
+                                
                             </div>
                         </div>
                     </form>

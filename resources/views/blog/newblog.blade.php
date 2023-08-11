@@ -12,7 +12,7 @@
             @csrf
             <h6 for="image" class="text-center pt-2" >Create New Blog Post:</h6>
             <div class="col-lg-6 col-12 ">
-            <strong>Title : </strong><input type="text" name="title" class="form-control form-control-lg @error('title') is-invalid @enderror" value="First Blog Post" required>
+            <strong>Title : </strong><input type="text" name="title" class="form-control form-control-lg @error('title') is-invalid @enderror" placeholder="First Blog Post" required>
             
             @error('title')
                 <span class="invalid-feedback" role="alert">
@@ -42,7 +42,8 @@
             </div>
             </br>
 
-            <button type="submit"  class="custom-btn mb-4">Create Post</button>
+            <a href="/doctorblog" class="custom-btn pt-1 pb-1">Back</a>
+            <button type="submit"  class="custom-btn mb-4 pt-1 pb-1">Create Post</button>
             </br>       
         </form>
 

@@ -47,11 +47,8 @@ class doctorBlogController extends Controller
         }
         else if($request->has('form2')){
 
-            if($request['comment'] == null){
-                Session::flash('alert_2', 'No comment entered!');
-            }
-            else if(User::find(Auth::user()) == null){
-                Session::flash('alert_2', 'Please log in to make comments!');
+            if(User::find(Auth::user()) == null){
+                return redirect()->back()->with('error', 'Please Log into Comment on Posts!');
             }
             else{
                 
@@ -60,7 +57,7 @@ class doctorBlogController extends Controller
                 ]);
 
                 if($validator->fails()){
-                    Session::flash('alert_2', 'No Comment Entered!');
+                    return redirect()->back()->with('error', 'No Comment Entered!');
                 }
                 else{
 
@@ -72,16 +69,10 @@ class doctorBlogController extends Controller
                     $temp['post_id'] = $latest[0]->id;
 
                     $temp->save();
-                    Session('alert_2','');   
+                    return redirect()->back()->with('success', 'Comment Posted!'); 
                 }
             
             }
-
-            $posts = Post::latest()->take(3)->get();
-            $latest = Post::latest()->take(1)->get();
-            return view('blog.doctorBlog', [
-                'posts' => $posts, 'latest' => $latest,
-            ]);
         }
         else if($request->has('form3')){
 
@@ -93,12 +84,7 @@ class doctorBlogController extends Controller
             }
             catch(Exception $ex){
 
-                Session::flash('alert_3', 'No Blog Post Found!');                           
-                $posts = Post::latest()->take(3)->get();
-                $latest = Post::latest()->take(1)->get();
-                return view('blog.doctorBlog', [
-                    'posts' => $posts, 'latest' => $latest,
-                ]);
+                return redirect()->back()->with('error', 'No Post Found!');
             }    
 
         }
@@ -109,38 +95,21 @@ class doctorBlogController extends Controller
             ]);
 
             if($validator->fails()){
-                Session::flash('alert_1', 'Already Subscribed or Invalid Email Entered!');
-                $posts = Post::latest()->take(3)->get();
-                $latest = Post::latest()->take(1)->get();
-                return view('blog.doctorBlog', [
-                    'posts' => $posts, 'latest' => $latest, 
-                ]); 
-                return view('blog.doctorBlog');
+                return redirect()->back()->with('error', 'Already Subscribed or Invalid Email!');
             }
             else{
-                $email = $request->all()['email'];
+                $email = $request['email'];
                 $subscriber = Subscriber::create([
                  'email' => $email
                  ]); 
      
-                 if ($subscriber) {
+                if ($subscriber){
                      Mail::to($email)->send(new Subscribe($email));
-                     Session::flash('alert_1', 'Subscription Success! Check Inbox');
-                     
-                     if(Auth::user()->usertype == 'doctor'){
-                        Session('alert_1', '');
-                        $posts = Post::latest()->take(3)->get();
-                        $latest = Post::latest()->take(1)->get();
-            
-                        return view('blog.doctorBlog', [
-                            'posts' => $posts, 'latest' => $latest,
-                        ]); 
-                    }
-                    else{
-                        return view('blog.blog');
-                    }
-                     return view('blog.doctorBlog');
-                 }
+                     return redirect()->back()->with('success', 'Subscription Success! Please Check your Inbox!');
+                }
+                else{
+                    return redirect()->back()->with('error', 'Something Went Wrong!');
+                }
             }
 
         }

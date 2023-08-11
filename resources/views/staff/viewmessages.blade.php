@@ -59,6 +59,7 @@
             </div>
         </div>
         <div class="message-container">
+            @if(isset($messages))
             @foreach($messages as $message)
             <div class="message-box" style="margin-bottom:20px;">
                 <h6>{{ $message->fname }} {{ $message->lname }}</h6>
@@ -72,6 +73,22 @@
                 @endif
             </div>
             @endforeach
+            @endif
+            @if(isset($texts))
+            @foreach($texts as $text)
+            <div class="message-box" style="margin-bottom:20px;">
+                <h6>{{ $text->User->name }}</h6>
+                <p><strong>Email: </strong>{{ $text->User->email }}</p>
+                <p>{{ $text->message }}</p>
+                <a href="/staffchat/{{$text->user_id}}" class="btn custom-btn pt-2 pb-2" style="display:inline;"> Reply</a>
+                @if($text->status == 'unread')
+                <span><img src="/images/new.png " style="width:40px; height:40px; float:right;" /></span>
+                @else
+                <span><img src="/images/unreaded.jpg " style="width:25px; height:25px; float:right;" /></span>
+                @endif
+            </div>
+            @endforeach
+            @endif
         </div>
     </div>
     <section class="section-padding section-bg mb-0 pt-0 mt-0 pt-0">

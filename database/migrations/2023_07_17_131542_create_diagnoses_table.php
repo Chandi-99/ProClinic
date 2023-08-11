@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('rest_no_days');
             $table->string('blood_pressure');
             $table->string('blood_sugar_level');
-            $table->foreign('appo_id')->references('id')->on('appointments');
             $table->timestamps();
         });
     }
