@@ -38,6 +38,6 @@ class viewReportsController extends Controller
         else{
             $pdfreports = null;
         }
-        return view('doctor.Reports', compact('reports', 'patient', 'pdfreports','patient'));
+        return view('doctor.viewreports', compact('reports', 'patient', 'pdfreports','patient'));
     }
 }

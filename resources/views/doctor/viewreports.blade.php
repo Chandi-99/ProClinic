@@ -3,38 +3,12 @@
 <section class="section-padding section-bg mt-0 pt-3">
     <div class="container ">
         <div class="row custom-text-box col-6 pt-2 mt-1" style="margin:0 auto;">
-            <h5 class="text-center">{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}'s Reports</h5>
-            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Patient Name: </span>{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}</label>
-            <label style="display:inline;font: size 18px;"><span style="font-weight:bold;">Date of Birth: </span>{{Auth::user()->patient->dob}} </label></br>
-            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Gender: </span>{{Auth::user()->patient->gender}} </label>
-            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Address: </span>{{Auth::user()->patient->address}} </label>
+            <h5 class="text-center">{{$patient->fname}} {{$patient->lname}}'s Reports</h5>
+            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Patient Name: </span>{{$patient->fname}} {{$patient->lname}}</label>
+            <label style="display:inline;font: size 18px;"><span style="font-weight:bold;">Date of Birth: </span>{{$patient->dob}} </label></br>
+            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Gender: </span>{{$patient->gender}} </label>
+            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Address: </span>{{$patient->address}} </label>
             <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Blood Group: </span>B+</label>
-        </div>
-
-        <div class="row custom-text-box mt-3 col-9 mb-3" style="margin:0 auto;">
-            <div class="container" style="margin:0 auto;">
-                <form method="POST" action="{{ route('user.reports.update') }}" enctype="multipart/form-data">
-                    @csrf
-                    <h6 class="text-center">Upload New Reports</h6>
-                    <div class="col-lg-6 col-12 ">
-                        <label style="font-weight:bold;">Report Name: </label><input type="text" name="report_name" class="form-control form-control-lg" placeholder="ECG Report" style="font-size:medium;" required />
-                    </div>
-                    </br>
-                    <div class="col-lg-6 col-12 ">
-                        <label style="font-weight:bold;">Visibility: </label><select id="visibility" type="text" class="form-control form-control-lg" name="visibility" style="font-size:medium;" required>
-                            <option>Private</option>
-                            <option>Allow for Doctors</option>
-                        </select>
-                    </div>
-                    </br>
-                    <div class="col-lg-6 col-12 ">
-                        <label style="font-weight:bold;">Upload Report: </label><input type="file" name="report" id="report" class="form-control form-control-lg" style="font-size:medium;" required>
-                    </div>
-                    </br>
-                    <a href="/home" class="btn custom-btn pt-1 pb-1">Go back</a>
-                    <button type="submit" name="form3" class="btn custom-btn pt-1 pb-1">Upload Report</button>
-                </form>
-            </div>
         </div>
 
         <div class="row custom-text-box col-12 mb-5">
