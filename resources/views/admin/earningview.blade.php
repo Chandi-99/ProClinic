@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="cutom-text-box">
+        <div class="custom-text-box">
             <div class="message-container">
                 <div class="message-box" style="margin-bottom:20px;padding-left:50px;">
                     <h5>Highest Demanding Doctor </h5>

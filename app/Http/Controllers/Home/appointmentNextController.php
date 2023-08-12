@@ -212,10 +212,7 @@ class appointmentNextController extends Controller
                             $startTime = '06:00 PM';
                         }
 
-
-
                         $date = $date->format('Y-m-d');
-                        //exception message?
                         try {
 
                             $appointment = new Appointment();

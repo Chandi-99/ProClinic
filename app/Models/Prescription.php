@@ -12,4 +12,16 @@ class Prescription extends Model
         'appo_id',
         'description',
     ];
+
+    public function Appointment(){
+        return $this->belongsTo(Appointment::class);
+    }
+
+    public function Medicines(){
+        return $this->hasMany(Medicine::class);
+    }
+
+    public function Prescription_Medicine(){
+        return $this->hasMany(Prescription_Medicine::class);
+    }
 }

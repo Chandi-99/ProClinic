@@ -14,4 +14,12 @@ class Prescription_Medicine extends Model
         'quantity',
         'dose'
     ];
+
+    public function Medicine(){
+        return $this->belongsTo(Medicine::class);
+    }
+
+    public function Prescription(){
+        return $this->belongsTo(Prescription::class);
+    }
 }

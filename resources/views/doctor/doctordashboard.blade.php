@@ -8,7 +8,7 @@
             <div class="col-md-3 mb-3" style="text-align:center;">
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body py-5 pb-0">Total Number of Appointments Today</div>
-                    <h1 style="padding:10px;">{{$appoCount}}</h1>
+                    <h1 style="padding:10px;margin-bottom:25px;">{{$appoCount}}</h1>
                     <a href="/show/doctor/appointments" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details
@@ -22,7 +22,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-warning text-white h-100" style="text-align:center;">
                     <div class="card-body py-5 pb-0">Total Number of Sessions Today</div>
-                    <h1 style="padding:10px;">{{$visitingCount}}</h1>
+                    <h1 style="padding:10px; margin-bottom:25px;">{{$visitingCount}}</h1>
                     <a href="/doctor/visitings" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details
@@ -35,9 +35,9 @@
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card bg-success text-white h-100" style="text-align:center;">
-                    <div class="card-body py-5 pb-0">Next Session Start Time and Room</div>
-                    <h1 style="font-size:x-large;">Room: {{$nextRoom}}</h1>
-                    <h1 style="font-size:x-large;">Time: {{$startTime}}</h1>
+                    <p class="card-body py-5 pb-0 mb-0">Next Session Start Time and Room</p>
+                    <h1 style="font-size:x-large; letter-spacing: 1px;" class="pt-0 mt-0">Room: {{$nextRoom}}</h1>
+                    <h1 style="font-size:x-large; margin-bottom:25px; letter-spacing: 1px;">Time: {{$startTime}}</h1>
                     <a href="/doctor/visitings" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details
@@ -51,7 +51,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-danger text-white h-100" style="text-align:center;">
                     <div class="card-body py-5 pb-0">Total Earning for This Month</div>
-                    <h1 style="padding:10px;">{{$total}}</h1>
+                    <h1 style="padding:10px;margin-bottom:25px;">{{$total}}</h1>
                     <a href="/viewMyearnings" style="color:white;">
                         <div class="card-footer d-flex">
                             View Details

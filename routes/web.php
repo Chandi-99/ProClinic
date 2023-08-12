@@ -31,9 +31,6 @@ Route::post('donation', [App\Http\Controllers\Home\donationController::class, 'd
 Route::get('blog', [App\Http\Controllers\Blog\blogController::class, 'index'])->name('blog');
 Route::post('blog', [App\Http\Controllers\Blog\blogController::class, 'update'])->name('blog.update');
 
-Route::get('videochat', [App\Http\Controllers\Home\VideoChatController::class, 'index'])->name('videochat');
-Route::post('auth', [App\Http\Controllers\Home\VideoChatController::class, 'auth']);
-
 Route::get('/user/reports', [App\Http\Controllers\Home\reportController::class, 'index'])->name('user.reports');
 Route::post('/user/reports', [App\Http\Controllers\Home\reportController::class, 'updateReports'])->name('user.reports.update');
 Route::get('/user/reports/{id}', function ($id) {
@@ -180,3 +177,5 @@ Route::get('/staff/newappointment', [App\Http\Controllers\Staff\staffAppointment
 Route::post('/staff/newappointment', [App\Http\Controllers\Staff\staffAppointmentController::class, 'update'])->name('staffappointment.update');
 Route::get('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff\staffAppointmentNextController::class, 'index'])->name('staffappointment.check');
 Route::post('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff\staffAppointmentNextController::class, 'check'])->name('staffappointment.validate');
+
+Route::get('/viewreports/{id}', [App\Http\Controllers\Doctor\viewReportsController::class, 'index']);

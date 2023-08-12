@@ -38,7 +38,7 @@
             background-color: #009879;
             color: #ffffff;
             text-align: left;
-            font-weight:bold;
+            font-weight: bold;
         }
 
         .styled-table th,
@@ -117,6 +117,15 @@
 
         .dropdownNew a:hover {
             background-color: #ddd;
+        }
+
+        .column {
+            float: left;
+            /* Float the column to the left */
+            width: 50%;
+            /* Set the width of each column to 50% for equal distribution */
+            padding: 10px;
+            /* Add padding for spacing */
         }
     </style>
 
@@ -203,7 +212,7 @@
             <div class="collapse navbar-collapse " id="navbarNav ">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link click-scroll " href="/doctor/visitings">Appointments</a>
+                        <a class="nav-link click-scroll " href="/show/doctor/appointments">Appointments</a>
                     </li>
 
                     <li class="nav-item ">

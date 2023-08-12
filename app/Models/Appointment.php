@@ -23,9 +23,12 @@ class Appointment extends Model
         return $this->belongsTo(Visitings::class);
     }
 
+    public function Prescription(){
+        return $this->belongsTo(Prescription::class);
+    }
+
     public function Patient(){
         $patient = Patient::where('patient_id', $this->patient_id)->get();
         return $patient[0];
-        //return $this->belongsTo(Patient::class);
     }
 }
