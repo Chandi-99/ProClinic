@@ -189,3 +189,5 @@ Route::get('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff
 Route::post('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staff\staffAppointmentNextController::class, 'check'])->name('staffappointment.validate');
 
 Route::get('/viewreports/{id}', [App\Http\Controllers\Doctor\viewReportsController::class, 'index']);
+Route::get('/newAllergy/{id}', [App\Http\Controllers\Doctor\allergyController::class, 'index']);
+Route::post('/newAllergy/{id}', [App\Http\Controllers\Doctor\allergyController::class, 'update']);
