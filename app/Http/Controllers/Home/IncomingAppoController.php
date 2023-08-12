@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use App\Models\AppointmentLink;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 
@@ -80,7 +81,15 @@ class IncomingAppoController extends Controller
             }
             else if($i == $appointment[0]->appo_number ){
                 $status = "Current Appointment Number is ".$i. ". It is your Number. Please Immediatly report to the ".$appointment[0]->Visiting->Room->room_name;
-                //look for a link in new data table appointment_link
+                $today = Carbon::now();
+                $date = $today->format('Y-m-d');
+                $link = AppointmentLink::where('visiting_id', $visitingId)->where('date', $date)->first();
+                if(isset($link)){
+                    return redirect($link->link);
+                }
+                else{
+                    return redirect()->back()->with('error', 'Link Not Found!. Please Immediatly Contact the Medical Center!');
+                }
                 
             }
             else if($i > $appointment[0]->appo_number ){

@@ -199,8 +199,10 @@ class appointmentNextController extends Controller
                     } else {
                         if ($type == 'Physical') {
                             $amounttopay = Doctor::where('id', $doctor_id)->select('normal_rate')->get();
-                        } else if ($type == 'TeleMedicine')
+                        } else if ($type == 'TeleMedicine'){
                             $amounttopay = Doctor::where('id', $doctor_id)->select('echanneling_rate')->get();
+                        }
+                            
 
                         if ($session == 'Morning') {
                             $startTime = '08:00 AM';
@@ -234,7 +236,13 @@ class appointmentNextController extends Controller
                         $bill = new Bill();
                         $bill->appo_id = $appo_id;
                         $bill->medicine_charges = null;
-                        $bill->doctor_charges = $amounttopay[0]->normal_rate;
+                        if($type == 'TeleMedicine'){
+                            $bill->doctor_charges = $amounttopay[0]->echanneling_rate;
+                        }
+                        else{
+                            $bill->doctor_charges = $amounttopay[0]->normal_rate;
+                        }
+                        
                         $bill->other_charges = null;
                         $bill->discount = null;
                         $bill->total = null;

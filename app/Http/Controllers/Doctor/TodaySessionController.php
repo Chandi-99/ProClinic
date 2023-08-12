@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\AppointmentLink;
 use App\Models\Doctor;
 use App\Models\Visitings;
 use Illuminate\Support\Facades\Validator;
@@ -98,6 +99,7 @@ class TodaySessionController extends Controller
         $stringTime = "08:00:00";
         $today = Carbon::today();
         $today = $today->format('Y-m-d');
+        $link = $request['link'];
 
         if ($visiting[0]->session == 'Morning') {
             $stringTime = "08:00:00";
@@ -113,6 +115,17 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
+                if($visiting[0]->type == 'TeleMedicine' && $link == null){
+                    return redirect()->back()->with('error', 'Please Upload the Meeting Link!');
+                }
+                else if($visiting[0]->type == 'TeleMedicine' && $link != null){
+                    
+                    $temp = new AppointmentLink();
+                    $temp->link = $link;
+                    $temp->date = $today;
+                    $temp->visiting_id = $visiting[0]->id;
+                    $temp->save();
+                }
                 $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
                 return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 
@@ -131,6 +144,17 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
+                if($visiting[0]->type == 'Telemedicine' && $request['link'] == ''){
+                    return redirect()->back()->with('error', 'Please Upload the Meeting Link!');
+                }
+                else if($visiting[0]->type == 'Telemedicine' && $request['link'] != ''){
+                    $link = $request['link'];
+                    $temp = new AppointmentLink();
+                    $temp->link = $link;
+                    $temp->date = $today;
+                    $temp->visiting_id = $visiting[0]->id;
+                    $temp->save();
+                }
                 $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
                 return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
 
@@ -149,6 +173,17 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
+                if($visiting[0]->type == 'Telemedicine' && $request['link'] == ''){
+                    return redirect()->back()->with('error', 'Please Upload the Meeting Link!');
+                }
+                else if($visiting[0]->type == 'Telemedicine' && $request['link'] != ''){
+                    $link = $request['link'];
+                    $temp = new AppointmentLink();
+                    $temp->link = $link;
+                    $temp->date = $today;
+                    $temp->visiting_id = $visiting[0]->id;
+                    $temp->save();
+                }
                 $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
                 return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 
@@ -167,6 +202,17 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
+                if($visiting[0]->type == 'Telemedicine' && $request['link'] == ''){
+                    return redirect()->back()->with('error', 'Please Upload the Meeting Link!');
+                }
+                else if($visiting[0]->type == 'Telemedicine' && $request['link'] != ''){
+                    $link = $request['link'];
+                    $temp = new AppointmentLink();
+                    $temp->link = $link;
+                    $temp->date = $today;
+                    $temp->visiting_id = $visiting[0]->id;
+                    $temp->save();
+                }
                 $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
                 return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 

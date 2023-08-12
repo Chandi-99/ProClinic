@@ -51,7 +51,7 @@
                 @csrf
                 </br>
                 <div class="row mb-3 mt-2">
-                    <label for="date" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Date') }} :</strong></label>
+                    <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Date') }} </label>
 
                     <div class="col-md-6">
                         <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" style="width:50%;" value="{{ $today }}" required autocomplete="date" disabled>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="row mb-3 mt-2">
-                    <label for="day" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Day') }} :</strong></label>
+                    <label for="day" class="col-md-4 col-form-label text-md-end">{{ __('Day') }} </label>
 
                     <div class="col-md-6">
                         <input id="day" type="text" class="form-control @error('date') is-invalid @enderror" name="day" style="width:50%;" value="{{ $day}}" required autocomplete="date" disabled>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="session" class="col-md-4 col-form-label text-md-end"><strong>{{ __('Session') }} :</strong></label>
+                    <label for="session" class="col-md-4 col-form-label text-md-end">{{ __('Session') }} </label>
 
                     <div class="col-md-6">
                         <select id="session" type="text" class="form-control @error('session') is-invalid @enderror" name="session" style="width:50%;" value="{{ old('session') }}" value="{{$today}}" required autocomplete="session">
@@ -95,14 +95,26 @@
                     </div>
                 </div>
 
-                <div class="row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <a class="btn custom-btn pt-1 pb-1" href="/doctor" style="margin-right: 10px;">Back</a>
+                <div class="row mb-3 mt-2">
+                    <label for="day" class="col-md-4 col-form-label text-md-end">{{ __('Link [TeleMedicine Only]') }} </label>
 
-                        <button type="submit" class="custom-btn pt-1 pb-1">
+                    <div class="col-md-6">
+                        <input id="link" type="text" class="form-control @error('link') is-invalid @enderror" name="link" style="width:80%;" autocomplete="link">
+
+                        @error('link')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="mb-0 justify-content-center align-items-center" ><center>
+                        <a class="btn custom-btn pt-1 pb-1" href="/doctor" style="margin-right: 10px;">Back</a>
+                        <button type="submit" class="btn custom-btn pt-1 pb-1">
                             {{ __('Start') }}
                         </button>
-                    </div>
+</center>
                 </div>
             </form>
         </div>
