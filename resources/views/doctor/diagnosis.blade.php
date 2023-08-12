@@ -125,7 +125,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    @if(isset($latests))
                     <a href="/oldmedications/{{$patient->patient_id}}" class="btn custom-btn pb-1 pt-1" target="_blank">See All</a>
+                    @endif
                 </div>
 
                 <div class="message-box" style="margin-bottom:20px;padding-left:50px;">

@@ -141,6 +141,9 @@ Route::get('/chat', [App\Http\Controllers\Home\ChatController::class, 'index']);
 Route::get('/chat/clearall', [App\Http\Controllers\Home\ChatController::class, 'clearChat']);
 Route::get('/send', [App\Http\Controllers\Home\ChatController::class, 'send']);
 
+Route::get('/addmore/{id}', [App\Http\Controllers\Home\addMoreController::class, 'index']);
+Route::post('/addmore/{id}', [App\Http\Controllers\Home\addMoreController::class, 'update']);
+
 Route::get('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old');
 Route::post('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old.post');
 

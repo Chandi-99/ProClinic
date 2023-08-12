@@ -23,8 +23,7 @@ class DiagnosisController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($visitingId, $appointmentId)
-    {
+    public function index($visitingId, $appointmentId){
         $usertype = Auth::user()->usertype;
 
         if ($usertype == 'patient') {
@@ -62,8 +61,7 @@ class DiagnosisController extends Controller
         }
     }
 
-    public function update(Request $request, $visitingId, $appointmentId)
-    {
+    public function update(Request $request, $visitingId, $appointmentId){
         $validator = Validator::make($request->all(), [
             'chief_complain' => ['required', 'string', 'max:100'],
             'symptoms' => ['required', 'string', 'max:100'],
@@ -77,7 +75,8 @@ class DiagnosisController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        } else {
+        }
+        else {
 
             $diagnosis = new Diagnosis();
             $diagnosis->chief_complain = $request['chief_complain'];
@@ -94,23 +93,23 @@ class DiagnosisController extends Controller
             $today = Carbon::today();
             $today = $today->format('Y-m-d');
             $medicines = Medicine::all();
-            $mediassigned = null;
-            $visiting = Visitings::where('id', $visitingId)->get();
 
-            $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->get();
-            $patient = $appointments[0]->Patient();
-            $bill = Bill::where('appo_id', $appointments[0]->id)->get();
-            $prescription = Prescription::where('appo_id', $appointments[0]->id)->get();
+            $mediassigned = null;
+            $visiting = Visitings::find($visitingId);
+
+            $appointment = Appointment::find($appointmentId);
+            $patient = $appointment->Patient();
+            $bill = Bill::where('appo_id', $appointment->id)->get();
+            $prescription = Prescription::where('appo_id', $appointment->id)->get();
 
             return view('doctor.diagnosis', [
-                'patient' => $patient, 'bill' => $bill[0], 'prescription' => $prescription[0], 'appointment' => $appointments[0],
-                'medicines' => $medicines, 'visiting' => $visiting[0], 'mediassigned' => $mediassigned, 'hidden' => false
+                'patient' => $patient, 'bill' => $bill[0], 'prescription' => $prescription[0], 'appointment' => $appointment,
+                'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false
             ]);
         }
     }
 
-    public function addMedicine(Request $request, $prescriptionId, $visitingId, $appointmentId)
-    {
+    public function addMedicine(Request $request, $prescriptionId, $visitingId, $appointmentId){
 
         $validator = Validator::make($request->all(), [
             'medicine_id' => ['required'],
@@ -181,14 +180,13 @@ class DiagnosisController extends Controller
 
         return view('doctor.diagnosis', [
             'patient' => $patient, 'bill' => $bill, 'prescription' => $prescription, 'appointment' => $appointment,
-            'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false
-        ]);
+            'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false]);
     }
 
-    public function absent($visitingId, $appointmentId)
-    {
+    public function absent($visitingId, $appointmentId){
         $appointment = Appointment::find($appointmentId);
         $appointment->status = "absent";
+        $appointment->save();
         $today = Carbon::today();
         $today = $today->format('Y-m-d');
         $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->count();

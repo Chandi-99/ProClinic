@@ -3,7 +3,7 @@
 <section class="section-padding section-bg mt-0 pt-2">
     <div class="container ">
         <div class="row" >
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
+            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
                     <a href="/oldappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
                         <img src="/images/test1.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
+            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
                     <a href="/incomingappointments/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
                         <img src="/images/test2.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
@@ -23,7 +23,17 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
+            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
+                <div class="featured-block d-flex justify-content-center align-items-center ">
+                    <a href="/addmore/{{Auth::user()->id}}" class="d-block " style="text-decoration:none;">
+                        <img src="/images/addmore.jpg " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
+
+                        <p class="featured-block-text " style="text-decoration:none;">Add More<strong> About You</strong></p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 " style="background-color:white;">
                 <div class="featured-block d-flex justify-content-center align-items-center ">
                     <a href="/chat" class="d-block " style="text-decoration:none;">
                         <img src="/images/test3.png " class="featured-block-image img-fluid mt-2" alt=" " height="130px" width="130px">
@@ -42,7 +52,7 @@
         </div>
         @endif
         <div class="custom-text-box  align-items-center mt-0 pt-2" style="padding-left: 50px;">
-            <h6 class="text-center pt-2" style="font-size:larger;">Create Doctor Appointment</h6>
+            <h4 class="text-center pt-2" style="font-size:larger;">Create Doctor Appointment</h4>
             <form method="POST" action="/newappointment/{{Auth::user()->id}}">
                 @csrf
                 <div class="col-lg-6 col-12">
@@ -100,8 +110,8 @@
                     @enderror
                 </div>
                 </br>
-                <a class="btn btn-secondary" href="{{route('welcome')}}">Go Back</a>
-                <button type="submit" name="form1" class="btn btn-success" {{ $isReadonly ? 'disabled' : '' }}>Submit</button>
+                <a class="btn custom-btn pt-1 pb-1" href="{{route('welcome')}}">Back</a>
+                <button type="submit" class="btn custom-btn pt-1 pb-1" >Submit</button>
             </form>
     </div>
 
