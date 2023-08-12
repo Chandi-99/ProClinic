@@ -2,13 +2,12 @@
 @section('content')
 <section class="section-padding section-bg mt-0 pt-3">
     <div class="container ">
-        <div class="row custom-text-box col-6 pt-2 mt-1" style="margin:0 auto;">
+        <div class="row custom-text-box col-6 pt-2 mt-1" style="margin:10px auto;">
             <h5 class="text-center">{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}'s Reports</h5>
             <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Patient Name: </span>{{Auth::user()->patient->fname}} {{Auth::user()->patient->lname}}</label>
             <label style="display:inline;font: size 18px;"><span style="font-weight:bold;">Date of Birth: </span>{{Auth::user()->patient->dob}} </label></br>
             <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Gender: </span>{{Auth::user()->patient->gender}} </label>
             <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Address: </span>{{Auth::user()->patient->address}} </label>
-            <label style="display:inline;font-size:18px;"><span style="font-weight:bold;">Blood Group: </span>B+</label>
         </div>
 
         <div class="row custom-text-box mt-3 col-9 mb-3" style="margin:0 auto;">

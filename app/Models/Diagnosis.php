@@ -18,4 +18,8 @@ class Diagnosis extends Model
         'blood_pressure',
         'blood_sugar_level',
     ];
+
+    public function Appointment(){
+        return $this->belongsTo(Appointment::class);
+    }
 }

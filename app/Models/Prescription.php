@@ -17,11 +17,8 @@ class Prescription extends Model
         return $this->belongsTo(Appointment::class);
     }
 
-    public function Medicines(){
-        return $this->hasMany(Medicine::class);
-    }
-
     public function Prescription_Medicine(){
         return $this->hasMany(Prescription_Medicine::class);
     }
+
 }

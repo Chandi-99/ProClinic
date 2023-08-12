@@ -26,9 +26,6 @@ class Medicine extends Model
         'howtouse',
     ];
 
-    public function TempMedi() {
-        return $this->belongsTo(TempMedi::class);
-    }
 
     public function Prescription_Medicine(){
         return $this->hasMany(Prescription_Medicine::class);

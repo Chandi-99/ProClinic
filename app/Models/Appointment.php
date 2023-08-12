@@ -31,4 +31,12 @@ class Appointment extends Model
         $patient = Patient::where('patient_id', $this->patient_id)->get();
         return $patient[0];
     }
+
+    public function Diagnosis(){
+        return $this->belongsTo(Diagnosis::class);
+    }
+
+    // public function MediName(){
+    //     $temp = Prescription::where('appo_id', $this->id)->first();
+    // }
 }

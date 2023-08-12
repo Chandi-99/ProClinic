@@ -165,7 +165,14 @@ Route::get('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionContro
 Route::post('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionController::class, 'start']);
 
 Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'index']);
-Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'start']);
+Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'update']);
+
+Route::get('/oldmedications/{id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'index']);
+
+Route::post('/todaysession/{id}/{Id}/{ID}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'addMedicine']);
+
+Route::get('/todaysession/{id}/{Id}/absent', [App\Http\Controllers\Doctor\DiagnosisController::class, 'absent']);
+Route::get('/todaysession/remove/{id}/{Id}/{ID}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'removeMedicine']);
 
 Route::get('/viewMyearnings', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'index'])->name('viewMyearnings');
 Route::get('/viewMyearnings/overall', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'overall'])->name('viewMyearnings.overall');

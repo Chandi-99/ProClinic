@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Doctor;
 
 use Illuminate\Http\Request;
-use app\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Visitings;
-use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
@@ -99,6 +96,9 @@ class TodaySessionController extends Controller
 
         $currentTime = Carbon::now()->format('H:i');
         $stringTime = "08:00:00";
+        $today = Carbon::today();
+        $today = $today->format('Y-m-d');
+
         if ($visiting[0]->session == 'Morning') {
             $stringTime = "08:00:00";
             $timestamp = strtotime($stringTime);
@@ -113,7 +113,8 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
-                return redirect('/todaysession/'.$userId.'/'.$visitingId);
+                $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
+                return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 
             }
         } else if ($visiting[0]->session == 'Afternoon') {
@@ -130,7 +131,8 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
-                return redirect('/todaysession/'.$userId.'/'.$visitingId);
+                $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
+                return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
 
             }
         } else if ($visiting[0]->session == 'Evening') {
@@ -147,7 +149,8 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
-                return redirect('/todaysession/'.$userId.'/'.$visitingId);
+                $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
+                return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 
             }
         } else if ($visiting[0]->session == 'Night') {
@@ -164,7 +167,8 @@ class TodaySessionController extends Controller
                 return redirect()->back();
             }
             else{
-                return redirect('/todaysession/'.$userId.'/'.$visitingId);
+                $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
+                return redirect('/todaysession/'.$visitingId.'/'.$appointments->id);
                 
             }
         }

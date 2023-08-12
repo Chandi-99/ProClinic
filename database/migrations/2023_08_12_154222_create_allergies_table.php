@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('temp_medicines', function (Blueprint $table) {
+        Schema::create('allergies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('medi_id');
-            $table->unsignedBigInteger('prescription_id');
-            $table->string('quantity');
-            $table->string('dose');
+            $table->string('allergy');
+            $table->unsignedBigInteger('patient_id');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('temp_medicines');
+        Schema::dropIfExists('allergies');
     }
 };
