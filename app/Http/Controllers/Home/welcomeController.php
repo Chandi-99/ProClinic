@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Candidate;
 use App\Http\Controllers\Controller;
+use App\Models\RandomKey;
 use Illuminate\Support\Facades\DB;
 
 class welcomeController extends Controller
@@ -105,6 +106,18 @@ class welcomeController extends Controller
 
             $temp->save();
             return view('patient.contactus');
+        }
+        else if($request->has('form4')){
+            $key = $request['key'];
+            $result = RandomKey::where('key', $key)->count();
+
+            if($result > 0){
+                $result = RandomKey::where('key', $key)->first();
+                return redirect()->back()->with('success', 'Valid Medical Certificate! Appointment ID:'.$result->appo_id);
+            }
+            else{
+                return redirect()->back()->with('error', 'Invalid Medical Certificate. Please Contact us if you need more details.');
+            }
         }
 
     }

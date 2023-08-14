@@ -17,6 +17,7 @@ class Diagnosis extends Model
         'rest_no_days',
         'blood_pressure',
         'blood_sugar_level',
+        'appo_id',
     ];
 
     public function Appointment(){

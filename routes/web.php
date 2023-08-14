@@ -152,11 +152,9 @@ Route::post('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingApp
 Route::get('/incomingappointments/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'check'])->name('incoming.check');
 Route::get('/incomingappointments/join/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'join'])->name('incoming.join');
 
-Route::get('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'index'])->name('prescription');
-Route::post('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'download'])->name('prescription.download');
-
-Route::get('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'index'])->name('medical');
-Route::post('/medical-certificate/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'download'])->name('medical.download');
+Route::get('/prescription/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'prescription'])->name('prescription');
+Route::get('/medical_certificate/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'medical'])->name('medical');
+Route::get('/bill/{id}/{Id}', [App\Http\Controllers\Home\PrescriptionController::class, 'bill'])->name('bill');
 
 Route::get('/joinappointment/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'index'])->name('joinappointment');
 Route::post('/joinappointment/{id}/{Id}', [App\Http\Controllers\Home\MedicalController::class, 'join'])->name('joinappointment.join');

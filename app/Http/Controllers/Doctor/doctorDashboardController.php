@@ -103,10 +103,15 @@ class doctorDashboardController extends Controller
                 }
             }
 
+            if($nextRoom == ''){
+                $nextRoom = 'N/A';
+                $startTime ='N/A';
+            }
             return view('doctor.doctordashboard', [
                 'appointments' => $appoArray, 'visitingCount' => $visitingCount,'total'=> $total,
                 'nextRoom' => $nextRoom, 'appoCount' => $i, 'docname' => $docname, 'speciality' => $speciality, 'startTime' => $startTime
             ]);
+
         } else {
             return redirect('/staff');
         }

@@ -276,7 +276,25 @@
             </div>
         </section>
 
-
+        <section class="cta-section section-padding section-bg " id="search_med">
+            <div class="container ">
+                 
+                <div class="row justify-content-center align-items-center ">
+                    <div class="col-lg-5 col-12 ms-auto ">
+                        <h2 class="mb-0 ">Validate Medical Certificates <br> Provided by Us. </br><span style="font-size:x-large;letter-spacing:1px;">Enter the Key to check.<span></h2>
+                    </div>
+                    <div class="col-lg-5 col-12 ">
+                        <form method="POST" action="{{route('welcome')}}" enctype="multipart/form-data">
+                            <input type="text" placeholder="Medical Certificate Key " name="key"  class="form-control form-control-lg" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8"/>
+                            </br>
+                            <button type="submit" class="custom-btn" name="form4">Search</button>
+                        </form>                     
+                    </div>
+                </div>
+            </div>
+        </section>
+</br>
+</br>
         <section class="volunteer-section section-padding " id="section_4 ">
             <div class="container ">
                 <div class="row ">
