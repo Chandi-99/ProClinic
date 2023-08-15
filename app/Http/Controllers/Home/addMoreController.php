@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MoreDetails;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 class addMoreController extends Controller
@@ -17,7 +18,8 @@ class addMoreController extends Controller
         return view('patient.addmore');
     }
 
-    public function update(Request $request, $patientId){
+    public function update(Request $request, $userId){
+        $patient = Patient::where('user_id', $userId)->first();
         $today = Carbon::tomorrow();
         $tommorrow = $today->format('Y-m-d');
 
@@ -42,11 +44,11 @@ class addMoreController extends Controller
             $detail->height = $request['height'];
             $detail->blood_group = $request['blood_group'];
             $detail->date = $request['date'];
-            $detail->patient_id = $patientId;
+            $detail->patient_id = $patient->patient_id;
             $detail->smoking = $request['smoking'];
             $detail->save();
 
-            return redirect('/newappointment/'.$patientId)->with('success', 'Details Saved!');
+            return redirect('/newappointment/'.$userId)->with('success', 'Details Saved!');
         }
     }
 }

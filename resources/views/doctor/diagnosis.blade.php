@@ -132,21 +132,25 @@
 
                 <div class="message-box" style="margin-bottom:20px;padding-left:50px;">
                     <h5 style="display: inline-block;">Vital Signs</h5><span><img src="/images/new23.webp " style="width:40px; height:40px; margin-bottom:10px;margin-left:10%;display: inline-block;" /></span> </br>
-                    @if(isset($latests))
-                    <p><b>Last Exam: </b>{{$latest->date}}</p>
-                    <p class="mt-0 mb-0"><span style="color:black;">Weight: </span></p>
-                    <p class="mt-0 mb-0"><span style="color:black;">Height: </span></p>
-                    <p class="mt-0 mb-0"><span style="color:black;">BMI: </span></p>
-                    <p class="mt-0 mb-0"><span style="color:black;">Blood Pressure</span></p>
+                    @if(isset($vitalSigns))
+                    <p style="color:black;"><b>Last Exam: </b>{{$vitalSigns->date}}</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">Civil Status: </span>{{$vitalSigns->civil_status}}</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">Occupation: </span>{{$vitalSigns->occupation}}</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">Blood Group: </span>{{$vitalSigns->blood_group}}</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">Weight: </span>{{$vitalSigns->weight}} kg</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">Height: </span>{{$vitalSigns->height}} cm</p>
+                    <p class="mt-0 mb-0"><span style="color:black;">BMI: </span>{{$bmi}}</p>
                     @endif
                 </div>
 
                 <div class="message-box" style="margin-bottom:20px;padding-left:50px;">
                     <h5 style="display: inline-block;">Allergies</h5><span><img src="/images/new24.png " style="width:40px; height:40px;margin-bottom:10px;margin-left:10%; display: inline-block;" /></span> </br>
                     @if(isset($allergies))
+                    <ul>
                     @foreach($allergies as $allergie)
-                    <p class="mt-0 mb-0"><span style="color:black;">{{$allergie->allergie}}</span></p>
+                    <li class="mt-0 mb-0"><span style="color:black;">{{$allergie->allergy}} >> {{$allergie->status}}</span></li>
                     @endforeach
+                    </ul>
                     @endif
                     </br>
                     <a href="/newAllergy/{{$patient->patient_id}}" class="btn custom-btn pb-1 pt-1" target="_blank">New Allergy</a>
@@ -224,7 +228,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-4 col-form-label text-md-end">{{ __('Blood Pressure') }}</label>
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('Blood Pressure') }} (mm/Hd)</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control @error('blood_pressure') is-invalid @enderror" name="blood_pressure" autocomplete="blood_pressure">
                                     @error('blood_pressure')
@@ -236,7 +240,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-4 col-form-label text-md-end">{{ __('Blood Sugar Level') }}</label>
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('Blood Sugar Level') }} (mg/dL)</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control @error('blood_sugar_level') is-invalid @enderror" name="blood_sugar_level" autocomplete="blood_sugar_level">
                                     @error('blood_sugar_level')
@@ -277,7 +281,7 @@
         </div>
 
 
-        <div class="row justify-content-center mb-4" >
+        <div class="row justify-content-center mb-4" {{ $hidden ? 'hidden' : '' }}>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header" style="text-align:center;"><b>{{ __('Medicine Assignment') }}</b></div>
@@ -342,7 +346,7 @@
         </div>
 
 
-        <div class="custom-text-box" >
+        <div class="custom-text-box" {{ $hidden ? 'hidden' : '' }}>
             <h5 class="mb-3 text-center">Medicines For the Patient:</h5>
             <table style="border:1px solid black;" class="table table-striped table-bordered">
                 <thead>
@@ -375,7 +379,7 @@
             <div class="row mb-0 mt-2 pt-2">
                 <div class="col-md-12">
                 <center>
-                    <a href="#" class="custom-btn pt-1 pb-1">
+                    <a href="/todaysession/{{$visiting->id}}/{{$appointment->id}}/finish" class="custom-btn pt-1 pb-1">
                         {{ __('Finish the Appointment') }}
                     </a>
                 </center>

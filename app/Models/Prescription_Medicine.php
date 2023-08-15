@@ -24,6 +24,11 @@ class Prescription_Medicine extends Model
         $medi =  Medicine::where('id',$this->medi_id)->first();
         return $medi->mg;
     }
+    
+    public function MedicinePrice(){
+        $medi =  Medicine::where('id',$this->medi_id)->first();
+        return $medi->unit_Price;
+    }
 
     public function MedicineAfter(){
         $medi =  Medicine::where('id',$this->medi_id)->first();

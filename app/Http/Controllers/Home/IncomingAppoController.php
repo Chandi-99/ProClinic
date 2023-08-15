@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Appointment;
 use App\Models\AppointmentLink;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 
@@ -16,12 +17,10 @@ class IncomingAppoController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($patientID){
-        $appointments = Appointment::where('patient_id', $patientID)
-                                    ->where('status',"Pending")
-                                    ->get();
+    public function index($userId){
+        $patient = Patient::where('user_id',$userId)->first();
+        $appointments = Appointment::where('patient_id', $patient->patient_id)->where('status','pending')->get();
         $today = Carbon::today();
-        //dd($today->format('Y-m-d'));
         return view('patient.incomingappointments',['appointments'=> $appointments, 'today'=> $today->format('Y-m-d')]);
     }
 

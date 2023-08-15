@@ -247,11 +247,16 @@ class appointmentNextController extends Controller
                         $bill->discount = null;
                         $bill->total = null;
                         $bill->save();
+                        
+
 
                         $prescription = new Prescription();
                         $prescription->appo_id = $appo_id;
                         $prescription->description = 'Initial Description';
                         $prescription->save();
+                        $appointment->bill_id = $bill->id;
+                        $appointment->prescription_id = $prescription->id;
+                        $appointment->save();
 
                         $email = User::where('id', $user_id)->select('email')->first()->get();
                         $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->first()->get();

@@ -11,10 +11,11 @@
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Visiting ID</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Day</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Session</strong></td>
+                        <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Type</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Room</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Start Time</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>End Time</strong></td>
-                        <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Max Patients Per Session</strong></td>
+                        <td style="border:1px solid black; padding:10px;width:10%;" class="text-center"><strong>Max Patients Per Session</strong></td>
                         <td style="border:1px solid black; padding:10px;" class="text-center"><strong>Edit/Delete</strong></td>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->id}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->day}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->session}}</td>
+                        <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->type}}</td>
                         <td style="border:1px solid black; padding:10px;" class="text-center">{{$visit->Room->room_name}}</td>
                         @if($visit->session == "Morning")
                         <td style="border:1px solid black; padding:10px;" class="text-center">8:00 A.M.</td>
@@ -55,14 +57,14 @@
 
         <div class="col-md-8" style="margin:0 auto;">
             <div class="card pt-3 mb-3">
-                <div class="card-body">
+                <div class="card-body" style="padding-left: 60px;">
                     <form method="POST" action="{{route('doctor.visiting.update')}}">
                         @csrf
                         <h5 class="text-center">Create New Visiting:</h5>
                         </br>
                         <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Day of the Week:  ') }}</strong></label>
-                            <select name="day" class="form-control form-control-lg @error('day') is-invalid @enderror" style="width:30%;" value="" required>
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;">{{ __('Day of the Week:  ') }}</label>
+                            <select name="day" class="form-control form-control-lg @error('day') is-invalid @enderror" style="width:30%;margin-left:30px;" value="" required>
                                 <option selected>Monday</option>
                                 <option>Tuesday</option>
                                 <option>Wednesday</option>
@@ -78,8 +80,8 @@
                             @enderror
                         </div>
                         <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Session:  ') }}</strong></label>
-                            <select name="session" class="form-control form-control-lg @error('session') is-invalid @enderror" style="width:30%;" value="" required>
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;">{{ __('Session:  ') }}</label>
+                            <select name="session" class="form-control form-control-lg @error('session') is-invalid @enderror" style="width:30%;margin-left:30px;" value="" required>
                                 <option selected>Morning</option>
                                 <option>Afternoon</option>
                                 <option>Evening</option>
@@ -93,8 +95,8 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Type:  ') }}</strong></label>
-                            <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" style="width:30%;" value="" required>
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;">{{ __('Type:  ') }}</label>
+                            <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" style="width:30%;margin-left:30px;" value="" required>
                                 <option>Physical</option>
                                 <option>TeleMedicine</option>
                             </select>
@@ -106,8 +108,8 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;"><strong>{{ __('Max Patients For a Session:  ') }}</strong></label>
-                            <select name="max_per_session" style="width:30%;" class="form-control form-control-lg @error('max_per_session') is-invalid @enderror" value="">
+                            <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;">{{ __('Max Patients For a Session:  ') }}</label>
+                            <select name="max_per_session" style="width:30%;margin-left:30px;" class="form-control form-control-lg @error('max_per_session') is-invalid @enderror" value="">
                                 @for($integer = 1; $integer <= 15; $integer ++) <option>{{$integer}}</option>
                                     @endfor
                             </select>

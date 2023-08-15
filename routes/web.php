@@ -173,6 +173,7 @@ Route::get('/oldmedications/{id}', [App\Http\Controllers\Doctor\DiagnosisControl
 Route::post('/todaysession/{id}/{Id}/{ID}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'addMedicine']);
 
 Route::get('/todaysession/{id}/{Id}/absent', [App\Http\Controllers\Doctor\DiagnosisController::class, 'absent']);
+Route::get('/todaysession/{id}/{Id}/finish', [App\Http\Controllers\Doctor\DiagnosisController::class, 'finish']);
 Route::get('/todaysession/remove/{id}/{Id}/{ID}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'removeMedicine']);
 
 Route::get('/viewMyearnings', [App\Http\Controllers\Doctor\doctorViewEarningController::class, 'index'])->name('viewMyearnings');

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
-use Illuminate\Http\Request;
+use App\Models\Patient;
+use Illuminate\Support\Carbon;
 
 class OldAppoController extends Controller
 {
@@ -12,10 +13,10 @@ class OldAppoController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($patientID){
-        $appointments = Appointment::where('patient_id', $patientID)
-                                    //->where('status',"End")
-                                    ->get();
+    public function index($userId){
+        $patient = Patient::where('user_id',$userId)->first();
+        $appointments = Appointment::where('patient_id', $patient->patient_id)->where('status','finished')->get();
+        $today = Carbon::today();
         return view('patient.oldappointments',['appointments'=> $appointments]);
     }
 
