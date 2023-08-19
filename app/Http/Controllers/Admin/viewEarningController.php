@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Bill;
-use App\Models\Doctor;
 use App\Models\Medicine;
 use App\Models\Prescription;
 use App\Models\Prescription_Medicine;
@@ -16,17 +15,15 @@ use Illuminate\Support\Facades\DB;
 
 class viewEarningController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index(){
         $usertype = Auth::user()->usertype;
 
         if ($usertype == 'patient') {
-            return view('patient.home');
+            return redirect('/home');
         } else if ($usertype == 'admin') {
 
             $totalRevenue = 0;
@@ -224,14 +221,13 @@ class viewEarningController extends Controller
                 'physicalCount' => $physicalCount, 'virtualCount' => $virtualCount
             ]);
         } else if ($usertype == 'doctor') {
-            return view('doctor.doctordashboard');
+            return redirect('/doctor');
         } else {
-            return view('staff.staffdashboard');
+            return redirect('/staff');
         }
     }
 
-    public function overall()
-    {
+    public function overall(){
         $totalRevenue = 0;
         $totalExpenses = 0;
         $totalAppointments = 0;
@@ -271,14 +267,12 @@ class viewEarningController extends Controller
 
         $today = Carbon::now();
         $lastDayOfMonth = Carbon::now()->endOfMonth();
-        $thismonth = $today->format('m');
         $thismonthName = $today->format('F');
         $allAppo = Appointment::all();
 
         foreach ($allAppo as $appo) {
             $stringDate = $appo->date;
             $date = Carbon::createFromFormat('Y-m-d', $stringDate);
-            $month = $date->format('m');
 
             $bills = Bill::where('appo_id', $appo->id)->first();
             $totalRevenue += $bills->total;
@@ -336,7 +330,6 @@ class viewEarningController extends Controller
 
         $session = highest($morningCount, $afternoonCount, $eveningCount, $nightCount);
         $sessionVisitings = Visitings::where('session', $session)->count();
-        $currentMonth = Carbon::now()->format('Y-m');
 
         $modeVisit = DB::table('appointments')
             ->select('visiting_id', DB::raw('COUNT(*) as appointment_count'))
@@ -383,7 +376,6 @@ class viewEarningController extends Controller
         foreach ($allAppo as $appo) {
             $stringDate = $appo->date;
             $date = Carbon::createFromFormat('Y-m-d', $stringDate);
-            $month = $date->format('m');
             $prescription = Prescription::where('appo_id', $appo->id)->first();
             $medicines = Prescription_Medicine::where('prescription_id', $prescription->id)->get();
 

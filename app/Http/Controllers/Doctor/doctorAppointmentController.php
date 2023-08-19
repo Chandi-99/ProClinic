@@ -15,38 +15,44 @@ use Illuminate\Support\Facades\Session;
 
 class doctorAppointmentController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        try {
-            $usertype = Auth::user()->usertype;
-            if ($usertype == 'patient') {
-                return view('patient.home');
-            } else if ($usertype == 'doctor') {
-                $appointments = Appointment::all();
-                $doctors = Doctor::all();
-                $patients = Patient::all();
-                $search_appointments = [];
-                return view('doctor.appointmentdetails', ['appointments' => $appointments, 'doctors' =>
-                 $doctors, 'patients' => $patients, 'search_appointments'=>$search_appointments, 'status' => 'pending' ]);
-
-            } else if ($usertype == 'admin') {
-                return view('admin.doctordashboard');
-            } else {
-                return view('staff.staffdashboard');
+    public function index(){
+        if(Auth::check()){
+            try {
+                $usertype = Auth::user()->usertype;
+                if ($usertype == 'patient') {
+                    return view('patient.home');
+                } 
+                else if ($usertype == 'doctor') {
+                    $appointments = Appointment::all();
+                    $doctors = Doctor::all();
+                    $patients = Patient::all();
+                    $search_appointments = [];
+                    return view('doctor.appointmentdetails', ['appointments' => $appointments, 'doctors' =>$doctors,
+                     'patients' => $patients, 'search_appointments'=>$search_appointments, 'status' => 'pending' ]);
+    
+                } 
+                else if ($usertype == 'admin') {
+                    return view('admin.doctordashboard');
+                } 
+                else {
+                    return view('staff.staffdashboard');
+                }
+            } catch (Exception $ex) {
+                Session::flash('error', 'Exception Occured!');
+                return redirect()->back();
             }
-        } catch (Exception $ex) {
-            Session::flash('error', 'Exception Occured!');
-            return redirect()->back();
         }
+        else{
+            return redirect('/welcome');
+        }
+        
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $validator = Validator::make($request->all(), [
             'appo_id' => ['string', 'max:20'],
             'status' => ['string', 'max:20'],

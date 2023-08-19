@@ -19,82 +19,86 @@ use Illuminate\Support\Carbon;
 
 class DiagnosisController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index($visitingId, $appointmentId)
-    {
-        $usertype = Auth::user()->usertype;
-
-        if ($usertype == 'patient') {
-            return redirect('/home');
-        } else if ($usertype == 'admin') {
-            return redirect('/admin');
-        } else if ($usertype == 'doctor') {
-
-            $today = Carbon::today();
-            $today = $today->format('Y-m-d');
-
-            $medicines = Medicine::all();
-            $mediassigned = null;
-
-            $visiting = Visitings::find($visitingId);
-            $appointment = Appointment::find($appointmentId);
-            $patient = $appointment->Patient();
-
-            $bill = Bill::where('appo_id', $appointment->id)->first();
-            $prescription = Prescription::where('appo_id', $appointment->id)->first();
-
-            $latests = Appointment::where('patient_id', $appointment->patient_id)->where('status', 'finished')->where('date', '<', now()->toDateString())->count();
-            if ($latests > 0) {
-                $latests = Appointment::where('date', '<', now()->toDateString())->get();
-            } else {
-                $latests = null;
-            }
-
-            $allergies = Allergy::where('patient_id', $patient->patient_id)->count();
-            if ($allergies > 0) {
-                $allergies = Allergy::where('patient_id', $patient->patient_id)->get();
-            } else {
-                $allergies = null;
-            }
-
-            $vitalSigns = MoreDetails::where('patient_id', $patient->patient_id)->count();
-            if ($vitalSigns > 0) {
-                $vitalSigns = MoreDetails::where('patient_id', $patient->patient_id)->first();
-                $bmi = ($vitalSigns->weight / (($vitalSigns->height / 100) * ($vitalSigns->height / 100)));
-                $bmi = round($bmi, 2);
-                if ($bmi < 18.5) {
-                    $weightStatus = "Underweight";
-                } elseif ($bmi < 25) {
-                    $weightStatus = "Normal weight";
-                } elseif ($bmi < 30) {
-                    $weightStatus = "Overweight";
-                } elseif ($bmi < 35) {
-                    $weightStatus = "Obesity Class I";
-                } elseif ($bmi < 40) {
-                    $weightStatus = "Obesity Class II";
+    public function index($visitingId, $appointmentId){
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
+            if ($usertype == 'patient') {
+                return redirect('/home');
+            } 
+            else if ($usertype == 'admin') {
+                return redirect('/admin');
+            } 
+            else if ($usertype == 'doctor') {
+    
+                $today = Carbon::today();
+                $today = $today->format('Y-m-d');
+    
+                $medicines = Medicine::all();
+                $mediassigned = null;
+    
+                $visiting = Visitings::find($visitingId);
+                $appointment = Appointment::find($appointmentId);
+                $patient = $appointment->Patient();
+    
+                $bill = Bill::where('appo_id', $appointment->id)->first();
+                $prescription = Prescription::where('appo_id', $appointment->id)->first();
+    
+                $latests = Appointment::where('patient_id', $appointment->patient_id)->where('status', 'finished')->where('date', '<', now()->toDateString())->count();
+                if ($latests > 0) {
+                    $latests = Appointment::where('date', '<', now()->toDateString())->get();
                 } else {
-                    $weightStatus = "Obesity Class III (Severe Obesity)";
+                    $latests = null;
                 }
-                $bmi = $bmi . ' (' . $weightStatus . ')';
-            } else {
-                $vitalSigns = null;
+    
+                $allergies = Allergy::where('patient_id', $patient->patient_id)->count();
+                if ($allergies > 0) {
+                    $allergies = Allergy::where('patient_id', $patient->patient_id)->get();
+                } else {
+                    $allergies = null;
+                }
+    
+                $vitalSigns = MoreDetails::where('patient_id', $patient->patient_id)->count();
+                if ($vitalSigns > 0) {
+                    $vitalSigns = MoreDetails::where('patient_id', $patient->patient_id)->first();
+                    $bmi = ($vitalSigns->weight / (($vitalSigns->height / 100) * ($vitalSigns->height / 100)));
+                    $bmi = round($bmi, 2);
+                    if ($bmi < 18.5) {
+                        $weightStatus = "Underweight";
+                    } elseif ($bmi < 25) {
+                        $weightStatus = "Normal weight";
+                    } elseif ($bmi < 30) {
+                        $weightStatus = "Overweight";
+                    } elseif ($bmi < 35) {
+                        $weightStatus = "Obesity Class I";
+                    } elseif ($bmi < 40) {
+                        $weightStatus = "Obesity Class II";
+                    } else {
+                        $weightStatus = "Obesity Class III (Severe Obesity)";
+                    }
+                    $bmi = $bmi . ' (' . $weightStatus . ')';
+                } 
+                else {
+                    $vitalSigns = null;
+                }
+                return view('doctor.diagnosis', [
+                    'patient' => $patient, 'bill' => $bill, 'prescription' => $prescription, 'appointment' => $appointment, 'vitalSigns' => $vitalSigns, 'allergies' => $allergies,
+                    'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'latests' => $latests, 'hidden' => true, 'bmi' => $bmi,
+                ]);
+            } 
+            else {
+                return redirect('/staff');
             }
-
-            return view('doctor.diagnosis', [
-                'patient' => $patient, 'bill' => $bill, 'prescription' => $prescription, 'appointment' => $appointment, 'vitalSigns' => $vitalSigns, 'allergies' => $allergies,
-                'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'latests' => $latests, 'hidden' => true, 'bmi' => $bmi,
-            ]);
-        } else {
-            return redirect('/staff');
+        }
+        else{
+            return redirect('/welcome');
         }
     }
 
-    public function update(Request $request, $visitingId, $appointmentId)
-    {
+    public function update(Request $request, $visitingId, $appointmentId){
         $validator = Validator::make($request->all(), [
             'chief_complain' => ['required', 'string', 'max:100'],
             'symptoms' => ['required', 'string', 'max:100'],
@@ -108,7 +112,8 @@ class DiagnosisController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        } else {
+        } 
+        else {
 
             $diagnosis = new Diagnosis();
             $diagnosis->chief_complain = $request['chief_complain'];
@@ -160,7 +165,8 @@ class DiagnosisController extends Controller
                     $weightStatus = "Obesity Class III (Severe Obesity)";
                 }
                 $bmi = $bmi . ' (' . $weightStatus . ')';
-            } else {
+            } 
+            else {
                 $vitalSigns = null;
             }
 
@@ -171,9 +177,7 @@ class DiagnosisController extends Controller
         }
     }
 
-    public function addMedicine(Request $request, $prescriptionId, $visitingId, $appointmentId)
-    {
-
+    public function addMedicine(Request $request, $prescriptionId, $visitingId, $appointmentId){
         $validator = Validator::make($request->all(), [
             'medicine_id' => ['required'],
             'quantity' => ['required', 'max:100'],
@@ -182,8 +186,8 @@ class DiagnosisController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        } else {
-
+        } 
+        else {
             $temp = Prescription_Medicine::where('medi_id', $request['medicine_id'])->where('prescription_id', $prescriptionId)->count();
             if ($temp > 0) {
                 $alreadyAssigned = true;
@@ -337,7 +341,6 @@ class DiagnosisController extends Controller
         $pres_medi = Prescription_Medicine::where('prescription_id', $prescription->id)->count();
         $mediCharges = 0;
         if ($pres_medi > 0) {
-
             $pres_medi = Prescription_Medicine::where('prescription_id', $prescription->id)->get();
             foreach ($pres_medi as $pm) {
                 $unit_price =  $pm->MedicinePrice();
@@ -362,6 +365,7 @@ class DiagnosisController extends Controller
 
         $today = Carbon::today();
         $today = $today->format('Y-m-d');
+
         $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->count();
         if($appointments > 0){
             $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
@@ -370,6 +374,5 @@ class DiagnosisController extends Controller
         else{
             return redirect('/todaysession/' . Auth::user()->id)->with('alert', 'All Appointments are Finished. Have a Nice Day!');
         }
-        
     }
 }

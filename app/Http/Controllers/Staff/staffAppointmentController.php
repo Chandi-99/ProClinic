@@ -67,16 +67,12 @@ class staffAppointmentController extends Controller
                             $url = route('staffappointment.check', ['id' => $patient[0]->patient_id, 'Id' => $doctorid, 'type' => $request['type']]);
                             return redirect()->to($url);
                         }
-
                     }                   
                     catch(Exception $ex){
                         return redirect()->back()->with('error','This Doctor did not registered for Appointment Type '.$request['type'] );
                     }
-                    
                 }
             }
-        
         }
-
     }
 }

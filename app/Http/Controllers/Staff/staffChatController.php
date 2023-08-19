@@ -4,20 +4,17 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
-use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class staffChatController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
     public function index($patientID)
     {
-        $staffID = Auth::user()->id;
         $usertype = Auth::user()->usertype;
         if ($usertype == 'staff') {
             $message = Chat::where('user_id', $patientID)->orderBy('created_at', 'asc')->first();
@@ -32,8 +29,7 @@ class staffChatController extends Controller
         }
     }
 
-    public function send(Request $request, $patientID)
-    {
+    public function send(Request $request, $patientID){
         $message = new Chat();
         $message->user_id = $patientID;
         $message->message = $request['message'];

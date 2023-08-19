@@ -145,10 +145,8 @@ Route::get('/addmore/{id}', [App\Http\Controllers\Home\addMoreController::class,
 Route::post('/addmore/{id}', [App\Http\Controllers\Home\addMoreController::class, 'update']);
 
 Route::get('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old');
-Route::post('/oldappointments/{id}', [App\Http\Controllers\Home\OldAppoController::class, 'index'])->name('old.post');
 
 Route::get('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'index'])->name('incoming');
-Route::post('/incomingappointments/{id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'index'])->name('incoming.post');
 Route::get('/incomingappointments/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'check'])->name('incoming.check');
 Route::get('/incomingappointments/join/{id}/{Id}', [App\Http\Controllers\Home\IncomingAppoController::class, 'join'])->name('incoming.join');
 

@@ -16,26 +16,29 @@ class nurseController extends Controller
     }
 
     public function index(){
-        Session::flash('alert_2', '');
-        $usertype = Auth::user()->usertype;
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
             
-        if($usertype == 'patient'){
-            return view('patient.home');
+            if($usertype == 'patient'){
+                return redirect('/home');
+            }
+            else if($usertype == 'admin'){
+                return redirect('/admin');
+            }
+            else if($usertype == 'doctor'){
+                return redirect('/doctor');
+            }
+            else{ 
+                $nurses = Nurse::all();
+                return view('staff.newNurse', [
+                    'nurses' => $nurses,
+                ]);
+            }
         }
-        else if($usertype == 'admin'){
-            return view('admin.admindashboard');
+        else{
+            return redirect('/welcome');
         }
-        else if($usertype == 'doctor'){
-            return view('doctor.doctordashboard');
-        }
-        else{ 
-
-            $nurses = Nurse::all();
-
-            return view('staff.newNurse', [
-                'nurses' => $nurses,
-            ]);
-        }
+       
     }
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
@@ -48,20 +51,11 @@ class nurseController extends Controller
             'contact' => ['required', 'max:20', 'unique:nurses'],
             'email' => ['required', 'max:30', 'unique:nurses'],
         ]);
-
-
         if ($validator->fails()) {
-            //'Nurse Account Creation Unsuccessful. One or More Inputs are Invalid!'
-            $nurses = Nurse::orderByDesc('created_at')->get();
-            Session::flash('alert_2', $validator->errors());
-            
-            return view('staff.newNurse', [
-                'nurses' => $nurses,
-            ]);
+            return redirect()->back()->withErrors($validator);
 
         }
         else{     
-        
             $nurse = Nurse::create([
                 'fname' => $request['fname'],
                 'lname'=> $request['lname'],
@@ -72,10 +66,8 @@ class nurseController extends Controller
                 'dob'=> $request['dob'],
                 'email'=> $request['email'],
              ]);
-
             $nurse->save();  
             return redirect()->back()->with('success', 'Nurse Account Creation Successful!');
-
         }
 
     }

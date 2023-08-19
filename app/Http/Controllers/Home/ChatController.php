@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -11,13 +10,11 @@ use App\Models\Chat;
 class ChatController extends Controller
 {
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index(){
         $userID = Auth::user()->id;
         $usertype = Auth::user()->usertype;
         if($usertype == 'patient'){
@@ -30,7 +27,6 @@ class ChatController extends Controller
                 $messages = [];
                 return view('patient.patientchat', compact('messages'));
             }
-            
         }
         else{
             return redirect()->back()->with('invalid user type. You don\'t have authority to view this page!');
@@ -60,7 +56,5 @@ class ChatController extends Controller
         else{
             return redirect('/chat')->with('success', 'Nothing to Clear!');
         }
-        
     }
-
 }

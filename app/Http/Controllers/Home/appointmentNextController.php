@@ -56,8 +56,7 @@ class appointmentNextController extends Controller
         return view('patient.appointmentNext', ['days' => $days, 'sessions' => $sessionsRegistered, 'isReadOnly' => $isReadOnly, 'patientid' => $patient_id, 'doctorid' => $doctor_id, 'patient' => $patient, 'doctor' => $doctor, 'date' => $date, 'type' => $type]);
     }
 
-    public function check(int $user_id, int $doctor_id, string $type, Request $request)
-    {
+    public function check(int $user_id, int $doctor_id, string $type, Request $request){
 
         if ($request->has('form1')) {
             Session::flash('alert_3', '');
@@ -257,15 +256,15 @@ class appointmentNextController extends Controller
                         $appointment->prescription_id = $prescription->id;
                         $appointment->save();
 
-                        $email = User::where('id', $user_id)->select('email')->first()->get();
-                        $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->first()->get();
-                        $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->first()->get();
+                        $email = User::where('id', $user_id)->select('email')->get();
+                        $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->get();
+                        $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->get();
                         $patientName = $patientFName[0]->fname . ' ' . $patientLName[0]->lname;
 
-                        $doctor = Doctor::where('id', $doctor_id)->first()->get();
-                        $emaildoctor = User::where('id', $doctor[0]->user_id)->select('email')->first()->get();
-                        $doctorFName = Doctor::where('id', $doctor_id)->select('fname')->first()->get();
-                        $doctorLName = Doctor::where('id', $doctor_id)->select('lname')->first()->get();
+                        $doctor = Doctor::where('id', $doctor_id)->get();
+                        $emaildoctor = User::where('id', $doctor[0]->user_id)->select('email')->get();
+                        $doctorFName = Doctor::where('id', $doctor_id)->select('fname')->get();
+                        $doctorLName = Doctor::where('id', $doctor_id)->select('lname')->get();
                         $doctorName = $doctorFName[0]->fname . ' ' . $doctorLName[0]->lname;
                         $AppointmentNumber = $appoCount + 1;
 

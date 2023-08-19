@@ -28,8 +28,7 @@ class reportController extends Controller
         return view('patient.Reports', compact('reports', 'patient', 'pdfreports'));
     }
 
-    public function updateReports(Request $request)
-    {
+    public function updateReports(Request $request){
         if($request->has('form3')){
             $validator = Validator::make($request->all(), [
                 'report' => 'required|file|mimes:jpeg,jpg,png,pdf|max:2048',
@@ -91,8 +90,7 @@ class reportController extends Controller
                     Report::create($insertData_arr);
                     return redirect('/user/reports');
                 }
-        }
-        
+            }
 
         }
        

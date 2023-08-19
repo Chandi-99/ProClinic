@@ -13,14 +13,13 @@ use Illuminate\Support\Carbon;
 
 class doctorDashboardController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
-    {
-        $usertype = Auth::user()->usertype;
+    public function index(Request $request){
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
 
         if ($usertype == 'patient') {
             return redirect('/patient');
@@ -47,7 +46,8 @@ class doctorDashboardController extends Controller
                 $visitingCount = 0;
                 $nextRoom = 'N/A';
                 $startTime = 'N/A';
-            } else {
+            } 
+            else {
                 $visitingCount = Visitings::where('doctor_id', $doctor->id)->where('day', $day)->count();
                 $visitings = Visitings::where('doctor_id', $doctor->id)->where('day', $day)->get();
 
@@ -115,5 +115,10 @@ class doctorDashboardController extends Controller
         } else {
             return redirect('/staff');
         }
+        }
+        else{
+            return redirect('/welcome');
+        }
+        
     }
 }

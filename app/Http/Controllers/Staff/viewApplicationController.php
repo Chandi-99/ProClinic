@@ -49,7 +49,6 @@ class viewApplicationController extends Controller
         foreach($applications as $application){
             $application->update(['status' => 'read']);
         }
-
         return redirect('/viewApplications')->with('success', "Mark All applications as Read!");
     }
 
@@ -59,7 +58,6 @@ class viewApplicationController extends Controller
         foreach($applications as $application){
             $application->update(['status' => 'unread']);
         }
-
         return redirect('/viewApplications')->with('success', "Mark All Messages as Unread!");
     }
 }

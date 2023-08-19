@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -38,20 +37,16 @@ class patientController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-
         if ($validator->fails()) {
-            Session::flash('alert_2', 'Patient Account Creation Unsuccessful. One or More Inputs are Invalid!');
-            return view('staff.newpatient');
+            return redirect()->back()->withErrors($validator);
         }
         else{     
-            
             $user = User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'usertype' => "patient",
                 'password' => Hash::make($request['password']),
             ]);
-
             $user->save();
             $userid = DB::connection()->getPdo()->lastInsertId();
         
@@ -65,11 +60,8 @@ class patientController extends Controller
                 'dob'=> $request['dob'],
                 'user_id' => $userid,
              ]);
-
             $patient->save();
-            Session::flash('alert_2', 'Patient Account Creation successful!');
-            return view('staff.newpatient');
-
+            return redirect()->back()->with('success', 'Patient Account Created Successfully!');
         }
     }
 

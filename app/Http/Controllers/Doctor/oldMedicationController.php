@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Doctor;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Allergy;
 use App\Models\Appointment;
 use App\Models\Patient;
-use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Stmt\Foreach_;
+
 
 class oldMedicationController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 

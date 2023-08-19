@@ -19,8 +19,4 @@ class OldAppoController extends Controller
         $today = Carbon::today();
         return view('patient.oldappointments',['appointments'=> $appointments]);
     }
-
-    public function update($patientID, $appoID){
-
-    }
 }

@@ -9,12 +9,10 @@ use App\Models\Bill;
 use App\Models\Doctor;
 use App\Models\Visitings;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class doctorViewEarningController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
@@ -228,7 +226,6 @@ class doctorViewEarningController extends Controller
 
             $sessionCount = Visitings::where('doctor_id', $doctorID)->distinct()->count();
 
-            $session = highest($morningCount, $afternoonCount, $eveningCount, $nightCount);
             $lastDayOfMonth = Carbon::parse($lastDayOfMonth);
             $day = Carbon::parse($today);
             $numberofDaysRemain = $lastDayOfMonth->diffInDays($day);

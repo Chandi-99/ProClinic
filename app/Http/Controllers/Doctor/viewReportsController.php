@@ -15,13 +15,11 @@ use Illuminate\Support\Str;
 
 class viewReportsController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index($id)
-    {
+    public function index($id){
         $patient = Patient::where('patient_id',$id)->first();
         $reports = Report::where('patient_id',$patient->patient_id)->where('visibility', 'Allow for Doctors')->latest()->count();
         if($reports > 0){

@@ -31,12 +31,10 @@ class addMoreController extends Controller
             'blood_group' => ['required', 'string', 'max:10'],
             'date' => ['required', 'date', 'before:'.$tommorrow, 'after:2023-01-01'],
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
         else {
-
             $detail = new MoreDetails();
             $detail->civil_status = $request['civil_status'];
             $detail->occupation = $request['occupation'];
@@ -47,7 +45,6 @@ class addMoreController extends Controller
             $detail->patient_id = $patient->patient_id;
             $detail->smoking = $request['smoking'];
             $detail->save();
-
             return redirect('/newappointment/'.$userId)->with('success', 'Details Saved!');
         }
     }

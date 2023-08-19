@@ -77,20 +77,16 @@ class blogController extends Controller
                 $postSearched= post::where('title', $request['search'])->get();
                 $temp =  $postSearched[0]->id;
                 return redirect('./blog/'.$temp);
-
             }
             catch(Exception $ex){
-
                 return redirect()->back()->with('error', 'No Post Found!');
             }         
 
         }
         else if($request->has('form3')){
-
             $validator = Validator::make($request->all(), [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:subscribers'],
             ]);
-
             if($validator->fails()){
                 return redirect()->back()->withErrors($validator);
             }

@@ -23,22 +23,29 @@ class appointmentDetailsNewController extends Controller
     public function index()
     {
         try {
-
-            $usertype = Auth::user()->usertype;
+            if(Auth::check()){
+                $usertype = Auth::user()->usertype;
 
             if ($usertype == 'patient') {
-                return view('patient.home');
-            } else if ($usertype == 'staff') {
+                return redirect('/home');
+            } 
+            else if ($usertype == 'staff') {
                 $appointments = Appointment::all();
                 $doctors = Doctor::all();
                 $patients = Patient::all();
                 $search_appointments = [];
                 return view('staff.appointmentdetails', ['appointments' => $appointments, 'doctors' => $doctors, 'patients' => $patients, 'search_appointments'=>$search_appointments]);
 
-            } else if ($usertype == 'doctor') {
-                return view('doctor.doctordashboard');
-            } else {
-                return view('admin.admindashboard');
+            } 
+            else if ($usertype == 'doctor') {
+                return redirect('/doctor');
+            } 
+            else {
+                return redirect('/admin');
+            }
+            }
+            else{
+                return redirect('/welcome');
             }
         } catch (Exception $ex) {
             Session::flash('error', 'Exception Occured!');

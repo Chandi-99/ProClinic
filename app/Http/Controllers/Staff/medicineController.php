@@ -15,8 +15,6 @@ class medicineController extends Controller
 {
     public function index(){
         $medicine = Medicine::all();
-        //$medicines = Medicine::withTrashed()->get();
-        Session::flash('alert_1', '');
         return view('staff.medicine',['medicines'=>$medicine]);
     }
 

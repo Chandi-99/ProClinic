@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class allergyController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index($patientId)
-    {
+    public function index($patientId){
         $allergies = Allergy::where('patient_id', $patientId)->count();
         if ($allergies > 0) {
             $allergies = Allergy::where('patient_id', $patientId)->get();
@@ -25,8 +23,7 @@ class allergyController extends Controller
         return view('doctor.newallergy', ['patientId' => $patientId, 'allergies' => $allergies]);
     }
 
-    public function update(Request $request, $patientId)
-    {
+    public function update(Request $request, $patientId){
         $validator = Validator::make($request->all(), [
             'allergy' => ['required', 'string', 'max:30'],
             'status' => ['required', 'string', 'max:40'],
@@ -34,7 +31,8 @@ class allergyController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        } else {
+        } 
+        else {
             $allergy = new Allergy();
             $allergy->allergy = $request['allergy'];
             $allergy->status = $request['status'];

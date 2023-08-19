@@ -22,25 +22,29 @@ class assignNurseController extends Controller
 
     public function index()
     {
-        $usertype = Auth::user()->usertype;
-
-        if ($usertype == 'patient') {
-            return view('patient.home');
-        } else if ($usertype == 'admin') {
-            return view('admin.admindashboard');
-        } else if ($usertype == 'doctor') {
-            return view('doctor.doctordashboard');
-        } else {
-
-            $today = date('Y-m-d');
-            $nurses = Nurse::orderByDesc('created_at')->get();
-            $rooms = Room::orderBy('room_name', 'asc')->get();
-            $data = Nurse_Room::where('date', $today)->get();
-
-            return view('staff.assignNurse', [
-                'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
-            ]);
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
+            if ($usertype == 'patient') {
+                return redirect('/home');
+            } else if ($usertype == 'admin') {
+                return redirect('/admin');
+            } else if ($usertype == 'doctor') {
+                return redirect('/doctor');
+            } else {
+                $today = date('Y-m-d');
+                $nurses = Nurse::orderByDesc('created_at')->get();
+                $rooms = Room::orderBy('room_name', 'asc')->get();
+                $data = Nurse_Room::where('date', $today)->get();
+    
+                return view('staff.assignNurse', [
+                    'nurses' => $nurses, 'rooms' => $rooms, 'data' => $data,
+                ]);
+            }
         }
+        else{
+            return redirect('/welcome');
+        }
+       
     }
 
     public function store(Request $request)
@@ -58,15 +62,6 @@ class assignNurseController extends Controller
                 return redirect()->back()->with('alert', $request['date'] . ' is a holiday.');
             }
         }
-
-        // $nurse = $request['nurse'];
-        // $values = explode(' ', $nurse);
-        // $fname = $values[0];
-        // $lname = $values[1];
-
-        // $nurseSelected = Nurse::where('fname', $fname)
-        //     ->Where('lname', $lname)
-        //     ->get();
 
         $nurseSelected = Nurse::find($request['nurse']);
         $roomSelected = Room::find($request['room']);
@@ -89,39 +84,40 @@ class assignNurseController extends Controller
 
             if ($validator->fails()) {
                 return redirect()->back()->with('error', $validator->errors());
-            } else {
+            } 
+            else {
 
-                        $nurseRoom = Nurse_Room::create([
-                            'nurse_id' => $nurseSelected->id,
-                            'room_id' => $roomSelected->id,
-                            'session' => $request['session'],
-                            'date' => $request['date'],
-                        ]);
+                $nurseRoom = Nurse_Room::create([
+                    'nurse_id' => $nurseSelected->id,
+                    'room_id' => $roomSelected->id,
+                    'session' => $request['session'],
+                    'date' => $request['date'],
+                ]);
 
-                        $nurseRoom->save();
-                        $time = "";
+                $nurseRoom->save();
+                $time = "";
 
-                        if ($request['session'] == 'Morning') {
-                            $time = '07:30 AM';
-                        } else if ($request['session'] == 'Afternoon') {
-                            $time = '11.30 PM';
-                        } else if ($request['session'] == 'Evening') {
-                            $time = '02.30 PM';
-                        } else if ($request['session'] == 'Night') {
-                            $time = '06.00 PM';
-                        }
+                if ($request['session'] == 'Morning') {
+                    $time = '07:30 AM';
+                } else if ($request['session'] == 'Afternoon') {
+                    $time = '11.30 PM';
+                } else if ($request['session'] == 'Evening') {
+                    $time = '02.30 PM';
+                } else if ($request['session'] == 'Night') {
+                    $time = '06.00 PM';
+                }
 
-                        Mail::to($nurseSelected->email)->send(new NurseAssignment(
-                            $nurseSelected->email,
-                            $nurseSelected->fname,
-                            $nurseSelected->lname,
-                            $request['date'],
-                            $time,
-                            $roomSelected->room_name,
-                            $request['session']
-                        ));
-                        dd($nurseSelected->email);
-                        return redirect()->back()->with('success', 'Nurse Assign to the Room Successfully!');
+                Mail::to($nurseSelected->email)->send(new NurseAssignment(
+                    $nurseSelected->email,
+                    $nurseSelected->fname,
+                    $nurseSelected->lname,
+                    $request['date'],
+                    $time,
+                    $roomSelected->room_name,
+                    $request['session']
+                ));
+
+                return redirect()->back()->with('success', 'Nurse Assign to the Room Successfully!');
             }
         }
     }

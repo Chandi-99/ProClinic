@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Models\post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Subscriber;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\comment;
@@ -58,9 +56,7 @@ class BlogPostController extends Controller
                 $temp->save();
                 Session('alert_2','');   
             }
-        
         }
-
         return redirect()->back()->with('success', 'Comment Posted Successfully!');
     }
 }

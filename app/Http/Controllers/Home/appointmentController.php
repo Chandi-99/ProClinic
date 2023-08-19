@@ -13,14 +13,11 @@ use Illuminate\Support\Facades\Validator;
 
 class appointmentController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index($id)
-    {
-
+    public function index($id){
         $doctors = Doctor::all();
         $specialities = Doctor::select('specialization')->distinct()->get();
         $isReadonly = false;
@@ -37,8 +34,7 @@ class appointmentController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
             'doctor' => 'required',
             'speciality' => 'required',

@@ -209,10 +209,7 @@ class staffAppointmentNextController extends Controller
                             $startTime = '06:00 PM';
                         }
 
-
-
                         $date = $date->format('Y-m-d');
-                        //exception message?
                         try {
 
                             $appointment = new Appointment();
@@ -245,15 +242,15 @@ class staffAppointmentNextController extends Controller
                         $prescription->description = 'Initial Description';
                         $prescription->save();
         
-                        $email = User::where('id', $patient[0]->user_id)->select('email')->first()->get();
-                        $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->first()->get();
-                        $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->first()->get();
+                        $email = User::where('id', $patient[0]->user_id)->select('email')->get();
+                        $patientFName = Patient::where('patient_id', $patient_id)->select('fname')->get();
+                        $patientLName = Patient::where('patient_id', $patient_id)->select('lname')->get();
                         $patientName = $patientFName[0]->fname . ' ' . $patientLName[0]->lname;
 
-                        $doctor = Doctor::where('id', $doctor_id)->first()->get();
-                        $emaildoctor = User::where('id', $doctor[0]->user_id)->select('email')->first()->get();
-                        $doctorFName = Doctor::where('id', $doctor_id)->select('fname')->first()->get();
-                        $doctorLName = Doctor::where('id', $doctor_id)->select('lname')->first()->get();
+                        $doctor = Doctor::where('id', $doctor_id)->get();
+                        $emaildoctor = User::where('id', $doctor[0]->user_id)->select('email')->get();
+                        $doctorFName = Doctor::where('id', $doctor_id)->select('fname')->get();
+                        $doctorLName = Doctor::where('id', $doctor_id)->select('lname')->get();
                         $doctorName = $doctorFName[0]->fname . ' ' . $doctorLName[0]->lname;
                         $AppointmentNumber = $appoCount + 1;
 

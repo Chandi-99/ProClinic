@@ -15,19 +15,15 @@ use Illuminate\Support\Facades\Session;
 
 class appointmentDetailsController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        try {
-
+    public function index(){
+        if(Auth::check()){
             $usertype = Auth::user()->usertype;
-
             if ($usertype == 'patient') {
-                return view('patient.home');
+                return redirect('/home');
             } else if ($usertype == 'admin') {
                 $appointments = Appointment::all();
                 $doctors = Doctor::all();
@@ -36,12 +32,10 @@ class appointmentDetailsController extends Controller
                 return view('admin.appointmentdetails', ['appointments' => $appointments, 'doctors' => $doctors, 'patients' => $patients, 'search_appointments'=>$search_appointments]);
 
             } else if ($usertype == 'doctor') {
-                return view('doctor.doctordashboard');
+                return redirect('/doctor');
             } else {
-                return view('staff.staffdashboard');
+                return redirect('/welcome');
             }
-        } catch (Exception $ex) {
-            Session::flash('error', 'Exception Occured!');
         }
     }
 
@@ -57,7 +51,8 @@ class appointmentDetailsController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
-        } else {
+        } 
+        else {
 
             $appoidfilter = $doctoridfilter = $patientidfilter = $appodatefilter = '';
             if ($request['appo_id'] != null) {
@@ -75,7 +70,8 @@ class appointmentDetailsController extends Controller
                         dd($visitings);
                         return redirect()->back()->with('error', 'Selected Doctor has not registrered in any Visitings!')->withInput();
                     }
-                } else {
+                } 
+                else {
                     return redirect()->back()->with('error', 'Invalid Doctor!')->withInput();
                 }
             }
@@ -84,7 +80,8 @@ class appointmentDetailsController extends Controller
                 $patient = Patient::where('patient_id', $request['patient_id'])->first();
                 if (!empty($patient)) {
                     $patient = Patient::where('patient_id', $request['patient_id'])->get();
-                } else {
+                } 
+                else {
                     return redirect()->back()->with('error', 'Invalid Patient!')->withInput();
                 }
             }

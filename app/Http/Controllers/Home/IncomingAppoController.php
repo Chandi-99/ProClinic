@@ -12,8 +12,7 @@ use Illuminate\Support\Carbon;
 
 class IncomingAppoController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
@@ -22,10 +21,6 @@ class IncomingAppoController extends Controller
         $appointments = Appointment::where('patient_id', $patient->patient_id)->where('status','pending')->get();
         $today = Carbon::today();
         return view('patient.incomingappointments',['appointments'=> $appointments, 'today'=> $today->format('Y-m-d')]);
-    }
-
-    public function update($patientID, $appoID){
-
     }
 
     public function check($userID, $appoID){
@@ -41,7 +36,6 @@ class IncomingAppoController extends Controller
                 $i = $temp->appo_number;
             }
         }
-
         if($i == 0){
             $i =1;
         }
@@ -54,7 +48,6 @@ class IncomingAppoController extends Controller
         else if($i > $appointment[0]->appo_number ){
             $status = "Current Appointment Number is ".$i. ". Please Contact Staff member if you unable to attend to the appointment";
         }
-
         Session::flash('success', $status);
         return redirect('incomingappointments/'.$userID);
     }
@@ -89,14 +82,11 @@ class IncomingAppoController extends Controller
                 else{
                     return redirect()->back()->with('error', 'Link Not Found!. Please Immediatly Contact the Medical Center!');
                 }
-                
             }
             else if($i > $appointment[0]->appo_number ){
                 $status = "Current Appointment Number is ".$i. ". Please Contact Staff member if you unable to attend to the appointment";
             }
-
-            Session::flash('success', $status);
-            return redirect('incomingappointments/'.$userID);
+            return redirect('incomingappointments/'.$userID)->with('success', $status);
         }
     }
 }

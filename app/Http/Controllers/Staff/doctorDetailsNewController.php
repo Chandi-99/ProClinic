@@ -20,24 +20,27 @@ class doctorDetailsNewController extends Controller
     public function index()
     {
         try {
-            Session::flash('alert_2', '');
-            $usertype = Auth::user()->usertype;
-
-            if ($usertype == 'patient') {
-                return view('patient.home');
-            } else if ($usertype == 'staff') {
-                $doctors = Doctor::all();
-                return view('staff.doctordetails', ['doctors' => $doctors]);
-            } else if ($usertype == 'doctor') {
-                return view('doctor.doctordashboard');
-            } else {
-                return view('staff.staffdashboard');
+            if(Auth::check()){
+                $usertype = Auth::user()->usertype;
+                if ($usertype == 'patient') {
+                    return view('patient.home');
+                } else if ($usertype == 'staff') {
+                    $doctors = Doctor::all();
+                    return view('staff.doctordetails', ['doctors' => $doctors]);
+                } else if ($usertype == 'doctor') {
+                    return view('doctor.doctordashboard');
+                } else {
+                    return view('staff.staffdashboard');
+                }
             }
+            else{
+                return redirect('/welcome');
+            }
+            
         } catch (Exception $ex) {
             Session::flash('error', $ex->getMessage());
             $doctors = Doctor::all();
             return view('staff.doctordetails', ['doctors' => $doctors]);
-
         }
     }
 

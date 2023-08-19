@@ -12,49 +12,44 @@ use Illuminate\Support\Facades\Session;
 
 class doctorDetailsController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
     public function index()
     {
         try {
-            Session::flash('alert_2', '');
-            $usertype = Auth::user()->usertype;
-
-            if ($usertype == 'patient') {
-                return view('patient.home');
-            } else if ($usertype == 'admin') {
-                $doctors = Doctor::all();
-                return view('admin.doctordetails', ['doctors' => $doctors]);
-            } else if ($usertype == 'doctor') {
-                return view('doctor.doctordashboard');
-            } else {
-                return view('staff.staffdashboard');
+            if(Auth::check()){
+                $usertype = Auth::user()->usertype;
+                if ($usertype == 'patient') {
+                    return redirect('/home');
+                } else if ($usertype == 'admin') {
+                    $doctors = Doctor::all();
+                    return view('admin.doctordetails', ['doctors' => $doctors]);
+                } else if ($usertype == 'doctor') {
+                    return redirect('/doctor');
+                } else {
+                    return redirect('/staff');
+                }
+            }
+            else{
+                return redirect('/welcome');
             }
         } catch (Exception $ex) {
             Session::flash('error', $ex->getMessage());
             $doctors = Doctor::all();
             return view('admin.doctordetails', ['doctors' => $doctors]);
-
         }
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $validator = Validator::make($request->all(), [
             'fname' => ['required', 'string', 'max:20'],
             'lname' => ['required', 'string', 'max:20'],
         ]);
 
         if ($validator->fails()) {
-
-            Session::flash('error', 'Invalid First name or Last name');
-            $doctors = Doctor::all();
-            return view('admin.doctordetails', [
-                'doctors' => $doctors
-            ]);
+            return redirect()->back()->withErrors($validator);
 
         } else {
             $doctors = Doctor::where('fname', $request['fname'])->where('lname', $request['lname'])->first();
@@ -64,7 +59,7 @@ class doctorDetailsController extends Controller
                     'doctors' => $doctors
                 ]);
             } else {
-                return redirect('showdoctors')->with('error', 'There is No Doctor registered for that name');;
+                return redirect()->back()->with('error', 'There is No Doctor registered for that name');
             }
         }
     }

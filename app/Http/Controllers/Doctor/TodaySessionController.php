@@ -15,13 +15,11 @@ use Illuminate\Support\Carbon;
 
 class TodaySessionController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index(Request $request, $userId)
-    {
+    public function index($userId){
         $usertype = Auth::user()->usertype;
 
         if ($usertype == 'patient') {
@@ -81,8 +79,7 @@ class TodaySessionController extends Controller
         }
     }
 
-    public function start(Request $request, $userId)
-    {
+    public function start(Request $request, $userId){
         $validator = Validator::make($request->all(), [
             'session' => 'required',
         ]);

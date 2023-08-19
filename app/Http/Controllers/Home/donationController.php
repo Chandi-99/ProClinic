@@ -8,19 +8,15 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 class donationController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
     
-    public function index(){
-        Session::flash('alert_01', '');
-        
+    public function index(){   
         return view('patient.donation');
     }
 
     public function donate(Request $request){
-
         $amount = 0;
         if($request['amount'] || $request['custom_amount']){
             if($request['amount'] && $request['custom_amount']){
@@ -31,7 +27,6 @@ class donationController extends Controller
                     'DonationPayment' => 'required|in:debitcard'
                 ]);
                 $amount=$request['custom_amount'];
-
             }
             else{
                 $validator = Validator::make($request->all(), [
@@ -43,14 +38,11 @@ class donationController extends Controller
                 $amount=$request['amount'];
             }
         }
-
         if($validator->fails()){
-            Session::flash('alert_01', $validator->error());
-            return view('patient.donation');
+            return redirect()->back()->withErrors($validator);
         }
         else{
             return redirect()->route('payment')->with(['name'=> $request['donation-name'], 'email' => $request['donation-email'], 'amount' => $amount]);
         }
-        
     }
 }

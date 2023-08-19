@@ -12,21 +12,18 @@ use PhpParser\Node\Expr\Cast\Double;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
     public function index(Request $request){
-        Session::flash('alert_01', '');
         $name = $request->session()->get('name');
         $email = $request->session()->get('email');
         $amount = $request->session()->get('amount');
 
         return view('patient.paymentpage',['amount' => $amount, 'name' => $name, 'email' => $email]);
     }
-    public function pay(Request $request)
-    {
+    public function pay(Request $request){
         // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         // $amount = $request->session()->get('amount');
         // Stripe\Charge::create ([

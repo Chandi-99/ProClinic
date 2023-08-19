@@ -16,18 +16,32 @@ use Illuminate\Support\Facades\Mail;
 class postController extends Controller
 {
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
     public function index(){
-        return view('blog.newblog');
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
+            if($usertype == 'patient'){
+                return redirect('/welcome');
+            }
+            else if($usertype == 'doctor'){
+                return view('blog.newblog');
+            }
+            else if($usertype == 'admin'){
+                return redirect('/admin');
+            }
+            else if($usertype == 'staff'){
+                return redirect('/staff');
+            }
+        }
+        else{
+            return redirect('/welcome');
+        }
     }
 
     public function create(Request $request){
-
-         // Validate the form input
          $validator = Validator::make($request->all(), [
             'image' => 'required|file|mimes:jpeg,jpg,png|max:4096',
             'body' => 'required',
@@ -40,36 +54,31 @@ class postController extends Controller
         else{
             $user = User::find(Auth::user()->id);
 
-            if($request['image']) {
+            $data= new post();
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/BlogImages'), $filename);
+            $data['image']= $filename;
+            $data['title'] = $request['title'];
+            $data['body'] = $request['body'];
+            $data['user_id'] = $user->id;
+            
 
-                $data= new post();
-                if($request->file('image')){
-                    $file= $request->file('image');
-                    $filename= date('YmdHi').$file->getClientOriginalName();
-                    $file-> move(public_path('public/BlogImages'), $filename);
-                    $data['image']= $filename;
-                    $data['title'] = $request['title'];
-                    $data['body'] = $request['body'];
-                    $data['user_id'] = $user->id;
-                }
+            $today = Carbon::now();
+            $date = $today->format('Y-m-d');
+            $time = $today->format('h:i A');
+            $data->save();
+            $emails = Subscriber::all();
 
-                $today = Carbon::now();
-                $date = $today->format('Y-m-d');
-                $time = $today->format('h:i A');
-                $data->save();
-                $emails = Subscriber::all();
-                foreach($emails as $email){
-                    Mail::to($email)->send(new NewPostAlert(
-                        $email,
-                        $request['title'],
-                        $date,
-                        $time
-                    ));
-                }
-                return redirect('/doctorblog')->with('success', 'Post Uploaded!');
-    
+            foreach($emails as $email){
+                Mail::to($email)->send(new NewPostAlert(
+                    $email,
+                    $request['title'],
+                    $date,
+                    $time
+                ));
             }
-
+            return redirect('/doctorblog')->with('success', 'Post Uploaded!');
         }
     
     }

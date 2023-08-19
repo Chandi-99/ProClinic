@@ -17,39 +17,37 @@ use Illuminate\Support\Facades\DB;
 
 class newStaffController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index(){
         try {
-
-            Session::flash('alert_2', '');
-            $usertype = Auth::user()->usertype;
-
-            if ($usertype == 'patient') {
-                return view('patient.home');
-            } else if ($usertype == 'admin') {
-                $nurses = Nurse::all();
-                $staffmembers = Staff::all();
-                $rooms = Room::withCount('visitings')->get();
-                return view('admin.staffroom', ['nurses' => $nurses, 'staffmembers' => $staffmembers, 'rooms' => $rooms]);
-                
-            } else if ($usertype == 'doctor') {
-                return view('doctor.doctordashboard');
-            } else {
-                return view('staff.staffdashboard');
+            if(Auth::check()){
+                $usertype = Auth::user()->usertype;
+                if ($usertype == 'patient') {
+                    return redirect('/home');
+                } else if ($usertype == 'admin') {
+                    $nurses = Nurse::all();
+                    $staffmembers = Staff::all();
+                    $rooms = Room::withCount('visitings')->get();
+                    return view('admin.staffroom', ['nurses' => $nurses, 'staffmembers' => $staffmembers, 'rooms' => $rooms]);
+                } else if ($usertype == 'doctor') {
+                    return redirect('/doctor');
+                } else {
+                    return redirect('/welcome');
+                }
+            }
+            else{
+                return redirect('/welcome');
             }
         } catch (Exception $ex) {
-            Session::flash('error', 'Exception Occured!');
+            return redirect()->back()->with($ex->getMessage());
         }
     }
 
     public function create(Request $request){
         try{
-
             $validator = Validator::make($request->all(), [
                 'fname' => ['required', 'string', 'max:20'],
                 'lname' => ['required', 'string', 'max:20'],
@@ -61,25 +59,19 @@ class newStaffController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
-    
-    
+
             if ($validator->fails()){
-                Session::flash('error', 'Nurse Account Creation Unsuccessful. One or More Inputs are Invalid!');
-                return redirect('/newStaff');
-    
+                return redirect()->back()->withErrors($validator);
             }
-            else{    
-                
+            else{     
                 $user = User::create([
                     'name' => $request['fname'],
                     'email' => $request['email'],
                     'usertype' => "staff",
                     'password' => Hash::make($request['password']),
                 ]);
-    
                 $user->save();
                 $userid = DB::connection()->getPdo()->lastInsertId();
-            
                 $staff = Staff::create([
                     'fname' => $request['fname'],
                     'lname'=> $request['lname'],
@@ -90,15 +82,12 @@ class newStaffController extends Controller
                     'dob'=> $request['dob'],
                     'user_id' => $userid,
                  ]);
-    
                 $staff->save();  
                 return redirect('/newStaff')->with('success', 'Nurse Account Creation Successful!');
-    
             }
         }
         catch(Exception $ex){
-            Session::flash('error', 'Exception Occured!');
-            return redirect('/newStaff');
+            return redirect()->back()->withErrors($ex->getMessage());
         }
 
     }

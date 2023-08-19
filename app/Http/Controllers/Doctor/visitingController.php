@@ -37,14 +37,11 @@ class visitingController extends Controller
     }
 
     public function update(Request $request){
-
         $user = User::find(Auth::user()->id);
         $doctorid = $user->Doctor->id;
-
         $temp = Visitings::all();
         foreach($temp as $unique){
             if($unique->day == $request['day'] && $unique->session == $request['session'] && $unique->doctor_id == $doctorid ){
-                // Session::flash('alert_2', 'Session Already Registered!');
                 return redirect('/doctor/visitings')->with('error', 'Session Already Registered!');
             }
         }
@@ -55,11 +52,9 @@ class visitingController extends Controller
             'max_per_session' => 'required',  
         ]);
         if($validator->fails()){
-            // Session::flash('alert_2', $validator->errors());
-            return redirect('/doctor/visitings')->with('error',$validator->errors());
+            return redirect('/doctor/visitings')->withErrors($validator);
         }
         else{
-            
             $visitings = Visitings::where('day', $request['day'])
                                     ->where('session', $request['session'])
                                     ->get();
@@ -70,7 +65,6 @@ class visitingController extends Controller
                     $unavailableRooms[] = $id;
                 }
             }
-
             $availableRooms = 0;
             $allrooms = Room::all();
             foreach($allrooms as $room){
@@ -80,11 +74,9 @@ class visitingController extends Controller
                 }
             }
             if($availableRooms == 0){
-                // Session::flash('alert_2', 'No Rooms Available for that Time Slot');
                 return redirect('/doctor/visitings')->with('error', 'No Rooms Available for that Time Slot');
             }
             else{
-
                 $roomselected = Room::where('id', $availableRooms)->latest()->get();
                 $data= new Visitings();
                 $data->day = $request['day'];
@@ -94,10 +86,8 @@ class visitingController extends Controller
                 $data->max_per_session = $request['max_per_session'];
                 $data->room_id = $roomselected[0]->id;
                 $data->save();
-                //Session::flash('alert_1', 'Visiting Added Successfully! Allocated Room is '.$roomselected[0]->room_name);
                 return redirect('/doctor/visitings')->with('success', 'Visiting Added Successfully! Allocated Room is '.$roomselected[0]->room_name);
             }
-
         }
     }
 }

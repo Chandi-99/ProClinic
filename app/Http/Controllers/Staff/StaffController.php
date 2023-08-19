@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
@@ -20,15 +19,13 @@ class StaffController extends Controller
     }
 
     public function index(Request $request){
-        $user = Auth::user();
-        if($user){
-            $usertype = $user->usertype;
+        if(Auth::check()){
+            $usertype = Auth::user()->usertype;
             if($usertype == 'admin'){
-                return view('admin.admindashboard');
+                return redirect('/admin');
             }
             else if($usertype == 'staff'){
                 $today = Carbon::today()->format('y-m-d');
-                $thismonth = Carbon::today()->format('m');
                 $appointments = Appointment::where('date', $today)->first();
 
                 $messagecount = Contact::where('status', 'unread')->first();
@@ -73,19 +70,14 @@ class StaffController extends Controller
                 }
             }
             else if($usertype == 'patient'){
-                Session::flash('alert_1', '');
-                Session::flash('alert_2', '');
-                return view('patient.home');
+                return redirect('/home');
             }
             else if($usertype == 'doctor'){
-                return view('doctor.doctordashboard');
+                return redirect('/doctor');
             }
         }
         else{
-            
-            Session::flash('alert_1', '');
-            Session::flash('alert_2', '');
-            return view('patient.welcome');
+            return redirect('/welcome');
         }
     }
 }

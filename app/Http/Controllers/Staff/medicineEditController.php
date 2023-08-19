@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use App\Models\Medicine;
-use Faker\Provider\Medical;
 
 class medicineEditController extends Controller
 {
@@ -32,37 +30,31 @@ class medicineEditController extends Controller
         ]);
 
         if($validator->fails()){
-            Session::flash('alert_1', $validator->errors());
-            return redirect('/medicine');
+            return redirect('/medicine')->withErrors($validator);
         }
-        else{
-                
-            $data = Medicine::find($medi_id)->get();
-            $data[0]->mg = $request['weight'];
-            $data[0]->company = $request['company'];
-            $data[0]->availability = $request['availability'];
-            $data[0]->after_eat = $request['after_eat'];
-            $data[0]->uses = $request['uses'];
-            $data[0]->side_effects = $request['side_effects'];
-            $data[0]->precautions = $request['precautions'];
-            $data[0]->overdose = $request['over_dose'];
-            $data[0]->howtouse = $request['howtouse'];
-            $data[0]->unit_price = $request['unit_price'];
-            $data[0]->save();
-            return redirect('/medicine');
-               
+        else{     
+            $data = Medicine::find($medi_id)->first();
+            $data->mg = $request['weight'];
+            $data->company = $request['company'];
+            $data->availability = $request['availability'];
+            $data->after_eat = $request['after_eat'];
+            $data->uses = $request['uses'];
+            $data->side_effects = $request['side_effects'];
+            $data->precautions = $request['precautions'];
+            $data->overdose = $request['over_dose'];
+            $data->howtouse = $request['howtouse'];
+            $data->unit_price = $request['unit_price'];
+            $data->save();
+            return redirect('/medicine')->with('success', 'Information Changed Successfully!');     
         }
-        
     }
 
-    public function delete(int $id){
-        
+    public function delete(int $id){ 
         $medicine = Medicine::find($id)->get();
         $medicine->each->delete();
         $medicine = Medicine::all();
         return view('staff.medicine',['medicines'=>$medicine]);
     }
-
 }
         
 
