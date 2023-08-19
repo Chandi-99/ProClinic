@@ -35,7 +35,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <a href="/admin" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
+                                    <a href="/staff" class="custom-btn pt-1 pb-1" style="margin-right:10px;">
                                         {{ __('Back') }}
                                     </a>
                                     <button type="submit" class="custom-btn pt-1 pb-1">

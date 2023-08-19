@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use App\Models\Visitings;
 use Exception;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class staffAppointmentController extends Controller
@@ -49,7 +48,7 @@ class staffAppointmentController extends Controller
             }
             else{
                 $values = explode(' ', $request['doctor']);
-                $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->first()->get();
+                $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->get();
                 
                 if($request['speciality'] != $selectedDoctor[0]->specialization){
                     return redirect()->back()->with('error','There is No Doctor Registered With that Specialization!' );

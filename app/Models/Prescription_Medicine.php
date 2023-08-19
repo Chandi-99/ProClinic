@@ -27,7 +27,7 @@ class Prescription_Medicine extends Model
     
     public function MedicinePrice(){
         $medi =  Medicine::where('id',$this->medi_id)->first();
-        return $medi->unit_Price;
+        return $medi->unit_price;
     }
 
     public function MedicineAfter(){

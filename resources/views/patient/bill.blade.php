@@ -83,15 +83,15 @@
         </ol>
 
         <ul>
-            <li>Subtotal: {{$bill->total}}</li>
-            <li>Medicine Charges: {{$bill->total}}</li>
-            <li>Total: {{$total}}</li>
+            <li>Subtotal: {{$subtotal}}</li>
+            <li>Discount: {{$bill->discount}}</li>
+            <li>Total: {{$bill->total}}</li>
         </ul>
         <p style="font-size:larger;font-weight:bold;margin-left:200px;">Payment Information:</p>
         <p style="margin:0px; padding:1px;"><span style="font-weight:bold;">Payment Method:</span>Cash </p>
         <p style="margin:0px; padding:1px;"><span style="font-weight:bold;">Transaction ID: </span>Bill_{{$bill->id}} </p>
         <p style="margin:0px; padding:1px;"><span style="font-weight:bold;">Date of Payment: </span> {{$appointment->date}} </p>
-        <p style="margin:0px; padding:1px;"><span style="font-weight:bold;">Amount Paid: </span> {{$total}} </p>
+        <p style="margin:0px; padding:1px;"><span style="font-weight:bold;">Amount Paid: </span> {{$bill->total}} </p>
 
 </br>
 </br>

@@ -8,7 +8,6 @@ use App\Models\Visitings;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class visitingController extends Controller
@@ -17,15 +16,21 @@ class visitingController extends Controller
         $user = User::find(Auth::user()->id);
         $doctorid = $user->Doctor->id;
         $visitings = Visitings::where('doctor_id', $doctorid);
+        if($user->Doctor->echanneling_rate == null){
+            $telemedicine = false;
+        }
+        else{
+            $telemedicine = true;
+        }
         if(empty($visitings)){
             return view('doctor.visiting', [
-                'visitings' => $visitings,
+                'visitings' => $visitings, 'telemedicine' => $telemedicine
             ]);
         }
         else{
             $visitings = Visitings::where('doctor_id', $doctorid)->get();
             return view('doctor.visiting', [
-                'visitings' => $visitings,
+                'visitings' => $visitings, 'telemedicine' => $telemedicine
             ]);
         }
         return view('doctor.visiting');

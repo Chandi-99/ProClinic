@@ -185,8 +185,11 @@ class DiagnosisController extends Controller
         } else {
 
             $temp = Prescription_Medicine::where('medi_id', $request['medicine_id'])->where('prescription_id', $prescriptionId)->count();
-
-            if (!$temp > 0) {
+            if ($temp > 0) {
+                $alreadyAssigned = true;
+            }
+            else{
+                $alreadyAssigned = false;
                 $tempMedi = new Prescription_Medicine();
                 $tempMedi->medi_id = $request['medicine_id'];
                 $tempMedi->prescription_id = $prescriptionId;
@@ -194,7 +197,6 @@ class DiagnosisController extends Controller
                 $tempMedi->dose = $request['dose'];
                 $tempMedi->save();
             }
-
 
             $medicines = Medicine::all();
             $today = Carbon::today();
@@ -241,16 +243,24 @@ class DiagnosisController extends Controller
             } else {
                 $vitalSigns = null;
             }
+            if($alreadyAssigned){
+                return view('doctor.diagnosis', [
+                    'patient' => $patient, 'bill' => $bill[0], 'prescription' => $prescription, 'appointment' => $appointment, 'bmi' => $bmi, 'allergies' => $allergies,
+                    'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false, 'vitalSigns' => $vitalSigns,
+                ]);
+            }
+            else{
+                return view('doctor.diagnosis', [
+                    'patient' => $patient, 'bill' => $bill[0], 'prescription' => $prescription, 'appointment' => $appointment, 'bmi' => $bmi, 'allergies' => $allergies,
+                    'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false, 'vitalSigns' => $vitalSigns,
+                ]);
+            }
 
-            return view('doctor.diagnosis', [
-                'patient' => $patient, 'bill' => $bill[0], 'prescription' => $prescription, 'appointment' => $appointment, 'bmi' => $bmi, 'allergies' => $allergies,
-                'medicines' => $medicines, 'visiting' => $visiting, 'mediassigned' => $mediassigned, 'hidden' => false, 'vitalSigns' => $vitalSigns,
-            ])->with('error', 'Medicine Already Assigned!');
+
         }
     }
 
-    public function removeMedicine($visitingId, $prescriptionId, $mediId)
-    {
+    public function removeMedicine($visitingId, $prescriptionId, $mediId){
 
         $temp = Prescription_Medicine::where('prescription_id', $prescriptionId)->where('medi_id', $mediId)->first();
         $temp->delete();
@@ -307,8 +317,7 @@ class DiagnosisController extends Controller
         ]);
     }
 
-    public function absent($visitingId, $appointmentId)
-    {
+    public function absent($visitingId, $appointmentId){
         $appointment = Appointment::find($appointmentId);
         $appointment->status = "absent";
         $appointment->save();
@@ -323,22 +332,22 @@ class DiagnosisController extends Controller
         }
     }
 
-    public function finish($visitingId, $appointmentId)
-    {
-        $prescriptionId = Prescription::where('appo_id', $appointmentId)->first();
-        $pres_medi = Prescription_Medicine::where('prescription_id', $prescriptionId)->count();
+    public function finish($visitingId, $appointmentId){
+        $prescription = Prescription::where('appo_id', $appointmentId)->first();
+        $pres_medi = Prescription_Medicine::where('prescription_id', $prescription->id)->count();
         $mediCharges = 0;
         if ($pres_medi > 0) {
-            $pres_medi = Prescription_Medicine::where('prescription_id', $prescriptionId)->get();
+
+            $pres_medi = Prescription_Medicine::where('prescription_id', $prescription->id)->get();
             foreach ($pres_medi as $pm) {
                 $unit_price =  $pm->MedicinePrice();
                 $quantity = $pm->quantity;
-                $mediCharges += $unit_price * $quantity;
+                $mediCharges = $mediCharges + ($unit_price * $quantity);
             }
         }
-
-        $discount = 0; //change this if need
-        $otherCharge = $mediCharges * 0.1;
+        
+        $discount = 0;
+        $otherCharge = ($mediCharges * 0.3);
 
         $bill = Bill::where('appo_id', $appointmentId)->first();
         $bill->medicine_charges = $mediCharges;
@@ -356,7 +365,7 @@ class DiagnosisController extends Controller
         $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->count();
         if($appointments > 0){
             $appointments = Appointment::where('visiting_id', $visitingId)->where('date', $today)->where('status', 'pending')->orderBy('appo_number', 'asc')->first();
-            return redirect('/todaysession/' . $visitingId . '/' . $appointments->id.'/finish');
+            return redirect('/todaysession/' . $visitingId . '/' . $appointments->id);
         }
         else{
             return redirect('/todaysession/' . Auth::user()->id)->with('alert', 'All Appointments are Finished. Have a Nice Day!');

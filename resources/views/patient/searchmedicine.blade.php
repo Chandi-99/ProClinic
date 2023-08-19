@@ -5,14 +5,15 @@
     <div class="container ">
         <div class="col-12 ">
             <div class="custom-text-box ">
-                <!-- <div class="col-lg-5 col-12 ">
+                <div class="col-lg-5 col-12 mb-5">
                     <form method="POST" action="{{route('searchmedi')}}" enctype="multipart/form-data">
-                        <input type="text" placeholder="Medicine Name " name="medicine_name" class="form-control form-control-lg" />
+                        @csrf
+                        <input type="text" placeholder="Medicine Name " name="medicine_name" class="form-control form-control-lg" required/>
                         </br>
-                        <button type="submit" class="custom-btn" name="form1">Search</button>
+                        <button type="submit" class="custom-btn pt-1 pb-1" name="form1">Search</button>
                     </form>
-                </div> -->
-                <h4 class="mb-3 ">The Medicine You Search Found!</h4>
+                </div>
+                <h4 class="mb-3">The Medicine You Search Found!</h4>
                 <table>
                     <tr>
                         <td><strong>Name: </strong> </td>
@@ -49,29 +50,29 @@
                         <td><strong>Uses: </strong> </td>
                         <td>{{ $medi[0]->uses }}</td>
                     </tr>
-                    <tr>
+                    <tr class="mb-4">
                         <td><strong>How to Use: </strong> </td>
                         <td>{{ $medi[0]->howtouse }}</td>
                     </tr>
-                    <tr>
+                    <tr class="mb-4">
                         <td><strong>Precautions: </strong></td>
                         <td>{{ $medi[0]->precautions }}</td>
                     </tr>
-                    <tr>
+                    <tr class="mb-4">
                         <td><strong>Side Effects: </strong></td>
                         <td>{{ $medi[0]->side_effects }}</td>
                     </tr>
-                    <tr>
+                    <tr class="mb-4">
                         <td><strong>Overdose: </strong></td>
                         <td>{{ $medi[0]->overdose }}</td>
                     </tr>
-                    <tr>
+                    <tr class="mb-4">
                         <td><strong>Image: </strong></td>
-                        <td><img src="{{ url('public/MediImages/'.$medi[0]->image) }}" width="50%" z-index='0' /></td>
+                        <td><img src="{{ url('public/MediImages/'.$medi[0]->image) }}" style="width:300px; height:400px;" z-index='0' /></td>
                     </tr>
                 </table>
             </div>
-            <a class="custom-btn" href="{{route('welcome')}}">Go Back</a>
+            <a class="custom-btn pt-1 pb-1" href="{{route('welcome')}}">Go Back</a>
         </div>
     </div>
 

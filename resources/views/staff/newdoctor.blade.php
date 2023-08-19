@@ -21,7 +21,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('User Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" required>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -142,7 +142,7 @@
 
                             <div class="col-md-6" >
                                 
-                            <input type="number" id="echanneling_rate" name="echanneling_rate" class="form-control @error('echanneling_rate') is-invalid @enderror"  value="{{ old('echanneling_rate') }}" required autocomplete="echanneling_rate" >
+                            <input type="number" id="echanneling_rate" name="echanneling_rate" class="form-control @error('echanneling_rate') is-invalid @enderror"  value="{{ old('echanneling_rate') }}" autocomplete="echanneling_rate" >
 
                             <script>
                                 document.querySelector('select[name="echanneling"]').addEventListener('change', function() {

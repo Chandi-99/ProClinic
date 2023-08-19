@@ -40,9 +40,7 @@ class medicineController extends Controller
             ]);
     
             if($validator->fails()){
-                Session::flash('alert_1', $validator->errors());
-                //dd($validator->errors());
-                return redirect('/medicine');
+                return redirect()->back()->withErrors($validator);
             }
             else{
                 if($request['image']) {

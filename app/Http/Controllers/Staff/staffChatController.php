@@ -25,11 +25,10 @@ class staffChatController extends Controller
                 $messages = Chat::where('user_id', $patientID)->orderBy('created_at', 'asc')->get();
                 return view('staff.staffchat', ['messages' => $messages, 'patientID' => $patientID]);
             } else {
-                $messages = [];
-                return view('staff.staffchat', ['messages' => $messages]);
+                return redirect()->back()->with('alert', 'User Unsend that Message!');
             }
         } else {
-            return redirect()->back()->with('invalid user type. You don\'t have authority to view this page!');
+            return redirect('/staff')->with('invalid user type. You don\'t have authority to view this page!');
         }
     }
 

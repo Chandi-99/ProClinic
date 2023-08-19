@@ -97,8 +97,13 @@
                         <div class="row mb-3">
                             <label for="status" class="col-md-4 col-form-label text-md-end" style="display:inline;font-size:larger;">{{ __('Type:  ') }}</label>
                             <select name="type" class="form-control form-control-lg @error('type') is-invalid @enderror" style="width:30%;margin-left:30px;" value="" required>
+                            @if($telemedicine == false)
+                                <option>Physical</option>
+                            @else
                                 <option>Physical</option>
                                 <option>TeleMedicine</option>
+                            @endif
+
                             </select>
                             @error('type')
                             <span class="invalid-feedback" role="alert">

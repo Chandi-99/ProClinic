@@ -30,7 +30,7 @@ class TodaySessionController extends Controller
             return view('admin.admindashboard');
         } else if ($usertype == 'doctor') {
 
-            $doctor = Doctor::where('user_id', $userId)->first()->get();
+            $doctor = Doctor::where('user_id', $userId)->get();
             $docname = $doctor[0]->fname . ' ' . $doctor[0]->lname;
             $speciality = $doctor[0]->specialization;
             $today = Carbon::today();

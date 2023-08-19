@@ -24,7 +24,9 @@ class Appointment extends Model
     }
 
     public function Prescription(){
-        return $this->belongsTo(Prescription::class);
+        $prescription = Prescription::where('appo_id', $this->id)->first();
+        $pres_medi = Prescription_Medicine::where('prescription_id', $prescription->id)->get();
+        return $pres_medi;
     }
 
     public function Patient(){
@@ -32,8 +34,9 @@ class Appointment extends Model
         return $patient[0];
     }
 
-    public function Diagnosis(){
-        return $this->belongsTo(Diagnosis::class);
+    public function DiagnosisComplain(){
+        $diagnosis = Diagnosis::where('appo_id', $this->id)->first();
+        return $diagnosis->chief_complain;
     }
 
     // public function MediName(){

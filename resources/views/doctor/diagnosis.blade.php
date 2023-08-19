@@ -82,7 +82,7 @@
                 <div class="message-box" style="margin-bottom:20px;">
                     <h5 style="display: inline-block;">Recent Visits</h5><span><img src="/images/new21.jpg " style="width:40px; height:40px;margin-left:10%;margin-bottom:10px;" /></span>
                     <table class="table table-striped table-bordered">
-                        <thead>
+                        <thead>Diagnosis
                             <tr class="text-center">
                                 <th width="20%">Date</th>
                                 <th width="40%">Chief Complain</th>
@@ -90,11 +90,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 @if(isset($latests))
                                 @foreach($latests as $latest)
-                                <td width="20%">{{$latest->date}}</td>
-                                <td width="40%">{{$latest->Diagnosis->chief_complain}}</td>
+                                <td width="30%">{{$latest->date}}</td>
+                                <td width="20%">{{$latest->DiagnosisComplain()}}</td>
                                 <td>{{$latest->Visiting->Doctor->fname}} {{$latest->Visiting->Doctor->lname}}</td>
                                 @endforeach
                                 @endif
@@ -114,12 +114,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 @if(isset($latests))
                                 @foreach($latests as $latest)
-                                <td>{{$latest->date->format('m-d')}}</td>
-                                <td>{{$latest->Prescription->Prescription_Medicine->medi_Name()}}</td>
-                                <td>{{$latest->Prescription->Prescription_Medicine->dose}}</td>
+                                @foreach($latest->Prescription() as $value)
+                                <td width="30%">{{$latest->date}}</td>
+                                <td width="10%">{{$value->MedicineName()}}</td>
+                                <td>{{$value->dose}}</td>
+                                @endforeach
+                                @break
                                 @endforeach
                                 @endif
                             </tr>
@@ -147,9 +150,9 @@
                     <h5 style="display: inline-block;">Allergies</h5><span><img src="/images/new24.png " style="width:40px; height:40px;margin-bottom:10px;margin-left:10%; display: inline-block;" /></span> </br>
                     @if(isset($allergies))
                     <ul>
-                    @foreach($allergies as $allergie)
-                    <li class="mt-0 mb-0"><span style="color:black;">{{$allergie->allergy}} >> {{$allergie->status}}</span></li>
-                    @endforeach
+                        @foreach($allergies as $allergie)
+                        <li class="mt-0 mb-0"><span style="color:black;">{{$allergie->allergy}} >> {{$allergie->status}}</span></li>
+                        @endforeach
                     </ul>
                     @endif
                     </br>
@@ -378,11 +381,11 @@
             </table>
             <div class="row mb-0 mt-2 pt-2">
                 <div class="col-md-12">
-                <center>
-                    <a href="/todaysession/{{$visiting->id}}/{{$appointment->id}}/finish" class="custom-btn pt-1 pb-1">
-                        {{ __('Finish the Appointment') }}
-                    </a>
-                </center>
+                    <center>
+                        <a href="/todaysession/{{$visiting->id}}/{{$appointment->id}}/finish" class="custom-btn pt-1 pb-1">
+                            {{ __('Finish the Appointment') }}
+                        </a>
+                    </center>
                 </div>
             </div>
         </div>

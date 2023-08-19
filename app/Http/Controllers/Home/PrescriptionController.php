@@ -35,14 +35,37 @@ class PrescriptionController extends Controller
                 $pres_medi = null;
             }
 
-            $data = ['appointment' => $appointment, 'patient' => $patient];
+            $imageCacheKey = 'processed_image_' . md5('images/session.jpg');
+            $cachedImage = cache($imageCacheKey);
+    
+            if (!$cachedImage) {
+                // Process the image using GD and save to cache
+                $processedImage = $this->processImageWithGd('images/session.jpg');
+                cache([$imageCacheKey => $processedImage], now()->addDay());
+            }
 
+            $data = ['appointment' => $appointment, 'patient' => $patient, 'pres_medi' => $pres_medi, 'image' => asset('cache/' . $imageCacheKey)];
             $pdf = app('dompdf.wrapper');
             $pdf->loadView('patient.prescription', $data);
-
-
             return $pdf->download($patient->fname . '_Appo' . $appointment->id . '_prescription.pdf');
         }
+    }
+
+    private function processImageWithGd($imagePath)
+    {
+        // Process the image using GD here
+        // Example: resize, crop, watermark, etc.
+        // Return the processed image data
+
+        // Placeholder code:
+        $image = imagecreatefromjpeg(public_path($imagePath));
+        // Process the image here...
+        ob_start();
+        imagejpeg($image, null, 90);
+        $imageData = ob_get_contents();
+        ob_end_clean();
+
+        return $imageData;
     }
 
     public function medical($patientId, $appointmentId)
@@ -86,7 +109,7 @@ class PrescriptionController extends Controller
             $gendernew = '';
             $gender = '';
 
-            if ($patient->gender == 'male') {
+            if ($patient->gender == 'Male') {
                 $gender = 'he';
                 $gendernew = 'him';
             } else {
@@ -125,10 +148,9 @@ class PrescriptionController extends Controller
             }
 
             $bill = Bill::where('appo_id', $appointmentId)->first();
-            if($bill->discount != null){
-                $total = $bill->total - ($bill->discount*$bill->total/100);
-            }
-            $data = ['appointment' => $appointment, 'patient' => $patient, 'diagnosis' => $diagnosis, 'bill'=> $bill, 'total'=>$total];
+            $subtotal = $bill->medicine_charges + $bill->other_charges;
+
+            $data = ['appointment' => $appointment, 'patient' => $patient, 'diagnosis' => $diagnosis, 'bill' => $bill, 'subtotal' => $subtotal];
             $pdf = app('dompdf.wrapper');
             $pdf->loadView('patient.bill', $data);
 

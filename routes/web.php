@@ -168,7 +168,7 @@ Route::post('/todaysession/{id}', [App\Http\Controllers\Doctor\TodaySessionContr
 Route::get('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'index']);
 Route::post('/todaysession/{id}/{Id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'update']);
 
-Route::get('/oldmedications/{id}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'index']);
+Route::get('/oldmedications/{id}', [App\Http\Controllers\Doctor\oldMedicationController::class, 'index']);
 
 Route::post('/todaysession/{id}/{Id}/{ID}', [App\Http\Controllers\Doctor\DiagnosisController::class, 'addMedicine']);
 
@@ -190,3 +190,6 @@ Route::post('/staff/newappointment/{id}/{Id}/{type}', [App\Http\Controllers\Staf
 Route::get('/viewreports/{id}', [App\Http\Controllers\Doctor\viewReportsController::class, 'index']);
 Route::get('/newAllergy/{id}', [App\Http\Controllers\Doctor\allergyController::class, 'index']);
 Route::post('/newAllergy/{id}', [App\Http\Controllers\Doctor\allergyController::class, 'update']);
+
+Route::get('/viewmedicine/{id}', [App\Http\Controllers\Home\viewMedicineController::class, 'index']);
+Route::post('/viewmedicine', [App\Http\Controllers\Home\viewMedicineController::class, 'search'])->name('searchmedi');

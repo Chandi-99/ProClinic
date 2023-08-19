@@ -247,8 +247,7 @@ class appointmentNextController extends Controller
                         $bill->discount = null;
                         $bill->total = null;
                         $bill->save();
-                        
-
+                    
 
                         $prescription = new Prescription();
                         $prescription->appo_id = $appo_id;

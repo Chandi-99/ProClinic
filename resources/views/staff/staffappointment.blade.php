@@ -85,6 +85,8 @@
     <script>
         const doctors = [
             "Amal Perera",
+            "Samantha Bennett",
+            "Amelia Johnson",
         ];
 
         const doctorInput = document.getElementById("doctorInput");

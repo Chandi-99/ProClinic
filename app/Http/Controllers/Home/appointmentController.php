@@ -50,8 +50,7 @@ class appointmentController extends Controller
         } 
         else {
             $values = explode(' ', $request['doctor']);
-            $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->first()->get();
-
+            $selectedDoctor = Doctor::where('fname', $values[0])->where('lname', $values[1])->get();
             if ($request['speciality'] != $selectedDoctor[0]->specialization) {
                 return redirect('/newappointment/' . $id)->with('error', 'There is No Doctor Registered With that Specialization!');
             } else {
