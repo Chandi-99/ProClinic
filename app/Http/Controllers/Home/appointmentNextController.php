@@ -228,7 +228,7 @@ class appointmentNextController extends Controller
 
                             $appointment->save();
                         } catch (Exception $ex) {
-                            dd($ex);
+                            return redirect()->back()->withErrors($ex->getMessage());
                         }
 
                         $appo_id = $appointment->id;

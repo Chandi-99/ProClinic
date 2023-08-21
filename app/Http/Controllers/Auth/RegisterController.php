@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -53,8 +52,6 @@ class RegisterController extends Controller
                 $this->redirectTo = 'login';
                 return $this->redirectTo;
         }
-         
-        // return $next($request);
     } 
 
     /**
@@ -116,9 +113,7 @@ class RegisterController extends Controller
             'dob'=> $data['dob'],
             'user_id' => $userid,
         ]);
-
         $patient->save();
-       // Session::alert('New Patient Account Created Successfully!.', 'success');
         return $user;
 
     }
