@@ -154,6 +154,9 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
+                                <a class="btn custom-btn pt-2 pb-2" href="/login">
+                                    {{ __('Back') }}
+                                </a>
                                 <button type="submit" class="btn custom-btn pt-2 pb-2">
                                     {{ __('Register') }}
                                 </button>
